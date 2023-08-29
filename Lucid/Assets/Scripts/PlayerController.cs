@@ -12,7 +12,7 @@ public class PlayerController : MonoBehaviour
     // private Vector3 cameraPosition, cameraOffset;
     // private float cameraXMax = 50;
     // private float cameraXMin = -17.5f;
-    private float playerXMax = 12;
+    private float playerXMax = 15;
     private float playerXMin = -12;
     private float playerSpeed = 20f;
     // Start is called before the first frame update
