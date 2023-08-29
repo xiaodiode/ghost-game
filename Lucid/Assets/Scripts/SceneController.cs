@@ -1,38 +1,33 @@
 using System.Collections;
 using System.Collections.Generic;
-using System.Runtime.CompilerServices;
 using UnityEngine;
+using UnityEngine.UI;
 
-public class PlayerController : MonoBehaviour
+public class SceneController : MonoBehaviour
 {
-    public bool canMove;
-    public Camera playerCamera;
-    private Vector3 playerPosition, cameraPosition, cameraOffset;
-    private float cameraXMax = 50;
-    private float cameraXMin = -17.5f;
-    private float playerXMax = 12;
-    private float playerXMin = -12;
-    private float playerSpeed = 20f;
+    public Canvas[] sceneLayers;
+    public PlayerController player;
+    public float[] sceneXMax;
+    private float[] sceneSpeed;
+    private float baseSpeed = 20f;
+    private float baseTime;
+    // private float cameraXMax = -67.5f;
+    
     // Start is called before the first frame update
     void Start()
     {
-        canMove = false;
-        playerPosition = transform.position;
-        cameraPosition = playerCamera.transform.position;
-
-        cameraOffset = playerPosition - cameraPosition;
+        baseTime = sceneXMax[sceneXMax.Length-1]/baseSpeed;
+        for(int i=0; i<sceneLayers.Length; i++){
+            sceneSpeed[i] = sceneXMax[i]/baseTime;
+        }
     }
 
     // Update is called once per frame
     void Update()
     {
-        if(canMove){
-            playerMovement();
-        }
-        
+        sceneMovement();
     }
-
-    private void playerMovement(){
+    private void sceneMovement(){
         float horizontalInput = Input.GetAxis("Horizontal");
 
         if(horizontalInput!=0 && transform.position.x>=playerXMin && transform.position.x<=playerXMax){
