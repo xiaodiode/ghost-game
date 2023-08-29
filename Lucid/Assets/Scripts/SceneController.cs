@@ -6,11 +6,11 @@ using UnityEngine.UI;
 public class SceneController : MonoBehaviour
 {
     public Canvas[] sceneLayers;
-    public PlayerController player;
+    // public PlayerController player;
     public float[] sceneXMax;
     public int depthValue;
     private float[] sceneSpeed;
-    public bool atSceneEdge;
+    public bool atLeftEdge, atRightEdge;
     private float baseSpeed = 20f;
     private float baseTime;
     // private float cameraXMax = -67.5f;
@@ -18,8 +18,9 @@ public class SceneController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        atLeftEdge = false; atRightEdge = false;
+        
         sceneSpeed = new float[sceneLayers.Length];
-        atSceneEdge = true;
         baseTime = sceneXMax[sceneXMax.Length-1]/baseSpeed;
         for(int i=0; i<sceneLayers.Length; i++){
             sceneSpeed[i] = sceneXMax[i]/baseTime;
@@ -34,23 +35,39 @@ public class SceneController : MonoBehaviour
     private void sceneMovement(){
         float horizontalInput = Input.GetAxis("Horizontal");
         
-        for(int i=0; i<sceneLayers.Length; i++){
-            if(sceneLayers[i].GetComponent<RectTransform>().position.x > 0 &&
-                sceneLayers[i].GetComponent<RectTransform>().position.x < sceneXMax[i]){
-                    atSceneEdge = false;
-            }
+        if(sceneLayers[0].GetComponent<RectTransform>().anchoredPosition.x == sceneXMax[0]){
+            atRightEdge = true;
+            Debug.Log("at right edge");
         }
+        else if(sceneLayers[0].GetComponent<RectTransform>().anchoredPosition.x == 0){
+            atLeftEdge = true;
+            Debug.Log("at left edge");
+        }
+        else{
+            atRightEdge = false;
+            atLeftEdge = false;
+        }
+        // for(int i=0; i<sceneLayers.Length; i++){
+        //     if(sceneLayers[i].GetComponent<RectTransform>().position.x == sceneXMax[i] + depthValue*i &&
+        //         sceneLayers[i].GetComponent<RectTransform>().position.x < depthValue*i){
+        //             atSceneEdge = false;
+        //     }
+        //     else{
+        //         player.canMove = true;
+        //     }
+        // }
         if(horizontalInput!=0){
             for(int i=0; i<sceneLayers.Length; i++){
                 Vector2 move = new Vector2(-horizontalInput, 0f)*sceneSpeed[i]*Time.deltaTime;
-                Debug.Log("sceneSpeed: " + sceneSpeed[i]);
+                // Debug.Log("sceneSpeed: " + sceneSpeed[i]);
                 Vector2 newPosition = sceneLayers[i].GetComponent<RectTransform>().anchoredPosition + move;
-                Debug.Log("anchoredPosition for " + i + ": " + sceneLayers[i].GetComponent<RectTransform>().anchoredPosition); 
+                // Debug.Log("anchoredPosition for " + i + ": " + sceneLayers[i].GetComponent<RectTransform>().anchoredPosition); 
                 newPosition.x = Mathf.Clamp(newPosition.x, sceneXMax[i] + depthValue*i, depthValue*i);
             
                 sceneLayers[i].GetComponent<RectTransform>().anchoredPosition = newPosition;
             }
             
+          
 
             // if(transform.position.x == playerXMin || transform.position.x == playerXMax){
             //     cameraOffset = transform.position - playerCamera.transform.position;

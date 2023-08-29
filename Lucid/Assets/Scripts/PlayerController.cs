@@ -5,11 +5,13 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
+    public SceneController sceneController;
     public bool canMove;
     public Camera playerCamera;
-    private Vector3 playerPosition, cameraPosition, cameraOffset;
-    private float cameraXMax = 50;
-    private float cameraXMin = -17.5f;
+    private Vector3 playerPosition;
+    // private Vector3 cameraPosition, cameraOffset;
+    // private float cameraXMax = 50;
+    // private float cameraXMin = -17.5f;
     private float playerXMax = 12;
     private float playerXMin = -12;
     private float playerSpeed = 20f;
@@ -18,15 +20,16 @@ public class PlayerController : MonoBehaviour
     {
         canMove = false;
         playerPosition = transform.position;
-        cameraPosition = playerCamera.transform.position;
+        // cameraPosition = playerCamera.transform.position;
 
-        cameraOffset = playerPosition - cameraPosition;
+        // cameraOffset = playerPosition - cameraPosition;
     }
 
     // Update is called once per frame
     void Update()
     {
-        if(canMove){
+        if((sceneController.atLeftEdge && transform.position.x!=playerXMin) 
+            || (sceneController.atRightEdge && transform.position.x!=playerXMax)){
             playerMovement();
         }
         
@@ -42,21 +45,21 @@ public class PlayerController : MonoBehaviour
             
             transform.position = newPosition;
 
-            if(transform.position.x == playerXMin || transform.position.x == playerXMax){
-                cameraOffset = transform.position - playerCamera.transform.position;
-                // Debug.Log("changed: cameraOffset: " + cameraOffset);
-            }
+            // if(transform.position.x == playerXMin || transform.position.x == playerXMax){
+            //     cameraOffset = transform.position - playerCamera.transform.position;
+            //     // Debug.Log("changed: cameraOffset: " + cameraOffset);
+            // }
 
-            updateCamera();
+            // updateCamera();
         }
         
     }
-    private void updateCamera(){
-        if(playerCamera.transform.position.x >= cameraXMin && playerCamera.transform.position.x <= cameraXMax){
-            Vector3 newPosition = gameObject.transform.position - cameraOffset;
-            newPosition.x = Mathf.Clamp(newPosition.x, cameraXMin, cameraXMax);
+    // private void updateCamera(){
+    //     if(playerCamera.transform.position.x >= cameraXMin && playerCamera.transform.position.x <= cameraXMax){
+    //         Vector3 newPosition = gameObject.transform.position - cameraOffset;
+    //         newPosition.x = Mathf.Clamp(newPosition.x, cameraXMin, cameraXMax);
 
-            playerCamera.transform.position = newPosition;
-        }
-    }
+    //         playerCamera.transform.position = newPosition;
+    //     }
+    // }
 }
