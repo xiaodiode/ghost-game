@@ -387,8 +387,8 @@ MonoBehaviour:
   m_ShadowVolumeIntensityEnabled: 0
   m_ShadowVolumeIntensity: 0.75
   m_LocalBounds:
-    m_Center: {x: 0.93665004, y: -0.7904, z: 0}
-    m_Extent: {x: 4.39305, y: 5.6689, z: 0}
+    m_Center: {x: 0.93755007, y: -0.7888, z: 0}
+    m_Extent: {x: 4.39195, y: 5.6657, z: 0}
   m_PointLightInnerAngle: 360
   m_PointLightOuterAngle: 360
   m_PointLightInnerRadius: 0
@@ -1008,8 +1008,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0.0020341, y: 0}
-  m_SizeDelta: {x: 251.45, y: 59.958}
+  m_AnchoredPosition: {x: -1.0969996, y: 0}
+  m_SizeDelta: {x: 406.133, y: 98.949}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &356048561
 MonoBehaviour:
@@ -1058,8 +1058,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 7
-  m_fontSizeBase: 7
+  m_fontSize: 12
+  m_fontSizeBase: 12
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -1094,7 +1094,7 @@ MonoBehaviour:
   m_VertexBufferAutoSizeReduction: 0
   m_useMaxVisibleDescender: 1
   m_pageToDisplay: 1
-  m_margin: {x: 5, y: 5, z: 5, w: 5}
+  m_margin: {x: 15, y: 10, z: 15, w: 10}
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
   m_hasFontAssetChanged: 0
@@ -1321,8 +1321,8 @@ RectTransform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 510341938}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: -814.32996}
-  m_LocalScale: {x: 249.99994, y: 60, z: 1}
+  m_LocalPosition: {x: 0, y: 0, z: -814.32983}
+  m_LocalScale: {x: 399.99997, y: 100, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1817055929}
@@ -1330,8 +1330,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -0.22472, y: -0.57899857}
-  m_SizeDelta: {x: 1.0076, y: 1}
+  m_AnchoredPosition: {x: 0, y: 2.0410004}
+  m_SizeDelta: {x: 1, y: 1}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!212 &510341940
 SpriteRenderer:
@@ -1677,8 +1677,8 @@ MonoBehaviour:
   m_ShadowVolumeIntensityEnabled: 0
   m_ShadowVolumeIntensity: 0.75
   m_LocalBounds:
-    m_Center: {x: 0.9374, y: -0.7932501, z: 0}
-    m_Extent: {x: 4.3962, y: 5.66425, z: 0}
+    m_Center: {x: 0.9381, y: -0.79540014, z: 0}
+    m_Extent: {x: 4.395, y: 5.6605, z: 0}
   m_PointLightInnerAngle: 360
   m_PointLightOuterAngle: 360
   m_PointLightInnerRadius: 0
@@ -3383,8 +3383,8 @@ MonoBehaviour:
   m_ShadowVolumeIntensityEnabled: 0
   m_ShadowVolumeIntensity: 0.75
   m_LocalBounds:
-    m_Center: {x: 0.9432001, y: -0.79635, z: 0}
-    m_Extent: {x: 4.3919, y: 5.66295, z: 0}
+    m_Center: {x: 0.94009995, y: -0.7924001, z: 0}
+    m_Extent: {x: 4.3884, y: 5.6684, z: 0}
   m_PointLightInnerAngle: 360
   m_PointLightOuterAngle: 360
   m_PointLightInnerRadius: 0
@@ -3851,8 +3851,8 @@ MonoBehaviour:
   m_ShadowVolumeIntensityEnabled: 0
   m_ShadowVolumeIntensity: 0.75
   m_LocalBounds:
-    m_Center: {x: 0.93684983, y: -0.79034996, z: 0}
-    m_Extent: {x: 4.39655, y: 5.66685, z: 0}
+    m_Center: {x: 0.9385501, y: -0.7909999, z: 0}
+    m_Extent: {x: 4.39725, y: 5.6534, z: 0}
   m_PointLightInnerAngle: 360
   m_PointLightOuterAngle: 360
   m_PointLightInnerRadius: 0
@@ -4028,8 +4028,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: -48.421013}
-  m_SizeDelta: {x: -71.546, y: -121.47}
+  m_AnchoredPosition: {x: 0.5, y: -71.041}
+  m_SizeDelta: {x: -91.867, y: -181.051}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1817055930
 MonoBehaviour:
@@ -4263,8 +4263,8 @@ MonoBehaviour:
   m_ShadowVolumeIntensityEnabled: 0
   m_ShadowVolumeIntensity: 0.75
   m_LocalBounds:
-    m_Center: {x: 0.93865, y: -0.7888999, z: 0}
-    m_Extent: {x: 4.39455, y: 5.6616, z: 0}
+    m_Center: {x: 0.94369996, y: -0.7953, z: 0}
+    m_Extent: {x: 4.393, y: 5.6613, z: 0}
   m_PointLightInnerAngle: 360
   m_PointLightOuterAngle: 360
   m_PointLightInnerRadius: 0

@@ -25,7 +25,7 @@ public class MonologueController : MonoBehaviour
     private IEnumerator printMonologue(TextAsset text){
         foreach(char character in text.text){
             if(character == '\n'){
-                monologueText.text += "\n";
+                monologueText.text += "\n\n";
                 yield return new WaitForSeconds(1.0f);
             }
             else{
