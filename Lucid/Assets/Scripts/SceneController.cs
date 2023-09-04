@@ -37,11 +37,11 @@ public class SceneController : MonoBehaviour
         
         if(sceneLayers[0].GetComponent<RectTransform>().anchoredPosition.x == sceneXMax[0]){
             atRightEdge = true;
-            Debug.Log("at right edge");
+            //Debug.Log("at right edge");
         }
         else if(sceneLayers[0].GetComponent<RectTransform>().anchoredPosition.x == 0){
             atLeftEdge = true;
-            Debug.Log("at left edge");
+            //Debug.Log("at left edge");
         }
         else{
             atRightEdge = false;
