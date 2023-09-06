@@ -20,20 +20,26 @@ public class Timestamp : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(((360 - minuteHand.transform.rotation.eulerAngles.z)/6)<10){
-            leadingZeroH = "0";
+        if(((360 - minuteHand.transform.rotation.eulerAngles.z)/6)<10 || ((360 - minuteHand.transform.rotation.eulerAngles.z)/6) == 60){
+            leadingZeroM = "0";
         }
         else{
-            leadingZeroH = "";
+            leadingZeroM = "";
         }
-        
+
         if(Mathf.FloorToInt((360 - hourHand.transform.rotation.eulerAngles.z)/30) == 0){
             hour = 12;
         }
         else{
             hour = Mathf.FloorToInt((360 - hourHand.transform.rotation.eulerAngles.z)/30);
         }
-        timestamp.text = hour.ToString() + ":" 
-        + leadingZeroH + Mathf.FloorToInt((360 - minuteHand.transform.rotation.eulerAngles.z)/6).ToString();
+
+        if(Mathf.FloorToInt((360 - minuteHand.transform.rotation.eulerAngles.z)/6) == 60){
+            minute = 0;
+        }
+        else{
+            minute = Mathf.FloorToInt((360 - minuteHand.transform.rotation.eulerAngles.z)/6);
+        }
+        timestamp.text = hour.ToString() + ":" + leadingZeroM + minute.ToString();
     }
 }
