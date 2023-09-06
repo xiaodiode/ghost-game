@@ -18,5 +18,6 @@ public class ClockRotation : MonoBehaviour
         currRotation.z -= rotationSpeed*Time.deltaTime;
         
         transform.rotation = Quaternion.Euler(currRotation);
+        //Debug.Log("angle: " + transform.rotation.eulerAngles.z); 
     }
 }
