@@ -221,8 +221,8 @@ MonoBehaviour:
   m_ShadowVolumeIntensityEnabled: 0
   m_ShadowVolumeIntensity: 0.75
   m_LocalBounds:
-    m_Center: {x: 0.0015500188, y: -0.0030500293, z: 0}
-    m_Extent: {x: 1.0878501, y: 1.07745, z: 0}
+    m_Center: {x: -0.0020500422, y: 0.000100016594, z: 0}
+    m_Extent: {x: 1.08295, y: 1.079, z: 0}
   m_PointLightInnerAngle: 360
   m_PointLightOuterAngle: 360
   m_PointLightInnerRadius: 0
@@ -262,7 +262,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6992185874477776649}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: -0.429, z: 0}
+  m_LocalPosition: {x: 0.322, y: -0.34, z: 0}
   m_LocalScale: {x: 0.057348035, y: 0.057348035, z: 0}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -310,7 +310,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 2
-  m_Sprite: {fileID: 521771240216432575, guid: 9c023b5b836b78f4e89ceacb8303df69, type: 3}
+  m_Sprite: {fileID: 6800175483825063329, guid: 8b0bc2a3c2a8d4348b5b823f27e36944, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0

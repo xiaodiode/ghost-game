@@ -38,7 +38,7 @@ public class WindowController : MonoBehaviour
             windowLight.intensity = (rotation/180)*maxLightIntensity;
         }
         else{
-            windowLight.intensity = maxLightIntensity - (rotation/360)*maxLightIntensity;
+            windowLight.intensity = maxLightIntensity - ((rotation-180)/180)*maxLightIntensity;
         }
     }
 }
