@@ -5,14 +5,16 @@ using UnityEngine.UI;
 
 public class SceneController : MonoBehaviour
 {
-    public Canvas[] sceneLayers;
-    // public PlayerController player;
-    public float[] sceneXMax;
-    public int depthValue;
-    private float[] sceneSpeed;
-    public bool atLeftEdge, atRightEdge;
-    private float baseSpeed = 20f;
+    [SerializeField] public Canvas[] sceneLayers;
+    [SerializeField] public bool atLeftEdge, atRightEdge;
+
+
+    [SerializeField] private float[] sceneXMax;
+    [SerializeField] private int depthValue;
+    [SerializeField] private float[] sceneSpeed;
+    [SerializeField] private float baseSpeed = 20f;
     private float baseTime;
+    private float horizontalInput;
     // private float cameraXMax = -67.5f;
     
     // Start is called before the first frame update
@@ -30,10 +32,10 @@ public class SceneController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        sceneMovement();
+        updateSceneMovement();
     }
-    private void sceneMovement(){
-        float horizontalInput = Input.GetAxis("Horizontal");
+    private void updateSceneMovement(){
+        horizontalInput = Input.GetAxis("Horizontal");
         
         if(sceneLayers[0].GetComponent<RectTransform>().anchoredPosition.x == sceneXMax[0]){
             atRightEdge = true;

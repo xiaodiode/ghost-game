@@ -5,16 +5,20 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
-    public SceneController sceneController;
-    public bool canMove;
-    public Camera playerCamera;
-    private Vector3 playerPosition;
-    // private Vector3 cameraPosition, cameraOffset;
-    // private float cameraXMax = 50;
-    // private float cameraXMin = -17.5f;
-    private float playerXMax = 15;
-    private float playerXMin = -12;
-    private float playerSpeed = 20f;
+    [SerializeField] public GameObject player;
+
+    [SerializeField] private SceneController sceneController;
+    [SerializeField] private bool canMove;
+    [SerializeField] private Camera playerCamera;
+    [SerializeField] private float playerXMax;
+    [SerializeField] private float playerXMin;
+    [SerializeField] private float playerSpeed;
+    [SerializeField] private float cameraXMax;
+    [SerializeField] private float cameraXMin;
+
+    private Vector3 cameraPosition, cameraOffset;
+    private Vector3 playerPosition, playerScale;
+    private float horizontalInput;
     // Start is called before the first frame update
     void Start()
     {
@@ -28,31 +32,41 @@ public class PlayerController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if((sceneController.atLeftEdge && transform.position.x!=playerXMin) 
-            || (sceneController.atRightEdge && transform.position.x!=playerXMax)){
-            playerMovement();
+        horizontalInput = Input.GetAxis("Horizontal");
+        if(horizontalInput < 0 && player.transform.localScale.x > 0 ||
+                horizontalInput > 0 && player.transform.localScale.x < 0){
+            
+            playerScale = player.transform.localScale;
+            playerScale.x = -playerScale.x;
+            player.transform.localScale = playerScale;
         }
-        
+        OnHorizontalMovement();
     }
 
-    private void playerMovement(){
-        float horizontalInput = Input.GetAxis("Horizontal");
-
-        if(horizontalInput!=0 && transform.position.x>=playerXMin && transform.position.x<=playerXMax){
-            Vector3 move = new Vector3(horizontalInput, 0f, 0f)*playerSpeed*Time.deltaTime;
-            Vector3 newPosition = transform.position + move;
-            newPosition.x = Mathf.Clamp(newPosition.x, playerXMin, playerXMax);
+    private void OnHorizontalMovement(){
+        Debug.Log("player position x: " + transform.position.x);
+        if((sceneController.atLeftEdge && transform.position.x!=playerXMin) 
+            || (sceneController.atRightEdge && transform.position.x!=playerXMax)){
             
-            transform.position = newPosition;
+            
+            Debug.Log("horizontal input: " + horizontalInput);
+            Debug.Log("player scale x: " + player.transform.localScale.x);
 
-            // if(transform.position.x == playerXMin || transform.position.x == playerXMax){
-            //     cameraOffset = transform.position - playerCamera.transform.position;
-            //     // Debug.Log("changed: cameraOffset: " + cameraOffset);
-            // }
+            if(horizontalInput!=0 && transform.position.x>=playerXMin && transform.position.x<=playerXMax){
+                Vector3 move = new Vector3(horizontalInput, 0f, 0f)*playerSpeed*Time.deltaTime;
+                Vector3 newPosition = transform.position + move;
+                newPosition.x = Mathf.Clamp(newPosition.x, playerXMin, playerXMax);
+                
+                transform.position = newPosition;
 
-            // updateCamera();
+                // if(transform.position.x == playerXMin || transform.position.x == playerXMax){
+                //     cameraOffset = transform.position - playerCamera.transform.position;
+                //     // Debug.Log("changed: cameraOffset: " + cameraOffset);
+                // }
+
+                // updateCamera();
+            }
         }
-        
     }
     // private void updateCamera(){
     //     if(playerCamera.transform.position.x >= cameraXMin && playerCamera.transform.position.x <= cameraXMax){

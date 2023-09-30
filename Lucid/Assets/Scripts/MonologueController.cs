@@ -7,8 +7,8 @@ using TMPro;
 
 public class MonologueController : MonoBehaviour
 {
-    public TextAsset testing;
-    public TextMeshProUGUI monologueText;
+    [SerializeField] private TextAsset testing;
+    [SerializeField] private TextMeshProUGUI monologueText;
     private float printSpeed = 0.05f;
     // Start is called before the first frame update
     void Start()
