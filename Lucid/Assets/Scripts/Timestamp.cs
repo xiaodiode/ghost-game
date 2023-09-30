@@ -7,14 +7,15 @@ using UnityEngine.Rendering;
 
 public class Timestamp : MonoBehaviour
 {
-    public ClockRotation hourHand, minuteHand;
-    private TextMeshProUGUI timestamp;
+    [SerializeField] private GameObject hourHand, minuteHand;
+
+    [SerializeField] private TextMeshProUGUI timestamp;
     private int hour, minute;
     private string leadingZeroH, leadingZeroM;
     // Start is called before the first frame update
     void Start()
     {
-        timestamp = transform.GetComponent<TextMeshProUGUI>();
+
     }
 
     // Update is called once per frame
@@ -40,6 +41,13 @@ public class Timestamp : MonoBehaviour
         else{
             minute = Mathf.FloorToInt((360 - minuteHand.transform.rotation.eulerAngles.z)/6);
         }
-        timestamp.text = hour.ToString() + ":" + leadingZeroM + minute.ToString();
+
+        if(hour < 10){
+            leadingZeroH = "0";
+        }
+        else{
+            leadingZeroH = "";
+        }
+        timestamp.text = leadingZeroH + hour.ToString() + ":" + leadingZeroM + minute.ToString();
     }
 }
