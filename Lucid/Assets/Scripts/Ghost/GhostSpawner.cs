@@ -4,9 +4,13 @@ using UnityEngine;
 
 public class GhostSpawner : MonoBehaviour
 {
+    [Header("Current Ghosts")]
+    [SerializeField] public List<Ghost> allActiveGhosts = new();
+    [SerializeField] public int totalTriggerTime;
+
     [Header("Ghost Types")]
     [SerializeField] private List<Ghost> allSubtleTypes = new();
-    [SerializeField] private List<Ghost> allUnSubtleTypes = new();
+    [SerializeField] private List<Ghost> allUnsubtleTypes = new();
 
     [Header("Round 1")]
     [SerializeField] private int firstSpawnTime;
@@ -22,16 +26,58 @@ public class GhostSpawner : MonoBehaviour
     [SerializeField] private int thirdSpawnTime;
     [SerializeField] private int thirdSpawnSubtleNum; 
     [SerializeField] private int thirdSpawnUnsubtleNum;
-    
+
+    private List<Ghost> toTrigger = new();
+    private int totalSubtleTypes, totalUnsubtleTypes;
+    int randomIndex;
+    int secondsStart, secondsPassed;
+
     // Start is called before the first frame update
     void Start()
     {
-        
+        secondsStart = Mathf.FloorToInt(Time.time);
+
+        totalSubtleTypes = allSubtleTypes.Count;
+        totalUnsubtleTypes = allUnsubtleTypes.Count;
     }
 
     // Update is called once per frame
     void Update()
     {
+        secondsPassed = Mathf.FloorToInt(Time.time) - secondsStart;
         
+        checkSpawnTime(firstSpawnTime, firstSpawnSubtleNum, firstSpawnUnsubtleNum);
+        checkSpawnTime(secondSpawnTime, secondSpawnSubtleNum, secondSpawnUnsubtleNum);
+        checkSpawnTime(thirdSpawnTime, thirdSpawnSubtleNum, thirdSpawnUnsubtleNum);
+        
+    }
+
+    private void checkSpawnTime(int spawnTime, int spawnSubtleNum, int spawnUnsubtleNum){
+        if(secondsPassed == spawnTime){
+            for(int i=0; i<spawnSubtleNum; i++){
+                randomIndex = Mathf.FloorToInt(Random.Range(0, totalSubtleTypes - 1));
+                allActiveGhosts.Add(allSubtleTypes[randomIndex]);
+                toTrigger.Add(allSubtleTypes[randomIndex]);
+
+                allSubtleTypes.RemoveAt(randomIndex);
+                totalSubtleTypes--;
+            }
+            for(int i=0; i<spawnUnsubtleNum; i++){
+                randomIndex = Mathf.FloorToInt(Random.Range(0, totalUnsubtleTypes - 1));
+                allActiveGhosts.Add(allUnsubtleTypes[randomIndex]);
+                toTrigger.Add(allUnsubtleTypes[randomIndex]);
+
+                allUnsubtleTypes.RemoveAt(randomIndex);
+                totalUnsubtleTypes--;
+            }
+            triggerGhosts();
+        }
+    }
+
+    private void triggerGhosts(){
+        for(int i=0; i<toTrigger.Count; i++){
+            StartCoroutine(toTrigger[i].startTamperings());
+        }
+        toTrigger.Clear();
     }
 }

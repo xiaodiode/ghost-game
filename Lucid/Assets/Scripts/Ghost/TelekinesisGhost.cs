@@ -15,4 +15,15 @@ public class TelekinesisGhost : Ghost
     {
         
     }
+
+    public override IEnumerator startTamperings(){
+        // while(tamperingList.Count != 0){
+        //     randomIndex = Mathf.FloorToInt(Random.Range(0, tamperingList.Count - 1));
+        //     tamperingList[randomIndex]();
+        //     tamperingList.RemoveAt(randomIndex);
+
+            yield return new WaitForSeconds(triggerInterval);
+        // }
+    
+    }
 }
