@@ -3757,7 +3757,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6694023807682169596, guid: b95e2bbca338b044291f7c07ec4d0ade, type: 3}
       propertyPath: rotationSpeed
-      value: 10
+      value: 2
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 6139728218789085930, guid: b95e2bbca338b044291f7c07ec4d0ade, type: 3}
@@ -3773,6 +3773,18 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1337554770319443012, guid: 2b2a55eb381afd143828af6f36809f6a, type: 3}
+      propertyPath: m_Color.b
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1337554770319443012, guid: 2b2a55eb381afd143828af6f36809f6a, type: 3}
+      propertyPath: m_Color.g
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1337554770319443012, guid: 2b2a55eb381afd143828af6f36809f6a, type: 3}
+      propertyPath: m_Color.r
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 1770357232106521533, guid: 2b2a55eb381afd143828af6f36809f6a, type: 3}
       propertyPath: m_RootOrder
       value: 5
@@ -3911,6 +3923,10 @@ PrefabInstance:
       propertyPath: accurateClock
       value: 
       objectReference: {fileID: 1009946558}
+    - target: {fileID: 2535045693864280212, guid: 412831393eecd484f8d5342d99899e71, type: 3}
+      propertyPath: maxLightIntensity
+      value: 0.5
+      objectReference: {fileID: 0}
     - target: {fileID: 4210197150173527486, guid: 412831393eecd484f8d5342d99899e71, type: 3}
       propertyPath: m_Name
       value: Window Mask

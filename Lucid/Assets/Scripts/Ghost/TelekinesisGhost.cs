@@ -26,4 +26,7 @@ public class TelekinesisGhost : Ghost
         // }
     
     }
+    public override void resetTamperings(){
+        
+    }
 }

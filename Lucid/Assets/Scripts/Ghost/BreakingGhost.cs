@@ -52,5 +52,9 @@ public class BreakingGhost : Ghost
     
     }
 
+    public override void resetTamperings(){
+        
+    }
+
 
 }

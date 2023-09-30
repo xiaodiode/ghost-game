@@ -33,4 +33,6 @@ public abstract class Ghost : MonoBehaviour
     }
 
     public abstract IEnumerator startTamperings();
+
+    public abstract void resetTamperings();
 }

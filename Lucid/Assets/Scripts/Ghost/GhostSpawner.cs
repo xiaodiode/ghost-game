@@ -33,7 +33,7 @@ public class GhostSpawner : MonoBehaviour
     int randomIndex;
     int secondsStart, secondsPassed;
 
-    // Start is called before the first frame update
+  
     void Start()
     {
         secondsStart = Mathf.FloorToInt(Time.time);
@@ -93,7 +93,7 @@ public class GhostSpawner : MonoBehaviour
         }
         totalSubtleTypes = allSubtleTypes.Count;
         totalUnsubtleTypes = allUnsubtleTypes.Count;
-        
+
         toTrigger.Clear();
 
         secondsStart = Mathf.FloorToInt(Time.time);

@@ -25,4 +25,8 @@ public class TimeGhost : Ghost
         // }
     
     }
+
+    public override void resetTamperings(){
+        
+    }
 }
