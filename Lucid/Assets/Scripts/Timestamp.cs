@@ -7,15 +7,16 @@ using UnityEngine.Rendering;
 
 public class Timestamp : MonoBehaviour
 {
-    [SerializeField] private GameObject hourHand, minuteHand;
+    [SerializeField] public bool ready;
 
+    [SerializeField] private GameObject hourHand, minuteHand;
     [SerializeField] private TextMeshProUGUI timestamp;
     private int hour, minute;
     private string leadingZeroH, leadingZeroM;
     // Start is called before the first frame update
     void Start()
     {
-
+        ready = false;
     }
 
     // Update is called once per frame
@@ -49,5 +50,10 @@ public class Timestamp : MonoBehaviour
             leadingZeroH = "";
         }
         timestamp.text = leadingZeroH + hour.ToString() + ":" + leadingZeroM + minute.ToString();
+        ready = true;
+    }
+
+    public string getTimestamp(){
+        return timestamp.text;
     }
 }
