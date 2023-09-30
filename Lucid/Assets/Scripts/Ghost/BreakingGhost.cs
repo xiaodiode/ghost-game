@@ -8,12 +8,17 @@ public class BreakingGhost : Ghost
     [SerializeField] private List<GameObject> perfectObjects = new();
     [SerializeField] private List<GameObject> brokenObjects = new();
     [SerializeField] private delegate void triggerings(GameObject a, GameObject b);
+    [SerializeField] private List<triggerings> tamperingList = new List<triggerings>();
 
+    private triggerings trigger = breakObject;
     // Start is called before the first frame update
     void Start()
     {
+        type = "unsubtle";
+
+        trigger(perfectObjects[0],brokenObjects[0]);
         for(int i=0; i<perfectObjects.Count; i++){
-            // tamperingList.Add(breakObject(perfectObjects[i],brokenObjects[i]));   
+            tamperingList.Add(trigger);   
             // tamperingList.Add(please()); 
         }
         
@@ -25,10 +30,7 @@ public class BreakingGhost : Ghost
         
     }
 
-    public void please(){
-
-    }
-    private void breakObject(GameObject goodObject, GameObject badObject){
+    private static void breakObject(GameObject goodObject, GameObject badObject){
         Vector3 currPosition = goodObject.transform.position;
         Quaternion currRotation = goodObject.transform.rotation;
 

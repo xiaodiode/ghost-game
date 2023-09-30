@@ -29,6 +29,7 @@ public class GhostSpawner : MonoBehaviour
 
     private List<Ghost> toTrigger = new();
     private int totalSubtleTypes, totalUnsubtleTypes;
+    
     int randomIndex;
     int secondsStart, secondsPassed;
 
@@ -79,5 +80,22 @@ public class GhostSpawner : MonoBehaviour
             StartCoroutine(toTrigger[i].startTamperings());
         }
         toTrigger.Clear();
+    }
+
+    public void resetGhostSpawner(){
+        foreach(Ghost ghost in allActiveGhosts){
+            if(ghost.type == "subtle"){
+                allSubtleTypes.Add(ghost);
+            }
+            else if(ghost.type == "unsubtle"){
+                allUnsubtleTypes.Add(ghost);
+            }
+        }
+        totalSubtleTypes = allSubtleTypes.Count;
+        totalUnsubtleTypes = allUnsubtleTypes.Count;
+        
+        toTrigger.Clear();
+
+        secondsStart = Mathf.FloorToInt(Time.time);
     }
 }
