@@ -33,7 +33,7 @@ public class GhostSpawner : MonoBehaviour
     int randomIndex;
     int secondsStart, secondsPassed;
 
-  
+  //hi
     void Start()
     {
         secondsStart = Mathf.FloorToInt(Time.time);
