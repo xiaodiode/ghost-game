@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Runtime.CompilerServices;
+using TMPro;
 using UnityEngine;
 
 public class PlayerController : MonoBehaviour
@@ -11,14 +12,15 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private float playerXMax;
     [SerializeField] private float playerXMin;
     [SerializeField] private float playerSpeed;
+    [SerializeField] private TextMeshProUGUI monologueText;
 
-    private Vector3 cameraPosition, cameraOffset;
-    private Vector3 playerPosition, playerScale;
+    private Vector3 playerScale;
+    private Vector3 monologueScale;
     private float horizontalInput;
     // Start is called before the first frame update
     void Start()
     {
-        playerPosition = transform.position;
+        
     }
 
     // Update is called once per frame
@@ -30,7 +32,12 @@ public class PlayerController : MonoBehaviour
             
             playerScale = player.transform.localScale;
             playerScale.x = -playerScale.x;
+
+            monologueScale = monologueText.rectTransform.localScale;
+            monologueScale.x = -monologueScale.x;
+
             player.transform.localScale = playerScale;
+            monologueText.rectTransform.localScale = monologueScale;
         }
         horizontalMovement();
     }

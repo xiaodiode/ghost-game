@@ -46,10 +46,10 @@ public class MonologueController : MonoBehaviour
         cursorText = "<font=\"" + cursorFont + "\">" +"<size=" + cursorSizePercent + "%>";
 
         if(cursorBold){
-            cursorText += "<b> I";
+            cursorText += "<b>  I";
         }
         else{
-            cursorText += " I";
+            cursorText += "  I";
         }
 
         lineHeightText = "<line-height=" + lineDiffPercent + "%>";
