@@ -27,6 +27,7 @@ public class MonologueController : MonoBehaviour
     [SerializeField] private string cursorSizePercent;
     [SerializeField] private float cursorBlinkSpeed;
     [SerializeField] private bool cursorBold;
+    [SerializeField] private float cursorPrintDelay;
     
 
     private string[] fileLines;
@@ -34,7 +35,7 @@ public class MonologueController : MonoBehaviour
     private bool lineFinished, finishPrinting;
     private string currTimeStamp;
     private string lineHeightText;
-    private string cursorText;
+    private string cursorText, cursorAdjustText;
     private string textWithCursor, textWithoutCursor;
     private bool showCursor;
     
@@ -45,13 +46,14 @@ public class MonologueController : MonoBehaviour
         cursorText = "<font=\"" + cursorFont + "\">" +"<size=" + cursorSizePercent + "%>";
 
         if(cursorBold){
-            cursorText += "<b>I";
+            cursorText += "<b> I";
         }
         else{
-            cursorText += "I";
+            cursorText += " I";
         }
 
         lineHeightText = "<line-height=" + lineDiffPercent + "%>";
+        cursorAdjustText = "<size=0%>" + lineHeightText + "\n</size>";
 
         lineFinished = false;
         finishPrinting = false;
@@ -59,7 +61,7 @@ public class MonologueController : MonoBehaviour
         fileLines = testing.text.Split('\n');
         currLineIndex = 0;
 
-        new WaitForSeconds(1);
+        new WaitForSeconds(clearTime);
         StartCoroutine(printMonologue(testing));
     }
 
@@ -74,7 +76,7 @@ public class MonologueController : MonoBehaviour
             yield return null;
         }
 // It's ok. <font="amatic"><size=200%><b>I</font>
-        monologueText.text = lineHeightText + "\n";
+        monologueText.text = cursorAdjustText;
         lineFinished = false;
         yield return new WaitForSeconds(clearTime);
 
@@ -84,7 +86,7 @@ public class MonologueController : MonoBehaviour
             monologueText.text += character;
             
             if(finishPrinting){
-                monologueText.text = currTimeStamp + fileLines[currLineIndex];
+                monologueText.text = cursorAdjustText + fileLines[currLineIndex];
                 break;
             }
             else{
@@ -93,38 +95,47 @@ public class MonologueController : MonoBehaviour
 
         }
         //removes newline character so cursor can show properly
-        Debug.Log("text length: " + monologueText.text.Length);
         monologueText.text = monologueText.text.Remove(monologueText.text.Length - 1, 1);
-        Debug.Log("text length after removal: " + monologueText.text.Length);
-
-        showCursor = true;
-
-        textWithCursor = monologueText.text + cursorText;
-        textWithoutCursor = monologueText.text;
-        
-        while(showCursor){
-            monologueText.text = textWithCursor;
-            Debug.Log("with cursor" + monologueText.text);
-            yield return new WaitForSeconds(cursorBlinkSpeed);
-
-            monologueText.text = textWithoutCursor;
-            Debug.Log("without cursor" + monologueText.text);
-            yield return new WaitForSeconds(cursorBlinkSpeed);
-        }
 
         finishPrinting = false;
         lineFinished = true;
+
         currLineIndex++;
+        
+
+        showCursor = true;
+        StartCoroutine(printCursor());
+
     }
 
-    private void OnNextLine(){
-        showCursor = false;
-        if(!lineFinished){
-            finishPrinting = true;
+    private IEnumerator printCursor(){
+        textWithCursor = monologueText.text + cursorText;
+        textWithoutCursor = monologueText.text;
+        
+        yield return new WaitForSeconds(cursorPrintDelay);
+
+        while(showCursor){
+            if(monologueText.text == textWithoutCursor){
+                monologueText.text = textWithCursor;
+            }
+            else{
+                monologueText.text = textWithoutCursor;
+            }
+            yield return new WaitForSeconds(cursorBlinkSpeed);
         }
-        else if(currLineIndex < fileLines.Length){
-            finishPrinting = false;
-            StartCoroutine(printMonologue(testing));
+    }
+    private void OnNextLine(){
+        if(currLineIndex != fileLines.Length){
+            showCursor = false;
+            
+            
+            if(!lineFinished){
+                finishPrinting = true;
+            }
+            else if(currLineIndex < fileLines.Length){
+                finishPrinting = false;
+                StartCoroutine(printMonologue(testing));
+            }
         }
         
     }

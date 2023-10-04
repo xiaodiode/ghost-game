@@ -657,7 +657,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 
+  m_text: <size=0%><line-height=10%>\n</size>This is the first line.<font="amatic"><size=200%><b>I
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 4be781db6de3e96439c8eae1369273dc, type: 2}
   m_sharedMaterial: {fileID: -6268737636104457247, guid: 4be781db6de3e96439c8eae1369273dc, type: 2}
@@ -696,7 +696,7 @@ MonoBehaviour:
   m_textAlignment: 65535
   m_characterSpacing: 5
   m_wordSpacing: 0
-  m_lineSpacing: 0
+  m_lineSpacing: 200
   m_lineSpacingMax: 0
   m_paragraphSpacing: 0
   m_charWidthMaxAdj: 0
@@ -3061,6 +3061,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   testing: {fileID: 4900000, guid: 76fbc927e6873574eb0e0515979f40ea, type: 3}
   monologueText: {fileID: 1932137725}
+  lineDiffPercent: 0
   timestamp: {fileID: 1919116870}
   clearTime: 0
   printSpeed: 0.05
@@ -3068,6 +3069,7 @@ MonoBehaviour:
   cursorSizePercent: 
   cursorBlinkSpeed: 0
   cursorBold: 0
+  cursorPrintDelay: 0
 --- !u!114 &1786618859
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3188,13 +3190,15 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   testing: {fileID: 4900000, guid: 76fbc927e6873574eb0e0515979f40ea, type: 3}
   monologueText: {fileID: 356048561}
+  lineDiffPercent: 10
   timestamp: {fileID: 1919116870}
-  clearTime: 0
+  clearTime: 0.5
   printSpeed: 0.05
   cursorFont: amatic
   cursorSizePercent: 200
-  cursorBlinkSpeed: 0.05
+  cursorBlinkSpeed: 0.7
   cursorBold: 1
+  cursorPrintDelay: 0.5
 --- !u!114 &1817055931
 MonoBehaviour:
   m_ObjectHideFlags: 0
