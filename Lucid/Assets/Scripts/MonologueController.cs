@@ -46,10 +46,10 @@ public class MonologueController : MonoBehaviour
         cursorText = "<font=\"" + cursorFont + "\">" +"<size=" + cursorSizePercent + "%>";
 
         if(cursorBold){
-            cursorText += "<b>  I";
+            cursorText += "<b>  o";
         }
         else{
-            cursorText += "  I";
+            cursorText += "  o";
         }
 
         lineHeightText = "<line-height=" + lineDiffPercent + "%>";
@@ -127,7 +127,6 @@ public class MonologueController : MonoBehaviour
     private void OnNextLine(){
         if(currLineIndex != fileLines.Length){
             showCursor = false;
-            
             
             if(!lineFinished){
                 finishPrinting = true;
