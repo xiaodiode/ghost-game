@@ -16,6 +16,9 @@ public class MonologueController : MonoBehaviour
     [SerializeField] private float lineDiffPercent;
     [SerializeField] private Timestamp timestamp;
 
+    [Header("Message Log")]
+    [SerializeField] private LogController logController;
+    [SerializeField] private LogEntry newEntry;
 
     [Header("Printing Animation")]
     [SerializeField] private float clearTime;
@@ -92,8 +95,8 @@ public class MonologueController : MonoBehaviour
             else{
                 yield return new WaitForSeconds(printSpeed);
             }
-
         }
+        
         //removes newline character so cursor can show properly
         monologueText.text = monologueText.text.Remove(monologueText.text.Length - 1, 1);
 
@@ -132,6 +135,13 @@ public class MonologueController : MonoBehaviour
                 finishPrinting = true;
             }
             else if(currLineIndex < fileLines.Length){
+                currTimeStamp = timestamp.getTimestamp();
+                
+                newEntry.setTimestamp(currTimeStamp);
+                newEntry.setMonologue(textWithoutCursor.Replace("<size=0%>", ""));
+
+                logController.addNewEntry(newEntry);
+
                 finishPrinting = false;
                 StartCoroutine(printMonologue(testing));
             }

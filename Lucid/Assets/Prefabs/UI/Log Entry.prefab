@@ -9,6 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8738726958819486757}
+  - component: {fileID: 352153422299411744}
   m_Layer: 0
   m_Name: Log Entry
   m_TagString: Untagged
@@ -37,6 +38,20 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &352153422299411744
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 441500769321364989}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ee56c6bc96b68764089cc017d3f5443a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  timestampEntry: {fileID: 404959530903732687}
+  monologueEntry: {fileID: 6949763041976212356}
 --- !u!1 &4229742424575222931
 GameObject:
   m_ObjectHideFlags: 0

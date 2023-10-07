@@ -5,8 +5,8 @@ using TMPro;
 
 public class LogEntry : MonoBehaviour
 {
-    [SerializeField] private TextMeshProUGUI timestampEntry;
-    [SerializeField] private TextMeshProUGUI monologueEntry;
+    [SerializeField] public TextMeshProUGUI timestampEntry;
+    [SerializeField] public TextMeshProUGUI monologueEntry;
     // Start is called before the first frame update
     void Start()
     {

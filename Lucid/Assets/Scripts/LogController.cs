@@ -5,6 +5,7 @@ using UnityEngine;
 public class LogController : MonoBehaviour
 {
     [SerializeField] private List<LogEntry> logEntries = new(); 
+    [SerializeField] private GameObject logContent;
     // Start is called before the first frame update
     void Start()
     {
@@ -19,5 +20,9 @@ public class LogController : MonoBehaviour
 
     public void addNewEntry(LogEntry entry){
         logEntries.Add(entry);
+
+        LogEntry newEntry = Instantiate(entry);
+        newEntry.transform.SetParent(transform);
+        newEntry.transform.localScale = entry.transform.localScale;
     }
 }
