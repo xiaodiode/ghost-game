@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class LogController : MonoBehaviour
 {
+    [SerializeField] private List<LogEntry> logEntries = new(); 
     // Start is called before the first frame update
     void Start()
     {
@@ -14,5 +15,9 @@ public class LogController : MonoBehaviour
     void Update()
     {
         
+    }
+
+    public void addNewEntry(LogEntry entry){
+        logEntries.Add(entry);
     }
 }

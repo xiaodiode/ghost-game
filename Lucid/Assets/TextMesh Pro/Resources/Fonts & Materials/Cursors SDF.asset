@@ -1386,14 +1386,14 @@ MonoBehaviour:
     m_ClassDefinitionType: 0
   - m_Index: 82
     m_Metrics:
-      m_Width: 18.5
+      m_Width: 13.57
       m_Height: 53.953125
       m_HorizontalBearingX: 4.671875
       m_HorizontalBearingY: 44.40625
       m_HorizontalAdvance: 41.96875
     m_GlyphRect:
       m_X: 246
-      m_Y: 444
+      m_Y: 445
       m_Width: 34
       m_Height: 55
     m_Scale: 1
