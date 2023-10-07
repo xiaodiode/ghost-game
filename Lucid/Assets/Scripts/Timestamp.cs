@@ -10,10 +10,15 @@ public class Timestamp : MonoBehaviour
     [SerializeField] private GameObject hourHand, minuteHand;
     [SerializeField] private TextMeshProUGUI timestamp;
     private int hour, minute;
+    private int hourOffset;
     private string leadingZeroH, leadingZeroM;
+    private bool secondRotation;
     // Start is called before the first frame update
     void Start()
     {
+        hour = 0;
+        hourOffset = 0;
+        secondRotation = false;
         ready = false;
     }
 
@@ -27,11 +32,25 @@ public class Timestamp : MonoBehaviour
             leadingZeroM = "";
         }
 
+        if(timestamp.text == "11:59"){
+            secondRotation = true;
+        }
+        else if(timestamp.text == "23:59"){
+            secondRotation = false;
+        }
+
         if(Mathf.FloorToInt((360 - hourHand.transform.rotation.eulerAngles.z)/30) == 0){
-            hour = 12;
+            if(!secondRotation){
+                hour = 0;
+                hourOffset = 0;
+            }
+            else{
+                hour = 12;
+                hourOffset = 12;
+            }
         }
         else{
-            hour = Mathf.FloorToInt((360 - hourHand.transform.rotation.eulerAngles.z)/30);
+            hour = hourOffset + Mathf.FloorToInt((360 - hourHand.transform.rotation.eulerAngles.z)/30);
         }
 
         if(Mathf.FloorToInt((360 - minuteHand.transform.rotation.eulerAngles.z)/6) == 60){
