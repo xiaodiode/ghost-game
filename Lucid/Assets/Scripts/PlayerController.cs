@@ -39,6 +39,7 @@ public class PlayerController : MonoBehaviour
             player.transform.localScale = playerScale;
             monologueText.rectTransform.localScale = monologueScale;
         }
+        
         horizontalMovement();
     }
 
@@ -46,7 +47,7 @@ public class PlayerController : MonoBehaviour
         if((sceneController.atLeftEdge && transform.position.x!=playerXMin) 
             || (sceneController.atRightEdge && transform.position.x!=playerXMax)){
             
-            if(horizontalInput!=0 && transform.position.x>=playerXMin && transform.position.x<=playerXMax){
+            if(horizontalInput!=0){
                 Vector3 move = new Vector3(horizontalInput, 0f, 0f)*playerSpeed*Time.deltaTime;
                 Vector3 newPosition = transform.position + move;
                 newPosition.x = Mathf.Clamp(newPosition.x, playerXMin, playerXMax);
