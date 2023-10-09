@@ -7,6 +7,7 @@ public class SceneController : MonoBehaviour
 {
     [SerializeField] public Canvas[] sceneLayers;
     [SerializeField] public bool atLeftEdge, atRightEdge;
+    [SerializeField] public bool lockMovement;
 
 
     [SerializeField] private float[] sceneXMax;
@@ -27,12 +28,17 @@ public class SceneController : MonoBehaviour
         for(int i=0; i<sceneLayers.Length; i++){
             sceneSpeed[i] = sceneXMax[i]/baseTime;
         }
+
+        lockMovement = false;
     }
 
     // Update is called once per frame
     void Update()
     {
-        updateSceneMovement();
+        if(!lockMovement){
+           updateSceneMovement(); 
+        }
+        
     }
     private void updateSceneMovement(){
         horizontalInput = Input.GetAxis("Horizontal");

@@ -7,8 +7,9 @@ using UnityEngine;
 public class PlayerController : MonoBehaviour
 {
     [SerializeField] public GameObject player;
+    [SerializeField] public SceneController sceneController;
+    [SerializeField] public bool lockMovement;
 
-    [SerializeField] private SceneController sceneController;
     [SerializeField] private float playerXMax;
     [SerializeField] private float playerXMin;
     [SerializeField] private float playerSpeed;
@@ -20,27 +21,30 @@ public class PlayerController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+        lockMovement = false;
     }
 
     // Update is called once per frame
     void Update()
     {
-        horizontalInput = Input.GetAxis("Horizontal");
-        if(horizontalInput < 0 && player.transform.localScale.x > 0 ||
-                horizontalInput > 0 && player.transform.localScale.x < 0){
+        if(!lockMovement){
+            horizontalInput = Input.GetAxis("Horizontal");
+            if(horizontalInput < 0 && player.transform.localScale.x > 0 ||
+                    horizontalInput > 0 && player.transform.localScale.x < 0){
+                
+                playerScale = player.transform.localScale;
+                playerScale.x = -playerScale.x;
+
+                monologueScale = monologueText.rectTransform.localScale;
+                monologueScale.x = -monologueScale.x;
+
+                player.transform.localScale = playerScale;
+                monologueText.rectTransform.localScale = monologueScale;
+            }
             
-            playerScale = player.transform.localScale;
-            playerScale.x = -playerScale.x;
-
-            monologueScale = monologueText.rectTransform.localScale;
-            monologueScale.x = -monologueScale.x;
-
-            player.transform.localScale = playerScale;
-            monologueText.rectTransform.localScale = monologueScale;
+            horizontalMovement();
         }
         
-        horizontalMovement();
     }
 
     private void horizontalMovement(){
