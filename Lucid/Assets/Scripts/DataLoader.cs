@@ -55,7 +55,6 @@ public class DataLoader : MonoBehaviour
 
         fileReader = new StringReader(plantDataText.text);
 
-        
         while((fileLine = fileReader.ReadLine()) != null){
             fileLine = fileLine.Trim();
 

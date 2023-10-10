@@ -32,12 +32,15 @@ public class MonologueController : MonoBehaviour
 
     private string[] fileLines;
     private int currLineIndex;
-    private bool lineFinished, finishPrinting;
+    private bool isReset, isFinished, finishPrinting;
     private string currTimeStamp;
     private string lineHeightText;
     private string cursorText, cursorAdjustText;
     private string textWithCursor, textWithoutCursor;
     private bool showCursor;
+
+
+    private bool isInterjecting;
     
     // Start is called before the first frame update
     void Start()
@@ -55,14 +58,17 @@ public class MonologueController : MonoBehaviour
         lineHeightText = "<line-height=" + lineDiffPercent + "%>";
         cursorAdjustText = "<size=0%>" + lineHeightText + "\n</size>";
 
-        lineFinished = false;
+        isFinished = false;
         finishPrinting = false;
+        isReset = false;
 
         fileLines = testing.text.Split('\n');
         currLineIndex = 0;
 
+        isInterjecting = false;
+
         new WaitForSeconds(clearTime);
-        StartCoroutine(printMonologue(testing));
+        StartCoroutine(printMainMonologue());
     }
 
     // Update is called once per frame
@@ -71,41 +77,55 @@ public class MonologueController : MonoBehaviour
         
     }
     
-    private IEnumerator printMonologue(TextAsset text){
+    private IEnumerator printMainMonologue(){
         while(!timestamp.ready){
             yield return null;
         }
-// It's ok. <font="amatic"><size=200%><b>I</font>
+
+        StartCoroutine(resetMonologue());
+
+        while(!isReset){
+            yield return null;
+        }
+
+        StartCoroutine(printToMonologue(fileLines[currLineIndex]));
+
+        while(!isFinished){
+            yield return null;
+        }
+        
+        currLineIndex++;
+
+        StartCoroutine(printCursor());
+    }
+
+    private IEnumerator resetMonologue(){
         monologueText.text = cursorAdjustText;
-        lineFinished = false;
+        isFinished = false;
         yield return new WaitForSeconds(clearTime);
 
-        // currTimeStamp = timestamp.getTimestamp() + "\t";
-        // monologueText.text += currTimeStamp;
-        foreach(char character in fileLines[currLineIndex]){
+        isReset = true;
+    }
+
+    private IEnumerator printToMonologue(string toPrint){
+        isReset = false;
+        foreach(char character in toPrint){
             monologueText.text += character;
             
             if(finishPrinting){
-                monologueText.text = cursorAdjustText + fileLines[currLineIndex];
+                monologueText.text = cursorAdjustText + toPrint;
                 break;
             }
             else{
                 yield return new WaitForSeconds(printSpeed);
             }
         }
-        
         //removes newline character so cursor can show properly
         monologueText.text = monologueText.text.Remove(monologueText.text.Length - 1, 1);
 
         finishPrinting = false;
-        lineFinished = true;
-
-        currLineIndex++;
-        
-
+        isFinished = true;
         showCursor = true;
-        StartCoroutine(printCursor());
-
     }
 
     private IEnumerator printCursor(){
@@ -124,11 +144,12 @@ public class MonologueController : MonoBehaviour
             yield return new WaitForSeconds(cursorBlinkSpeed);
         }
     }
+
     private void OnNextLine(){
-        if(currLineIndex != fileLines.Length){
+        if((currLineIndex != fileLines.Length) && !isInterjecting){
             showCursor = false;
             
-            if(!lineFinished){
+            if(!isFinished){
                 finishPrinting = true;
             }
             else if(currLineIndex < fileLines.Length){
@@ -140,9 +161,36 @@ public class MonologueController : MonoBehaviour
                 logController.addNewEntry(newEntry);
 
                 finishPrinting = false;
-                StartCoroutine(printMonologue(testing));
+                StartCoroutine(printMainMonologue());
             }
         }
         
     }
+
+    public IEnumerator interjectMonologue(string interjection){
+        while(!isFinished){
+            yield return null;
+        }
+
+        isInterjecting = true;
+
+        StartCoroutine(resetMonologue());
+
+        while(!isReset){
+            yield return null;
+        }
+
+        StartCoroutine(printToMonologue(interjection));
+
+        while(!isFinished){
+            yield return null;
+        }
+
+        StartCoroutine(printCursor());
+
+        isInterjecting = false;
+
+    }
+
+    
 }
