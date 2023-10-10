@@ -10,7 +10,7 @@ public class TextInputController : MonoBehaviour, IPointerClickHandler
     [SerializeField] private TMP_InputField inputField;
     [SerializeField] private PlayerController player;
 
-    [SerializeField] private DataLoader dataLoader;
+    [SerializeField] private DataLoader data;
     [SerializeField] private TextMeshProUGUI autocomplete;
     
     
@@ -43,7 +43,7 @@ public class TextInputController : MonoBehaviour, IPointerClickHandler
 
     public void triggerAutocomplete(string input){
         if(input != ""){
-            firstDemonMatch = dataLoader.demonList.FirstOrDefault(demon => demon.StartsWith(input, System.StringComparison.OrdinalIgnoreCase));
+            firstDemonMatch = data.demonList.FirstOrDefault(demon => demon.StartsWith(input, System.StringComparison.OrdinalIgnoreCase));
             autocomplete.text = firstDemonMatch;
         }
         else{

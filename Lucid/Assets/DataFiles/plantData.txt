@@ -1,0 +1,24 @@
+baseMonologue
+This is an interesting plant.
+I wish I knew more about this plant.
+I forgot what this plant was called.
+Looks pretty healthy.
+This plant is growing really well.
+vibrantMonologue
+This plant is called 
+and it is 
+plantInfo
+plant1 description the descr of plant 1.
+plant2 description the descr of plant 2.
+plant3 description the descr of plant 3.
+plant4 description the descr of plant 4.
+plant5 description the descr of plant 5.
+plant6 description the descr of plant 6.
+plant7 description the descr of plant 7.
+plant8 description the descr of plant 8.
+plant9 description the descr of plant 9.
+plant10 description the descr of plant 10.
+plant11 description the descr of plant 11.
+plant12 description the descr of plant 12.
+plant13 description the descr of plant 13.
+plant14 description the descr of plant 14.

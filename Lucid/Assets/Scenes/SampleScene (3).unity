@@ -476,6 +476,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   demonListText: {fileID: 4900000, guid: c3ed89eb0d0083447943a5e01afb6dd0, type: 3}
+  plantDataText: {fileID: 4900000, guid: 20389d0e91be6cd4a993f66ac0fa79a0, type: 3}
   demonList: []
 --- !u!4 &160592820
 Transform:
@@ -558,7 +559,7 @@ MonoBehaviour:
     m_NormalColor: {r: 0.509434, g: 0.509434, b: 0.509434, a: 0.23529412}
     m_HighlightedColor: {r: 0.50980395, g: 0.50980395, b: 0.50980395, a: 0.5176471}
     m_PressedColor: {r: 0.50980395, g: 0.50980395, b: 0.50980395, a: 0.50980395}
-    m_SelectedColor: {r: 0.50980395, g: 0.50980395, b: 0.50980395, a: 1}
+    m_SelectedColor: {r: 0.50980395, g: 0.50980395, b: 0.50980395, a: 0.23529412}
     m_DisabledColor: {r: 0.50980395, g: 0.50980395, b: 0.50980395, a: 0.23529412}
     m_ColorMultiplier: 1
     m_FadeDuration: 0.1
@@ -1394,8 +1395,8 @@ MonoBehaviour:
   m_ShadowVolumeIntensityEnabled: 0
   m_ShadowVolumeIntensity: 0.75
   m_LocalBounds:
-    m_Center: {x: 1.0336914, y: -1.2906494, z: 0}
-    m_Extent: {x: 1367.324, y: 1159.6892, z: 0}
+    m_Center: {x: 1.0307007, y: -1.2855225, z: 0}
+    m_Extent: {x: 1367.322, y: 1159.6812, z: 0}
   m_PointLightInnerAngle: 360
   m_PointLightOuterAngle: 360
   m_PointLightInnerRadius: 0
@@ -4790,7 +4791,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1817055929
 RectTransform:
   m_ObjectHideFlags: 0
@@ -6128,11 +6129,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1053976171249551423, guid: 2b2a55eb381afd143828af6f36809f6a, type: 3}
       propertyPath: m_SizeDelta.y
-      value: 0
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 1053976171249551423, guid: 2b2a55eb381afd143828af6f36809f6a, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 9.784684
+      value: 9.785111
       objectReference: {fileID: 0}
     - target: {fileID: 1090518103484794059, guid: 2b2a55eb381afd143828af6f36809f6a, type: 3}
       propertyPath: m_Layer
@@ -6308,15 +6309,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4549640761144793496, guid: 2b2a55eb381afd143828af6f36809f6a, type: 3}
       propertyPath: m_AnchorMax.x
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4549640761144793496, guid: 2b2a55eb381afd143828af6f36809f6a, type: 3}
       propertyPath: m_AnchorMax.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4549640761144793496, guid: 2b2a55eb381afd143828af6f36809f6a, type: 3}
       propertyPath: m_SizeDelta.x
-      value: 0
+      value: -17
       objectReference: {fileID: 0}
     - target: {fileID: 4877997820453026116, guid: 2b2a55eb381afd143828af6f36809f6a, type: 3}
       propertyPath: m_Layer
@@ -6324,11 +6325,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5291399513813687936, guid: 2b2a55eb381afd143828af6f36809f6a, type: 3}
       propertyPath: m_AnchorMax.x
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5291399513813687936, guid: 2b2a55eb381afd143828af6f36809f6a, type: 3}
       propertyPath: m_AnchorMax.y
-      value: 0
+      value: 0.9999724
       objectReference: {fileID: 0}
     - target: {fileID: 5291399513813687936, guid: 2b2a55eb381afd143828af6f36809f6a, type: 3}
       propertyPath: m_AnchorMin.y
