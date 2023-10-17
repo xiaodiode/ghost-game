@@ -46,5 +46,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   demonListText: {fileID: 4900000, guid: c3ed89eb0d0083447943a5e01afb6dd0, type: 3}
   plantDataText: {fileID: 4900000, guid: 20389d0e91be6cd4a993f66ac0fa79a0, type: 3}
+  metalDataText: {fileID: 4900000, guid: f26cd9abb1d870241b5ebea18f1de058, type: 3}
   demonList: []
-  basePlantMonologue: []
+  plantDataReady: 0
+  deadPlantComments: []
+  metalDataReady: 0

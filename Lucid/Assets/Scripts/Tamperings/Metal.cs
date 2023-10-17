@@ -10,7 +10,6 @@ public class Metal : MonoBehaviour
 
     [Header("Monologue")]
     [SerializeField] private MonologueController monologue;
-    [SerializeField] private List<string> baseMonologue = new();
 
     [Header("Metal Information")]
     [SerializeField] private string metalName;

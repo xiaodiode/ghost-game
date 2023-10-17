@@ -10,6 +10,7 @@ public class DataLoader : MonoBehaviour
     [Header("Text Files")]
     [SerializeField] private TextAsset demonListText;
     [SerializeField] private TextAsset plantDataText;
+    [SerializeField] private TextAsset metalDataText;
 
     [Header("Data Structures")]
 
@@ -24,8 +25,8 @@ public class DataLoader : MonoBehaviour
 
     [Header("Metal")]
     [SerializeField] public bool metalDataReady = false;
-    [SerializeField] public Dictionary<string, List<string>> metalComments;
-    [SerializeField] public Dictionary<string, List<string>> goldComments;
+    [SerializeField] public Dictionary<string, List<string>> metalComments = new();
+    [SerializeField] public Dictionary<string, List<string>> goldComments = new();
     
     string objectName = "";
     List<string> comments = new();
@@ -98,38 +99,40 @@ public class DataLoader : MonoBehaviour
     }
 
     private void parseMetalData(){
-        fileReader = new StringReader(plantDataText.text);
+        fileReader = new StringReader(metalDataText.text);
+        comments.Clear();
 
         while((fileLine = fileReader.ReadLine()) != null){
             fileLine = fileLine.Trim();
 
             if(fileLine == "Gold" || 
                 fileLine.Contains("newMetal")){
-
+                    if(fileLine.Contains("newMetal")){
+                        if(comments.Count != 0){
+                            Debug.Log("goldComments: " + objectName + ", " + comments);
+                            goldComments.Add(objectName, comments);
+                            comments.Clear();
+                        }
+                        objectName = fileLine.Replace("newMetal", "").Trim();
+                    }
+                    else{
+                        metalComments.Add(objectName, comments);
+                        comments.Clear();  
+                    }
                     dataSection = fileLine;
             }
 
             else if(dataSection == "Gold"){
-                metalComments.Add(objectName, comments);
-                comments.Clear();
-
                 comments.Add(fileLine);
+                Debug.Log("gold comment: " + fileLine);
+
             }
 
             else{
-                if(fileLine.Contains("newMetal")){
-                    if(comments.Count != 0){
-                        goldComments.Add(objectName, comments);
-                        comments.Clear();
-                    }
-                    objectName = fileLine.Replace("newMetal", "").Trim();
-                    // Debug.Log("plantName: " + plantName);
-                }
-                else{
-                    comments.Add(fileLine);
-                    // Debug.Log("description: " + fileLine);
+                comments.Add(fileLine);
+                Debug.Log("metal comment: " + fileLine);
                     
-                }
+                
             }
         }
 
