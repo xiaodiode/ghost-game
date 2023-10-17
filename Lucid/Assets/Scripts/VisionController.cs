@@ -11,12 +11,13 @@ public class VisionController : MonoBehaviour
 
     [Header("Zoom Settings")]
     [SerializeField] private Camera zoomCamera;
-    [SerializeField] private float maxZoom;
-    [SerializeField] private float minZoom;
+    [SerializeField] private float maxIncrZoom, minZoom;
     [SerializeField] private float zoomSpeed;
 
+
+    Vector3 minZoomVect, maxZoomVect, newZoomVect, zoomSpeedVect;
+    float maxZoomScale;
     float mouseScroll;
-    float newZoom;
 
     Vector2 movePos;
     public void Start()
@@ -26,7 +27,12 @@ public class VisionController : MonoBehaviour
         //     parentCanvas.worldCamera,
         //     out movePos);
 
-        minZoom = zoomCamera.fieldOfView;
+        minZoomVect = visionCanvas.transform.localScale;
+        maxZoomVect = new Vector3(minZoomVect.x + maxIncrZoom, minZoomVect.y + maxIncrZoom, minZoomVect.z + maxIncrZoom);
+        zoomSpeedVect = new Vector3(zoomSpeed, zoomSpeed, zoomSpeed);
+
+        maxZoomScale = minZoomVect.x + maxIncrZoom;
+        
     }
 
     public void Update()
@@ -50,9 +56,17 @@ public class VisionController : MonoBehaviour
     }
 
     private void updateVisionZoom(){
-        newZoom = zoomCamera.fieldOfView - mouseScroll*zoomSpeed;
-        newZoom = Mathf.Clamp(newZoom, minZoom, maxZoom);
+        if((visionCanvas.transform.localScale.x + mouseScroll*zoomSpeed) > maxZoomScale){
+            newZoomVect = maxZoomVect;
+        }
+        else if((visionCanvas.transform.localScale.x + mouseScroll*zoomSpeed) < minZoomVect.x){
+            newZoomVect = minZoomVect;
+        }
+        else{
+            newZoomVect = mouseScroll*zoomSpeedVect + visionCanvas.transform.localScale;
+            // playerCanvas.transform.localScale -= mouseScroll*zoomSpeedVect;
+        }
 
-        zoomCamera.fieldOfView = newZoom;  
+        visionCanvas.transform.localScale = newZoomVect;  
     }
 }
