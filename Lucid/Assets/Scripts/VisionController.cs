@@ -5,13 +5,17 @@ using UnityEngine.UI;
 
 public class VisionController : MonoBehaviour
 {
-    [SerializeField] private Canvas playerCanvas;
+    [Header("Vision Settings")]
     [SerializeField] private Canvas visionCanvas;
     [SerializeField] private MouseController mouse;
 
+    [Header("Player Movement Settings")]
+    [SerializeField] private Canvas playerCanvas;
+    [SerializeField] private PlayerController player;
+    [SerializeField] private SceneController scene;
+
     [Header("Zoom Settings")]
-    [SerializeField] private Camera zoomCamera;
-    [SerializeField] private float maxIncrZoom, minZoom;
+    [SerializeField] private float maxZoomOffset;
     [SerializeField] private float zoomSpeed;
 
 
@@ -28,10 +32,10 @@ public class VisionController : MonoBehaviour
         //     out movePos);
 
         minZoomVect = visionCanvas.transform.localScale;
-        maxZoomVect = new Vector3(minZoomVect.x + maxIncrZoom, minZoomVect.y + maxIncrZoom, minZoomVect.z + maxIncrZoom);
+        maxZoomVect = new Vector3(minZoomVect.x + maxZoomOffset, minZoomVect.y + maxZoomOffset, minZoomVect.z + maxZoomOffset);
         zoomSpeedVect = new Vector3(zoomSpeed, zoomSpeed, zoomSpeed);
 
-        maxZoomScale = minZoomVect.x + maxIncrZoom;
+        maxZoomScale = minZoomVect.x + maxZoomOffset;
         
     }
 
@@ -61,9 +65,13 @@ public class VisionController : MonoBehaviour
         }
         else if((visionCanvas.transform.localScale.x + mouseScroll*zoomSpeed) < minZoomVect.x){
             newZoomVect = minZoomVect;
+            player.lockMovement = false;
+            scene.lockMovement = false;
         }
         else{
             newZoomVect = mouseScroll*zoomSpeedVect + visionCanvas.transform.localScale;
+            player.lockMovement = true;
+            scene.lockMovement = true;
             // playerCanvas.transform.localScale -= mouseScroll*zoomSpeedVect;
         }
 

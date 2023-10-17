@@ -1398,8 +1398,8 @@ MonoBehaviour:
   m_ShadowVolumeIntensityEnabled: 0
   m_ShadowVolumeIntensity: 0.75
   m_LocalBounds:
-    m_Center: {x: 1.0334473, y: -1.2929688, z: 0}
-    m_Extent: {x: 1367.3262, y: 1159.6913, z: 0}
+    m_Center: {x: 1.0327759, y: -1.2973022, z: 0}
+    m_Extent: {x: 1367.3315, y: 1159.6829, z: 0}
   m_PointLightInnerAngle: 360
   m_PointLightOuterAngle: 360
   m_PointLightInnerRadius: 0
@@ -2798,12 +2798,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6de2ac58e5630364fb70d73856c1669d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerCanvas: {fileID: 1817055933}
   visionCanvas: {fileID: 1104253790}
   mouse: {fileID: 1971888317}
-  zoomCamera: {fileID: 438051149}
-  maxIncrZoom: 1.2
-  minZoom: 1
+  playerCanvas: {fileID: 1817055933}
+  player: {fileID: 807201679}
+  scene: {fileID: 1063774803}
+  maxZoomOffset: 1.2
   zoomSpeed: 2
 --- !u!114 &1104253788
 MonoBehaviour:
@@ -6223,7 +6223,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1053976171249551423, guid: 2b2a55eb381afd143828af6f36809f6a, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 9.7851095
+      value: 9.785102
       objectReference: {fileID: 0}
     - target: {fileID: 1090518103484794059, guid: 2b2a55eb381afd143828af6f36809f6a, type: 3}
       propertyPath: m_Layer
