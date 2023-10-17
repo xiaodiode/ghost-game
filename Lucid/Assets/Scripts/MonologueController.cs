@@ -43,34 +43,12 @@ public class MonologueController : MonoBehaviour
     private bool showCursor;
 
 
-    private bool isInterjecting;
+    // private bool isInterjecting;
     
     // Start is called before the first frame update
     void Start()
     {
-        showCursor = false;
-        cursorText = "<font=\"" + cursorFont + "\">" +"<size=" + cursorSizePercent + "%>";
-
-        if(cursorBold){
-            cursorText += "<b>  o";
-        }
-        else{
-            cursorText += "  o";
-        }
-
-        lineHeightText = "<line-height=" + lineDiffPercent + "%>";
-        cursorAdjustText = "<size=0%>" + lineHeightText + "\n</size>";
-
-        isFinished = false;
-        finishPrinting = false;
-        isReset = false;
-
-        fileLines = testing.text.Split('\n');
-        currLineIndex = 0;
-
-        isInterjecting = false;
-
-        
+        completeReset();
 
         new WaitForSeconds(clearTime);
         StartCoroutine(printMainMonologue());
@@ -83,7 +61,6 @@ public class MonologueController : MonoBehaviour
     }
     
     private IEnumerator printMainMonologue(){
-        mouse.lockMouse(true);
         StartCoroutine(resetMonologue());
 
         while(!isReset){
@@ -111,6 +88,7 @@ public class MonologueController : MonoBehaviour
 
     private IEnumerator printToMonologue(string toPrint){
         isReset = false;
+        mouse.lockMouse(true);
         foreach(char character in toPrint){
             monologueText.text += character;
             
@@ -149,7 +127,7 @@ public class MonologueController : MonoBehaviour
     }
 
     private void OnNextLine(){
-        if((currLineIndex != fileLines.Length) && !isInterjecting){
+        if(currLineIndex != fileLines.Length){
             showCursor = false;
             
             if(!isFinished){
@@ -171,28 +149,53 @@ public class MonologueController : MonoBehaviour
     }
 
     public IEnumerator interjectMonologue(string interjection){
-        while(!isFinished){
-            yield return null;
+        Debug.Log("interjecting; isFinished: " + isFinished);
+        
+        if(isFinished){
+            completeReset();
+            // isInterjecting = true;
+
+            StartCoroutine(resetMonologue());
+
+            while(!isReset){
+                yield return null;
+            }
+
+            StartCoroutine(printToMonologue(interjection));
+
+            while(!isFinished){
+                yield return null;
+            }
+
+            StartCoroutine(printCursor());
+
+            // isInterjecting = false;
         }
 
-        isInterjecting = true;
+    }
 
-        StartCoroutine(resetMonologue());
+    private void completeReset(){
+        showCursor = false;
+        cursorText = "<font=\"" + cursorFont + "\">" +"<size=" + cursorSizePercent + "%>";
 
-        while(!isReset){
-            yield return null;
+        if(cursorBold){
+            cursorText += "<b>  o";
+        }
+        else{
+            cursorText += "  o";
         }
 
-        StartCoroutine(printToMonologue(interjection));
+        lineHeightText = "<line-height=" + lineDiffPercent + "%>";
+        cursorAdjustText = "<size=0%>" + lineHeightText + "\n</size>";
 
-        while(!isFinished){
-            yield return null;
-        }
+        isFinished = false;
+        finishPrinting = false;
+        isReset = false;
 
-        StartCoroutine(printCursor());
+        fileLines = testing.text.Split('\n');
+        currLineIndex = 0;
 
-        isInterjecting = false;
-
+        // isInterjecting = false;
     }
 
     

@@ -20,6 +20,7 @@ public class DataLoader : MonoBehaviour
     [Header("Plants")]
     [SerializeField] public List<string> basePlantMonologue = new();
     [SerializeField] public Dictionary<string, List<string>> plantDescriptions = new();
+    [SerializeField] public bool plantDataReady = false;
 
     StringReader fileReader;
     string fileLine, dataSection;
@@ -61,7 +62,7 @@ public class DataLoader : MonoBehaviour
                 fileLine == "plantInfo"){
 
                     dataSection = fileLine;
-                    Debug.Log("dataSection: " + dataSection);
+                    // Debug.Log("dataSection: " + dataSection);
             }
             else if(dataSection == "baseMonologue"){
                 basePlantMonologue.Add(fileLine);
@@ -73,15 +74,17 @@ public class DataLoader : MonoBehaviour
                         plantDescriptions.Add(plantName, plantDescr);
                         plantDescr.Clear();
                     }
-                    plantName = fileLine.Replace("newPlant", "");
-                    Debug.Log("plantName: " + plantName);
+                    plantName = fileLine.Replace("newPlant", "").Trim();
+                    // Debug.Log("plantName: " + plantName);
                 }
                 else{
                     plantDescr.Add(fileLine);
-                    Debug.Log("description: " + fileLine);
+                    // Debug.Log("description: " + fileLine);
                     
                 }
             }
         }
+
+        plantDataReady = true;
     }
 }
