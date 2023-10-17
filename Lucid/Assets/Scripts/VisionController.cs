@@ -4,27 +4,28 @@ using UnityEngine;
 
 public class VisionController : MonoBehaviour
 {
-    public Canvas parentCanvas;
+    [SerializeField] private Canvas parentCanvas;
+    [SerializeField] private MouseController mouse;
 
+    Vector2 movePos;
     public void Start()
     {
-        Vector2 pos;
-
         RectTransformUtility.ScreenPointToLocalPointInRectangle(
             parentCanvas.transform as RectTransform, Input.mousePosition,
             parentCanvas.worldCamera,
-            out pos);
+            out movePos);
     }
 
     public void Update()
     {
-        Vector2 movePos;
+        if(!mouse.isLocked){
+            RectTransformUtility.ScreenPointToLocalPointInRectangle(
+                parentCanvas.transform as RectTransform,
+                Input.mousePosition, parentCanvas.worldCamera,
+                out movePos);
 
-        RectTransformUtility.ScreenPointToLocalPointInRectangle(
-            parentCanvas.transform as RectTransform,
-            Input.mousePosition, parentCanvas.worldCamera,
-            out movePos);
-
-        transform.position = parentCanvas.transform.TransformPoint(movePos);
+            transform.position = parentCanvas.transform.TransformPoint(movePos);
+        }
+        
     }
 }

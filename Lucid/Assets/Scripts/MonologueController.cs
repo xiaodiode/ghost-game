@@ -28,6 +28,9 @@ public class MonologueController : MonoBehaviour
     [SerializeField] private float cursorBlinkSpeed;
     [SerializeField] private bool cursorBold;
     [SerializeField] private float cursorPrintDelay;
+
+    [Header("Mouse Control")]
+    [SerializeField] private MouseController mouse;
     
 
     private string[] fileLines;
@@ -67,6 +70,8 @@ public class MonologueController : MonoBehaviour
 
         isInterjecting = false;
 
+        
+
         new WaitForSeconds(clearTime);
         StartCoroutine(printMainMonologue());
     }
@@ -78,10 +83,7 @@ public class MonologueController : MonoBehaviour
     }
     
     private IEnumerator printMainMonologue(){
-        while(!timestamp.ready){
-            yield return null;
-        }
-
+        mouse.lockMouse(true);
         StartCoroutine(resetMonologue());
 
         while(!isReset){
@@ -134,6 +136,7 @@ public class MonologueController : MonoBehaviour
         
         yield return new WaitForSeconds(cursorPrintDelay);
 
+        mouse.lockMouse(false);
         while(showCursor){
             if(monologueText.text == textWithoutCursor){
                 monologueText.text = textWithCursor;

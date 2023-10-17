@@ -10,6 +10,7 @@ public class TextInputController : MonoBehaviour, IPointerClickHandler
     [SerializeField] private TMP_InputField inputField;
     [SerializeField] private PlayerController player;
 
+    [Header("Autocomplete")]
     [SerializeField] private DataLoader data;
     [SerializeField] private TextMeshProUGUI autocomplete;
     
