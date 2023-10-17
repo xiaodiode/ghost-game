@@ -18,19 +18,29 @@ public class DataLoader : MonoBehaviour
     [SerializeField] public List<string> demonList = new();
 
     [Header("Plants")]
+    [SerializeField] public bool plantDataReady = false;
     [SerializeField] public List<string> basePlantMonologue = new();
     [SerializeField] public Dictionary<string, List<string>> plantDescriptions = new();
-    [SerializeField] public bool plantDataReady = false;
+
+    [Header("Metal")]
+    [SerializeField] public bool metalDataReady = false;
+    [SerializeField] public Dictionary<string, List<string>> metalComments;
+    [SerializeField] public Dictionary<string, List<string>> goldComments;
+    
+    string objectName = "";
+    List<string> comments = new();
+
 
     StringReader fileReader;
     string fileLine, dataSection;
-    List<string> plantDescr = new();
+    
 
     // Start is called before the first frame update
     void Start()
     {
         parseDemonList();
         parsePlantData();
+        parseMetalData();
     }
 
     // Update is called once per frame
@@ -51,7 +61,6 @@ public class DataLoader : MonoBehaviour
     }
 
     private void parsePlantData(){
-        string plantName = "";
 
         fileReader = new StringReader(plantDataText.text);
 
@@ -70,15 +79,15 @@ public class DataLoader : MonoBehaviour
 
             else if(dataSection == "plantInfo"){
                 if(fileLine.Contains("newPlant")){
-                    if(plantDescr.Count != 0){
-                        plantDescriptions.Add(plantName, plantDescr);
-                        plantDescr.Clear();
+                    if(comments.Count != 0){
+                        plantDescriptions.Add(objectName, comments);
+                        comments.Clear();
                     }
-                    plantName = fileLine.Replace("newPlant", "").Trim();
+                    objectName = fileLine.Replace("newPlant", "").Trim();
                     // Debug.Log("plantName: " + plantName);
                 }
                 else{
-                    plantDescr.Add(fileLine);
+                    comments.Add(fileLine);
                     // Debug.Log("description: " + fileLine);
                     
                 }
@@ -86,5 +95,44 @@ public class DataLoader : MonoBehaviour
         }
 
         plantDataReady = true;
+    }
+
+    private void parseMetalData(){
+        fileReader = new StringReader(plantDataText.text);
+
+        while((fileLine = fileReader.ReadLine()) != null){
+            fileLine = fileLine.Trim();
+
+            if(fileLine == "Gold" || 
+                fileLine.Contains("newMetal")){
+
+                    dataSection = fileLine;
+            }
+
+            else if(dataSection == "Gold"){
+                metalComments.Add(objectName, comments);
+                comments.Clear();
+
+                comments.Add(fileLine);
+            }
+
+            else{
+                if(fileLine.Contains("newMetal")){
+                    if(comments.Count != 0){
+                        goldComments.Add(objectName, comments);
+                        comments.Clear();
+                    }
+                    objectName = fileLine.Replace("newMetal", "").Trim();
+                    // Debug.Log("plantName: " + plantName);
+                }
+                else{
+                    comments.Add(fileLine);
+                    // Debug.Log("description: " + fileLine);
+                    
+                }
+            }
+        }
+
+        metalDataReady = true;
     }
 }

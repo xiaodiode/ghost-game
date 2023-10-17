@@ -42,8 +42,6 @@ public class MonologueController : MonoBehaviour
     private string textWithCursor, textWithoutCursor;
     private bool showCursor;
 
-
-    // private bool isInterjecting;
     
     // Start is called before the first frame update
     void Start()
@@ -153,7 +151,6 @@ public class MonologueController : MonoBehaviour
         
         if(isFinished){
             completeReset();
-            // isInterjecting = true;
 
             StartCoroutine(resetMonologue());
 
@@ -168,8 +165,6 @@ public class MonologueController : MonoBehaviour
             }
 
             StartCoroutine(printCursor());
-
-            // isInterjecting = false;
         }
 
     }
@@ -194,8 +189,6 @@ public class MonologueController : MonoBehaviour
 
         fileLines = testing.text.Split('\n');
         currLineIndex = 0;
-
-        // isInterjecting = false;
     }
 
     

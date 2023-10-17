@@ -1,0 +1,40 @@
+newMetal metal1
+non-gold monologue1 about metal1
+non-gold monologue2 about metal1
+non-gold monologue3 about metal1
+Gold
+gold monologue1 about metal1
+gold monologue2 about metal1
+gold monologue3 about metal1
+newMetal metal2
+non-gold monologue1 about metal2
+non-gold monologue2 about metal2
+non-gold monologue3 about metal2
+Gold
+gold monologue1 about metal2
+gold monologue2 about metal2
+gold monologue3 about metal2
+newMetal metal3
+non-gold monologue1 about metal3
+non-gold monologue2 about metal3
+non-gold monologue3 about metal3
+Gold
+gold monologue1 about metal3
+gold monologue2 about metal3
+gold monologue3 about metal3
+newMetal metal4
+non-gold monologue1 about metal4
+non-gold monologue2 about metal4
+non-gold monologue3 about metal4
+Gold
+gold monologue1 about metal4
+gold monologue2 about metal4
+gold monologue3 about metal4
+newMetal metal5
+non-gold monologue1 about metal5
+non-gold monologue2 about metal5
+non-gold monologue3 about metal5
+Gold
+gold monologue1 about metal5
+gold monologue2 about metal5
+gold monologue3 about metal5
