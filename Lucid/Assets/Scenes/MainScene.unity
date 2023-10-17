@@ -1374,8 +1374,8 @@ MonoBehaviour:
   m_ShadowVolumeIntensityEnabled: 0
   m_ShadowVolumeIntensity: 0.75
   m_LocalBounds:
-    m_Center: {x: 1.0316162, y: -1.2921753, z: 0}
-    m_Extent: {x: 1367.3239, y: 1159.676, z: 0}
+    m_Center: {x: 1.0360718, y: -1.2929688, z: 0}
+    m_Extent: {x: 1367.3308, y: 1159.6757, z: 0}
   m_PointLightInnerAngle: 360
   m_PointLightOuterAngle: 360
   m_PointLightInnerRadius: 0
@@ -5946,6 +5946,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 160592819}
     - target: {fileID: 1838478790822990108, guid: 15a331dff714ad04b9568917d9211d07, type: 3}
+      propertyPath: isGold
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1838478790822990108, guid: 15a331dff714ad04b9568917d9211d07, type: 3}
       propertyPath: metalName
       value: metal4
       objectReference: {fileID: 0}
@@ -6043,7 +6047,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4400647663969968850, guid: 15a331dff714ad04b9568917d9211d07, type: 3}
       propertyPath: m_Name
-      value: Metal
+      value: Harp
       objectReference: {fileID: 0}
     - target: {fileID: 4438682404332713363, guid: 15a331dff714ad04b9568917d9211d07, type: 3}
       propertyPath: m_SizeDelta.x
