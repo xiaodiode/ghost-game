@@ -1,6 +1,7 @@
 using System.Collections;
 using UnityEngine;
 using TMPro;
+using UnityEngine.EventSystems;
 
 public class MonologueController : MonoBehaviour
 {
@@ -46,6 +47,8 @@ public class MonologueController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        currLineIndex = 0;
+
         completeReset();
 
         new WaitForSeconds(clearTime);
@@ -70,7 +73,7 @@ public class MonologueController : MonoBehaviour
         while(!isFinished){
             yield return null;
         }
-        
+
         //removes newline character so cursor can show properly
         monologueText.text = monologueText.text.Remove(monologueText.text.Length - 1, 1);
         
@@ -126,6 +129,7 @@ public class MonologueController : MonoBehaviour
     }
 
     private void OnNextLine(){
+        Debug.Log("on next line");
         if(currLineIndex != fileLines.Length){
             showCursor = false;
             
@@ -148,8 +152,9 @@ public class MonologueController : MonoBehaviour
     }
 
     public IEnumerator interjectMonologue(string interjection){
-        Debug.Log("interjecting; isFinished: " + isFinished);
         
+        EventSystem.current.SetSelectedGameObject(null);
+
         if(isFinished){
             completeReset();
 
@@ -189,7 +194,6 @@ public class MonologueController : MonoBehaviour
         isReset = false;
 
         fileLines = testing.text.Split('\n');
-        currLineIndex = 0;
     }
 
     

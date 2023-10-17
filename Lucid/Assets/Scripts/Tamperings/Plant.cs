@@ -65,9 +65,11 @@ public class Plant : MonoBehaviour
     }
 
     public void onInteraction(){
-        Debug.Log("pressing button");
         plantComment = plantName + "... " + getRandomMonologue();
+
         StartCoroutine(monologue.interjectMonologue(plantComment));
+
+        // EventSystem.current.SetSelectedGameObject(null);
     }
 
     public string getRandomMonologue(){
@@ -81,7 +83,7 @@ public class Plant : MonoBehaviour
         }
         
     }
-    
+
     private int getRandomNum(int max){
 
         return Random.Range(0, max);

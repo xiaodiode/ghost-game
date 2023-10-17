@@ -100,7 +100,7 @@ public class DataLoader : MonoBehaviour
         alivePlantComments.Add(objectName, comments);
 
         // debugDictionary(true, alivePlantComments, null);
-        
+
         plantDataReady = true;
     }
 
@@ -146,8 +146,8 @@ public class DataLoader : MonoBehaviour
 
         goldComments.Add(objectName, comments);
 
-        debugDictionary(true, metalComments, null);
-        debugDictionary(true, goldComments, null);
+        // debugDictionary(true, metalComments, null);
+        // debugDictionary(true, goldComments, null);
 
         metalDataReady = true;
     }

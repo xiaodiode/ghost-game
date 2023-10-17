@@ -1,6 +1,5 @@
 using System.Collections;
 using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
 
 public class Metal : MonoBehaviour
@@ -65,6 +64,7 @@ public class Metal : MonoBehaviour
 
     public void onInteraction(){
         metalComment = getRandomMonologue();
+
         StartCoroutine(monologue.interjectMonologue(metalComment));
     }
 
