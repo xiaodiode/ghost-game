@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using Unity.Collections.LowLevel.Unsafe;
 using Unity.VisualScripting;
+using UnityEditor.Rendering;
 using UnityEditor.ShaderKeywordFilter;
 using UnityEngine;
 using UnityEngine.InputSystem;
@@ -31,7 +32,7 @@ public class DataLoader : MonoBehaviour
     [SerializeField] public Dictionary<string, List<string>> goldComments = new();
     
     string objectName = "";
-    List<string> oldComments = new(); List<string> newComments = new();
+    List<string> comments = new();
     bool newHeading = true;
 
 
@@ -83,15 +84,15 @@ public class DataLoader : MonoBehaviour
 
             else if(dataSection == "plantInfo"){
                 if(fileLine.Contains("newPlant")){
-                    if(newComments.Count != 0){
-                        alivePlantComments.Add(objectName, newComments);
-                        newComments.Clear();
+                    if(comments.Count != 0){
+                        alivePlantComments.Add(objectName, comments);
+                        comments = new();
                     }
                     objectName = fileLine.Replace("newPlant", "").Trim();
                     // Debug.Log("plantName: " + plantName);
                 }
                 else{
-                    newComments.Add(fileLine);
+                    comments.Add(fileLine);
                     // Debug.Log("description: " + fileLine);
                     
                 }
@@ -103,8 +104,7 @@ public class DataLoader : MonoBehaviour
 
     private void parseMetalData(){
         fileReader = new StringReader(metalDataText.text);
-        oldComments.Clear();
-        newComments.Clear();
+        comments = new();
 
         while((fileLine = fileReader.ReadLine()) != null){
             fileLine = fileLine.Trim();
@@ -116,16 +116,16 @@ public class DataLoader : MonoBehaviour
             }
 
             else if(dataSection == "newMetal"){
-                if(newComments.Count != 0){
+                if(comments.Count != 0){
                     // Debug.Log("under metal objectName: " + objectName);
-                    goldComments.Add(objectName, newComments);
-                    newComments.Clear();
+                    goldComments.Add(objectName, comments);
+                    comments = new();
                 }
                 objectName = fileLine;
             }
 
             else if(dataSection == "Nongold"){
-                oldComments.Add(fileLine);
+                comments.Add(fileLine);
                 // Debug.Log("description: " + fileLine);
                 
             }
@@ -134,10 +134,10 @@ public class DataLoader : MonoBehaviour
                 if(newHeading){
                     newHeading = false;
                     // Debug.Log("under gold objectName: " + objectName);
-                    metalComments.Add(objectName, oldComments);
-                    oldComments.Clear();
+                    metalComments.Add(objectName, comments);
+                    comments = new();
                 }
-                newComments.Add(fileLine);
+                comments.Add(fileLine);
             }
             // if(fileLine == "Gold" || fileLine.Contains("newMetal")){
                 // if(fileLine.Contains("newMetal")){
