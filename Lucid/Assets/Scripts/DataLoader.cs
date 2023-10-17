@@ -31,7 +31,8 @@ public class DataLoader : MonoBehaviour
     [SerializeField] public Dictionary<string, List<string>> goldComments = new();
     
     string objectName = "";
-    List<string> comments = new();
+    List<string> oldComments = new(); List<string> newComments = new();
+    bool newHeading = true;
 
 
     StringReader fileReader;
@@ -82,58 +83,86 @@ public class DataLoader : MonoBehaviour
 
             else if(dataSection == "plantInfo"){
                 if(fileLine.Contains("newPlant")){
-                    if(comments.Count != 0){
-                        alivePlantComments.Add(objectName, comments);
-                        comments.Clear();
+                    if(newComments.Count != 0){
+                        alivePlantComments.Add(objectName, newComments);
+                        newComments.Clear();
                     }
                     objectName = fileLine.Replace("newPlant", "").Trim();
                     // Debug.Log("plantName: " + plantName);
                 }
                 else{
-                    comments.Add(fileLine);
+                    newComments.Add(fileLine);
                     // Debug.Log("description: " + fileLine);
                     
                 }
             }
         }
-
+        debugDictionary(true, alivePlantComments, null);
         plantDataReady = true;
     }
 
     private void parseMetalData(){
         fileReader = new StringReader(metalDataText.text);
-        comments.Clear();
+        oldComments.Clear();
+        newComments.Clear();
 
         while((fileLine = fileReader.ReadLine()) != null){
             fileLine = fileLine.Trim();
 
-            if(fileLine == "Gold" || fileLine.Contains("newMetal")){
-                if(fileLine.Contains("newMetal")){
-                    if(comments.Count != 0){
-                        // foreach(string comment in comments)
-                        //     Debug.Log("goldComments: " + objectName + ", " + comment);
-                        goldComments.Add(objectName, comments);
-                        comments.Clear();
-                    }
-                    objectName = fileLine.Replace("newMetal", "").Trim();
-                }
-                else{
-                    // foreach(string comment in comments)
-                    //     Debug.Log("metalComments: " + objectName + ", " + comment);
-                    metalComments.Add(objectName, comments);
-                    comments.Clear();  
-                }
-                dataSection = fileLine;
+            if(fileLine == "newMetal" || fileLine == "Nongold" || fileLine == "Gold"){
+                    dataSection = fileLine;
+                    newHeading = true;
+                    // Debug.Log("dataSection: " + dataSection);
             }
 
-            else{
-                comments.Add(fileLine);
+            else if(dataSection == "newMetal"){
+                if(newComments.Count != 0){
+                    // Debug.Log("under metal objectName: " + objectName);
+                    goldComments.Add(objectName, newComments);
+                    newComments.Clear();
+                }
+                objectName = fileLine;
+            }
+
+            else if(dataSection == "Nongold"){
+                oldComments.Add(fileLine);
+                // Debug.Log("description: " + fileLine);
                 
             }
+
+            else if(dataSection == "Gold"){
+                if(newHeading){
+                    newHeading = false;
+                    // Debug.Log("under gold objectName: " + objectName);
+                    metalComments.Add(objectName, oldComments);
+                    oldComments.Clear();
+                }
+                newComments.Add(fileLine);
+            }
+            // if(fileLine == "Gold" || fileLine.Contains("newMetal")){
+                // if(fileLine.Contains("newMetal")){
+                //     if(comments.Count != 0){
+                //         goldComments.Add(fileLine.Replace("newMetal", "").Trim(), comments);
+                //         debugDictionary(true, goldComments, null);
+                //         comments.Clear();
+                //     }
+                //     objectName = fileLine.Replace("newMetal", "").Trim();
+                // }
+                // else if(fileLine == "Gold"){
+                //     metalComments.Add(objectName, comments);
+                //     comments.Clear();  
+                // }
+                // dataSection = fileLine;
+            // }
+
+            // else{
+            //     comments.Add(fileLine);
+                
+            // }
         }
 
-        debugDictionary(true, metalComments, null);
-        debugDictionary(true, goldComments, null);
+        // debugDictionary(true, metalComments, null);
+        // debugDictionary(true, goldComments, null);
 
         metalDataReady = true;
     }

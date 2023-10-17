@@ -71,6 +71,9 @@ public class MonologueController : MonoBehaviour
             yield return null;
         }
         
+        //removes newline character so cursor can show properly
+        monologueText.text = monologueText.text.Remove(monologueText.text.Length - 1, 1);
+        
         currLineIndex++;
 
         StartCoroutine(printCursor());
@@ -98,8 +101,6 @@ public class MonologueController : MonoBehaviour
                 yield return new WaitForSeconds(printSpeed);
             }
         }
-        //removes newline character so cursor can show properly
-        monologueText.text = monologueText.text.Remove(monologueText.text.Length - 1, 1);
 
         finishPrinting = false;
         isFinished = true;
