@@ -46,6 +46,7 @@ public class TextInputController : MonoBehaviour, IPointerClickHandler
         if(input != ""){
             firstDemonMatch = data.demonList.FirstOrDefault(demon => demon.StartsWith(input, System.StringComparison.OrdinalIgnoreCase));
             autocomplete.text = firstDemonMatch;
+            inputField.caretPosition = firstDemonMatch.Length;
         }
         else{
             autocomplete.text = "";
