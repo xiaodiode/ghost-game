@@ -93,12 +93,14 @@ public class DataLoader : MonoBehaviour
                 }
                 else{
                     comments.Add(fileLine);
-                    // Debug.Log("description: " + fileLine);
-                    
                 }
             }
         }
-        debugDictionary(true, alivePlantComments, null);
+
+        alivePlantComments.Add(objectName, comments);
+
+        // debugDictionary(true, alivePlantComments, null);
+        
         plantDataReady = true;
     }
 
@@ -139,30 +141,13 @@ public class DataLoader : MonoBehaviour
                 }
                 comments.Add(fileLine);
             }
-            // if(fileLine == "Gold" || fileLine.Contains("newMetal")){
-                // if(fileLine.Contains("newMetal")){
-                //     if(comments.Count != 0){
-                //         goldComments.Add(fileLine.Replace("newMetal", "").Trim(), comments);
-                //         debugDictionary(true, goldComments, null);
-                //         comments.Clear();
-                //     }
-                //     objectName = fileLine.Replace("newMetal", "").Trim();
-                // }
-                // else if(fileLine == "Gold"){
-                //     metalComments.Add(objectName, comments);
-                //     comments.Clear();  
-                // }
-                // dataSection = fileLine;
-            // }
-
-            // else{
-            //     comments.Add(fileLine);
-                
-            // }
         }
 
-        // debugDictionary(true, metalComments, null);
-        // debugDictionary(true, goldComments, null);
+
+        goldComments.Add(objectName, comments);
+
+        debugDictionary(true, metalComments, null);
+        debugDictionary(true, goldComments, null);
 
         metalDataReady = true;
     }
