@@ -19,8 +19,8 @@ public class DataLoader : MonoBehaviour
 
     [Header("Plants")]
     [SerializeField] public bool plantDataReady = false;
-    [SerializeField] public List<string> basePlantMonologue = new();
-    [SerializeField] public Dictionary<string, List<string>> plantDescriptions = new();
+    [SerializeField] public List<string> deadPlantComments = new();
+    [SerializeField] public Dictionary<string, List<string>> alivePlantComments = new();
 
     [Header("Metal")]
     [SerializeField] public bool metalDataReady = false;
@@ -74,13 +74,13 @@ public class DataLoader : MonoBehaviour
                     // Debug.Log("dataSection: " + dataSection);
             }
             else if(dataSection == "baseMonologue"){
-                basePlantMonologue.Add(fileLine);
+                deadPlantComments.Add(fileLine);
             }
 
             else if(dataSection == "plantInfo"){
                 if(fileLine.Contains("newPlant")){
                     if(comments.Count != 0){
-                        plantDescriptions.Add(objectName, comments);
+                        alivePlantComments.Add(objectName, comments);
                         comments.Clear();
                     }
                     objectName = fileLine.Replace("newPlant", "").Trim();

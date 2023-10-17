@@ -9,25 +9,26 @@ public class Plant : MonoBehaviour
 
     [Header("Monologue")]
     [SerializeField] private MonologueController monologue;
-    [SerializeField] private List<string> baseMonologue = new();
+    
 
     [Header("Plant Information")]
     [SerializeField] private string plantName;
-    [SerializeField] private List<string> description = new();
+    [SerializeField] private List<string> deadComments = new();
+    [SerializeField] private List<string> aliveComments = new();
 
     [Header("Plant Tampering")]
+    [SerializeField] public bool isAlive;
     [SerializeField] private SpriteRenderer deadState;
     [SerializeField] private SpriteRenderer aliveState;
     [SerializeField] private bool deadOverlay, aliveOverlay, changeSprite;
-    [SerializeField] public bool isAlive;
+    
 
     int randomNum;
-    string plantMonologue;
+    string plantComment;
 
     // Start is called before the first frame update
     void Start()
     {
-
         if(isAlive){
             makeAlive();
         }
@@ -45,8 +46,8 @@ public class Plant : MonoBehaviour
         while(!data.plantDataReady){
             yield return null;
         }
-        baseMonologue = data.basePlantMonologue;
-        description = data.plantDescriptions[plantName];
+        deadComments = data.deadPlantComments;
+        aliveComments = data.alivePlantComments[plantName];
     }
 
     public void makeAlive(){
@@ -65,20 +66,22 @@ public class Plant : MonoBehaviour
 
     public void onInteraction(){
         Debug.Log("pressing button");
-        plantMonologue = plantName + "... " + getRandomMonologue();
-        StartCoroutine(monologue.interjectMonologue(plantMonologue));
+        plantComment = plantName + "... " + getRandomMonologue();
+        StartCoroutine(monologue.interjectMonologue(plantComment));
     }
+
     public string getRandomMonologue(){
         if(isAlive){
-            randomNum = getRandomNum(description.Count);
-            return description[randomNum];
+            randomNum = getRandomNum(aliveComments.Count);
+            return aliveComments[randomNum];
         }
         else{
-            randomNum = getRandomNum(baseMonologue.Count);
-            return baseMonologue[randomNum];
+            randomNum = getRandomNum(deadComments.Count);
+            return deadComments[randomNum];
         }
         
     }
+    
     private int getRandomNum(int max){
 
         return Random.Range(0, max);
