@@ -19,11 +19,11 @@ public class DataLoader : MonoBehaviour
 
     [Header("Plants")]
     [SerializeField] public List<string> basePlantMonologue = new();
-    [SerializeField] public string vPlantNameMonologue, vPlantDescrMonologue;
-    [SerializeField] public Dictionary<string, string> plantDescriptions = new();
+    [SerializeField] public Dictionary<string, List<string>> plantDescriptions = new();
 
     StringReader fileReader;
     string fileLine, dataSection;
+    List<string> plantDescr = new();
 
     // Start is called before the first frame update
     void Start()
@@ -50,8 +50,7 @@ public class DataLoader : MonoBehaviour
     }
 
     private void parsePlantData(){
-        string plantName, plantDescription;
-        int endNameIndex;
+        string plantName = "";
 
         fileReader = new StringReader(plantDataText.text);
 
@@ -59,7 +58,6 @@ public class DataLoader : MonoBehaviour
             fileLine = fileLine.Trim();
 
             if(fileLine == "baseMonologue" || 
-                fileLine == "vibrantMonologue" || 
                 fileLine == "plantInfo"){
 
                     dataSection = fileLine;
@@ -69,24 +67,20 @@ public class DataLoader : MonoBehaviour
                 basePlantMonologue.Add(fileLine);
             }
 
-            else if(dataSection == "vibrantMonologue"){
-                if(vPlantNameMonologue == ""){
-                    vPlantNameMonologue = fileLine;
+            else if(dataSection == "plantInfo"){
+                if(fileLine.Contains("newPlant")){
+                    if(plantDescr.Count != 0){
+                        plantDescriptions.Add(plantName, plantDescr);
+                        plantDescr.Clear();
+                    }
+                    plantName = fileLine.Replace("newPlant", "");
+                    Debug.Log("plantName: " + plantName);
                 }
                 else{
-                    vPlantDescrMonologue = fileLine;
+                    plantDescr.Add(fileLine);
+                    Debug.Log("description: " + fileLine);
+                    
                 }
-            }
-
-            else if(dataSection == "plantInfo"){
-                endNameIndex = fileLine.IndexOf("description");
-
-                plantName = fileLine[..endNameIndex];
-                Debug.Log("plantName: " + plantName);
-                plantDescription = fileLine[(endNameIndex + "description ".Length)..];
-                Debug.Log("plantDescription: " + plantDescription);
-
-                plantDescriptions.Add(plantName, plantDescription);
             }
         }
     }

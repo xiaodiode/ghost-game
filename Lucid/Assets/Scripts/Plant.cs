@@ -9,12 +9,14 @@ public class Plant : MonoBehaviour
 
     [Header("Plant Information")]
     [SerializeField] private string plantName;
-    [SerializeField] private string description;
+    [SerializeField] private List<string> description = new();
 
     [Header("Plant Tampering")]
     [SerializeField] private SpriteRenderer baseState;
     [SerializeField] private Sprite vibrantState;
     [SerializeField] public bool isVibrant;
+
+    int randomNum;
 
     // Start is called before the first frame update
     void Start()
@@ -29,8 +31,10 @@ public class Plant : MonoBehaviour
         
     }
 
-    public string getDescription(){
-        return description;
+    public string getRandomDescr(){
+        randomNum = getRandomNum(description.Count);
+
+        return description[randomNum];
     }
 
     public void makeVibrate(){
@@ -42,5 +46,10 @@ public class Plant : MonoBehaviour
         if(isVibrant){
             
         }
+    }
+
+    private int getRandomNum(int max){
+
+        return Random.Range(0, max-1);
     }
 }
