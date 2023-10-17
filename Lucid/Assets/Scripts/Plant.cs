@@ -81,6 +81,6 @@ public class Plant : MonoBehaviour
     }
     private int getRandomNum(int max){
 
-        return Random.Range(0, max-1);
+        return Random.Range(0, max);
     }
 }
