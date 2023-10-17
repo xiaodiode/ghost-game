@@ -6,6 +6,7 @@ using UnityEngine.UI;
 public class VisionController : MonoBehaviour
 {
     [Header("Vision Settings")]
+    [SerializeField] private Camera visionCamera;
     [SerializeField] private Canvas visionCanvas;
     [SerializeField] private MouseController mouse;
 
@@ -26,11 +27,6 @@ public class VisionController : MonoBehaviour
     Vector2 movePos;
     public void Start()
     {
-        // RectTransformUtility.ScreenPointToLocalPointInRectangle(
-        //     parentCanvas.transform as RectTransform, Input.mousePosition,
-        //     parentCanvas.worldCamera,
-        //     out movePos);
-
         minZoomVect = visionCanvas.transform.localScale;
         maxZoomVect = new Vector3(minZoomVect.x + maxZoomOffset, minZoomVect.y + maxZoomOffset, minZoomVect.z + maxZoomOffset);
         zoomSpeedVect = new Vector3(zoomSpeed, zoomSpeed, zoomSpeed);

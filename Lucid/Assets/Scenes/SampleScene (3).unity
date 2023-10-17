@@ -1398,8 +1398,8 @@ MonoBehaviour:
   m_ShadowVolumeIntensityEnabled: 0
   m_ShadowVolumeIntensity: 0.75
   m_LocalBounds:
-    m_Center: {x: 1.0327759, y: -1.2973022, z: 0}
-    m_Extent: {x: 1367.3315, y: 1159.6829, z: 0}
+    m_Center: {x: 1.0389404, y: -1.2980347, z: 0}
+    m_Extent: {x: 1367.3297, y: 1159.686, z: 0}
   m_PointLightInnerAngle: 360
   m_PointLightOuterAngle: 360
   m_PointLightInnerRadius: 0
@@ -1483,7 +1483,7 @@ MonoBehaviour:
   m_RendererIndex: -1
   m_VolumeLayerMask:
     serializedVersion: 2
-    m_Bits: 9
+    m_Bits: 1
   m_VolumeTrigger: {fileID: 0}
   m_VolumeFrameworkUpdateModeOption: 2
   m_RenderPostProcessing: 0
@@ -1554,7 +1554,7 @@ Camera:
   m_Depth: 1
   m_CullingMask:
     serializedVersion: 2
-    m_Bits: 33
+    m_Bits: 1
   m_RenderingPath: -1
   m_TargetTexture: {fileID: 8400000, guid: b941f89e5f2ddb240b23c399e353ad71, type: 2}
   m_TargetDisplay: 0
@@ -2798,6 +2798,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6de2ac58e5630364fb70d73856c1669d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  visionCamera: {fileID: 0}
   visionCanvas: {fileID: 1104253790}
   mouse: {fileID: 1971888317}
   playerCanvas: {fileID: 1817055933}
@@ -6219,11 +6220,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1053976171249551423, guid: 2b2a55eb381afd143828af6f36809f6a, type: 3}
       propertyPath: m_SizeDelta.y
-      value: 0
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 1053976171249551423, guid: 2b2a55eb381afd143828af6f36809f6a, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 9.785102
+      value: 9.78512
       objectReference: {fileID: 0}
     - target: {fileID: 1090518103484794059, guid: 2b2a55eb381afd143828af6f36809f6a, type: 3}
       propertyPath: m_Layer
@@ -6383,7 +6384,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4012898007514914584, guid: 2b2a55eb381afd143828af6f36809f6a, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4546870554242521715, guid: 2b2a55eb381afd143828af6f36809f6a, type: 3}
       propertyPath: m_Name
@@ -6399,15 +6400,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4549640761144793496, guid: 2b2a55eb381afd143828af6f36809f6a, type: 3}
       propertyPath: m_AnchorMax.x
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4549640761144793496, guid: 2b2a55eb381afd143828af6f36809f6a, type: 3}
       propertyPath: m_AnchorMax.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4549640761144793496, guid: 2b2a55eb381afd143828af6f36809f6a, type: 3}
       propertyPath: m_SizeDelta.x
-      value: 0
+      value: -17
       objectReference: {fileID: 0}
     - target: {fileID: 4877997820453026116, guid: 2b2a55eb381afd143828af6f36809f6a, type: 3}
       propertyPath: m_Layer
@@ -6415,11 +6416,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5291399513813687936, guid: 2b2a55eb381afd143828af6f36809f6a, type: 3}
       propertyPath: m_AnchorMax.x
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5291399513813687936, guid: 2b2a55eb381afd143828af6f36809f6a, type: 3}
       propertyPath: m_AnchorMax.y
-      value: 0
+      value: 0.99999183
       objectReference: {fileID: 0}
     - target: {fileID: 5291399513813687936, guid: 2b2a55eb381afd143828af6f36809f6a, type: 3}
       propertyPath: m_AnchorMin.y
