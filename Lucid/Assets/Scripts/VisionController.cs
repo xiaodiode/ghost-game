@@ -11,7 +11,6 @@ public class VisionController : MonoBehaviour
     [SerializeField] private MouseController mouse;
 
     [Header("Player Movement Settings")]
-    [SerializeField] private Canvas playerCanvas;
     [SerializeField] private PlayerController player;
     [SerializeField] private SceneController scene;
 

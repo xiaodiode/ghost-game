@@ -56,7 +56,8 @@ public class Metal : MonoBehaviour
             goldState.enabled = true;
         }
         else if(changeSprite){
-            metallicState.sprite = goldState.sprite;
+            metallicState.enabled = false;
+            goldState.enabled = true;
         }
         
         isGold = true;

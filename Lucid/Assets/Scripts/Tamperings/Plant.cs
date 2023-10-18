@@ -58,7 +58,8 @@ public class Plant : MonoBehaviour
             aliveState.enabled = true;
         }
         else if(changeSprite){
-            deadState.sprite = aliveState.sprite;
+            deadState.enabled = false;
+            aliveState.enabled = true;
         }
         
         isAlive = true;
