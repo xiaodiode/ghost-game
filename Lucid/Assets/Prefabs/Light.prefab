@@ -376,7 +376,7 @@ MonoBehaviour:
   darkDuration: 0.2
   maxFallStrength: 0.7
   minFallStrength: 0.3
-  glowDuration: 8
+  glowDuration: 6
 --- !u!1 &7330639369035495876
 GameObject:
   m_ObjectHideFlags: 0
