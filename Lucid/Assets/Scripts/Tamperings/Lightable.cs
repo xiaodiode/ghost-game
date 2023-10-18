@@ -23,7 +23,7 @@ public class Lightable : MonoBehaviour
     [SerializeField] private bool instant;
 
     [Header("Flicker On Settings")]
-    [SerializeField] private int flickerCount;
+    [SerializeField] private int flickerOnCount;
     [SerializeField] private float flickerOnInterval;
     [SerializeField] private float flickerPercentFall;
     
@@ -36,6 +36,7 @@ public class Lightable : MonoBehaviour
     [SerializeField] private bool glow;
 
     [Header("Flicker Settings")]
+    [SerializeField] private int flickerCount;
     [SerializeField] private float flickerInterval;
     [SerializeField] private float darkDuration;
 
@@ -51,9 +52,9 @@ public class Lightable : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        idealIntensity = light2D.intensity;
+        switchAnimReady = true;
 
-        StartCoroutine(changeLitState());
+        idealIntensity = light2D.intensity;
     }
 
     // Update is called once per frame
@@ -66,7 +67,6 @@ public class Lightable : MonoBehaviour
         if(switchAnimReady){
             StartCoroutine(changeLitState());
         }
-        
     }
 
     public IEnumerator changeLitState(){
@@ -95,15 +95,10 @@ public class Lightable : MonoBehaviour
     }
 
     private IEnumerator switchAnimation(bool lightOn){
-        if(instant){
-            light2D.enabled = lightOn;
-        }
-        else if(flickerOn){
-            Debug.Log("in flicker on");
-            counter = flickerCount;
+        if(flickerOn){
+            counter = flickerOnCount;
             
             while(counter != 0){
-                Debug.Log("counter: " + counter);
                 light2D.enabled = !lightOn;
 
                 yield return new WaitForSeconds(flickerOnInterval*(counter*flickerPercentFall));
@@ -115,6 +110,7 @@ public class Lightable : MonoBehaviour
                 counter--;
             }
         }
+
         else if(fadeIn){
             elapsedTime = 0;
             
@@ -132,11 +128,30 @@ public class Lightable : MonoBehaviour
             }
             
         }
+
+        else if(instant){
+            light2D.enabled = lightOn;
+        }
         switchAnimReady = true;
 
     }
 
     private IEnumerator litAnimation(){
-        yield return null;
+        while(isLit){
+            counter = flickerCount;
+            while(counter != 0){
+                light2D.enabled = !light2D.enabled;
+
+                yield return new WaitForSeconds(counter*darkDuration*flickerPercentFall);
+
+                light2D.enabled = !light2D.enabled;
+
+                yield return new WaitForSeconds(counter*darkDuration*flickerPercentFall);
+
+                counter--;
+            }
+
+            yield return new WaitForSeconds(flickerInterval);
+        }
     }
 }

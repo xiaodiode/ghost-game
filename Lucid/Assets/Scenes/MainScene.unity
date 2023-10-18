@@ -1374,8 +1374,8 @@ MonoBehaviour:
   m_ShadowVolumeIntensityEnabled: 0
   m_ShadowVolumeIntensity: 0.75
   m_LocalBounds:
-    m_Center: {x: 1.0384521, y: -1.2848511, z: 0}
-    m_Extent: {x: 1367.3257, y: 1159.6829, z: 0}
+    m_Center: {x: 1.0300903, y: -1.2858276, z: 0}
+    m_Extent: {x: 1367.3223, y: 1159.6819, z: 0}
   m_PointLightInnerAngle: 360
   m_PointLightOuterAngle: 360
   m_PointLightInnerRadius: 0
@@ -5756,27 +5756,55 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4349236322559562435, guid: f2a3009427343d242bbcd83ad388f400, type: 3}
       propertyPath: isLit
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 4349236322559562435, guid: f2a3009427343d242bbcd83ad388f400, type: 3}
-      propertyPath: fadeIn
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 4349236322559562435, guid: f2a3009427343d242bbcd83ad388f400, type: 3}
-      propertyPath: flickerOn
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4349236322559562435, guid: f2a3009427343d242bbcd83ad388f400, type: 3}
-      propertyPath: fadeDuration
-      value: 3
+      propertyPath: fadeIn
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4349236322559562435, guid: f2a3009427343d242bbcd83ad388f400, type: 3}
+      propertyPath: flicker
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4349236322559562435, guid: f2a3009427343d242bbcd83ad388f400, type: 3}
+      propertyPath: instant
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4349236322559562435, guid: f2a3009427343d242bbcd83ad388f400, type: 3}
+      propertyPath: flickerOn
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4349236322559562435, guid: f2a3009427343d242bbcd83ad388f400, type: 3}
       propertyPath: maxFadeIntensity
       value: 14.36
       objectReference: {fileID: 0}
+    - target: {fileID: 6487049650398803252, guid: f2a3009427343d242bbcd83ad388f400, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6487049650398803252, guid: f2a3009427343d242bbcd83ad388f400, type: 3}
+      propertyPath: m_LocalBounds.m_Center.x
+      value: 0.014899969
+      objectReference: {fileID: 0}
+    - target: {fileID: 6487049650398803252, guid: f2a3009427343d242bbcd83ad388f400, type: 3}
+      propertyPath: m_LocalBounds.m_Center.y
+      value: -0.35525012
+      objectReference: {fileID: 0}
+    - target: {fileID: 6487049650398803252, guid: f2a3009427343d242bbcd83ad388f400, type: 3}
+      propertyPath: m_LocalBounds.m_Extent.x
+      value: 6.7363997
+      objectReference: {fileID: 0}
+    - target: {fileID: 6487049650398803252, guid: f2a3009427343d242bbcd83ad388f400, type: 3}
+      propertyPath: m_LocalBounds.m_Extent.y
+      value: 6.06205
+      objectReference: {fileID: 0}
     - target: {fileID: 7238494160119104812, guid: f2a3009427343d242bbcd83ad388f400, type: 3}
       propertyPath: m_Name
       value: Light
+      objectReference: {fileID: 0}
+    - target: {fileID: 7330639369035495876, guid: f2a3009427343d242bbcd83ad388f400, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
