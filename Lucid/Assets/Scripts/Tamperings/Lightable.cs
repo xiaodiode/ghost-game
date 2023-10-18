@@ -54,6 +54,13 @@ public class Lightable : MonoBehaviour
     {
         switchAnimReady = true;
 
+        if(isLit){
+            light2D.enabled = true;
+        }
+        else{
+            light2D.enabled = false;
+        }
+
         idealIntensity = light2D.intensity;
     }
 
@@ -138,20 +145,41 @@ public class Lightable : MonoBehaviour
 
     private IEnumerator litAnimation(){
         while(isLit){
-            counter = flickerCount;
-            while(counter != 0){
-                light2D.enabled = !light2D.enabled;
+            if(flicker){
+                counter = flickerCount;
+                while(counter != 0){
+                    light2D.enabled = !light2D.enabled;
 
-                yield return new WaitForSeconds(counter*darkDuration*flickerPercentFall);
+                    yield return new WaitForSeconds(counter*darkDuration*flickerPercentFall);
 
-                light2D.enabled = !light2D.enabled;
+                    light2D.enabled = !light2D.enabled;
 
-                yield return new WaitForSeconds(counter*darkDuration*flickerPercentFall);
+                    yield return new WaitForSeconds(counter*darkDuration*flickerPercentFall);
 
-                counter--;
+                    counter--;
+                }
+
+                yield return new WaitForSeconds(flickerInterval);
             }
+            if(glow){
+                elapsedTime = 0;
 
-            yield return new WaitForSeconds(flickerInterval);
+                while(elapsedTime < glowDuration){
+                    if(elapsedTime < glowDuration/2){
+                        light2D.falloffIntensity = Mathf.Lerp(maxFallStrength, minFallStrength, elapsedTime/(glowDuration/2));
+                    }
+                    else{
+                        light2D.falloffIntensity = Mathf.Lerp(minFallStrength, maxFallStrength, (elapsedTime-glowDuration/2)/(glowDuration/2));
+                    }
+                    
+                    elapsedTime += Time.deltaTime;
+
+                    yield return null; 
+                }
+            }
+            yield return null;
         }
     }
+
+
 }

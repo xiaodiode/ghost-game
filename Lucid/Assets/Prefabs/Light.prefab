@@ -374,9 +374,9 @@ MonoBehaviour:
   flickerCount: 3
   flickerInterval: 4
   darkDuration: 0.2
-  maxFallStrength: 0
-  minFallStrength: 0
-  glowDuration: 0
+  maxFallStrength: 0.7
+  minFallStrength: 0.3
+  glowDuration: 8
 --- !u!1 &7330639369035495876
 GameObject:
   m_ObjectHideFlags: 0
