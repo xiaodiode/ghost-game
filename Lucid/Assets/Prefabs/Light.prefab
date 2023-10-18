@@ -121,8 +121,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: Plant, Assembly-CSharp
+      - m_Target: {fileID: 4349236322559562435}
+        m_TargetAssemblyTypeName: Lightable, Assembly-CSharp
         m_MethodName: onInteraction
         m_Mode: 1
         m_Arguments:
@@ -376,6 +376,7 @@ MonoBehaviour:
   maxFallStrength: 0
   minFallStrength: 0
   glowDuration: 0
+  mouse: {fileID: 8207088321609811887, guid: 17de83e0773c85a46953b164a17d5038, type: 3}
 --- !u!1 &7330639369035495876
 GameObject:
   m_ObjectHideFlags: 0
@@ -442,8 +443,8 @@ MonoBehaviour:
   m_ShadowVolumeIntensityEnabled: 0
   m_ShadowVolumeIntensity: 0.75
   m_LocalBounds:
-    m_Center: {x: 0.018100023, y: -0.35240006, z: 0}
-    m_Extent: {x: 6.7426004, y: 6.0656004, z: 0}
+    m_Center: {x: 0.015749931, y: -0.36144996, z: 0}
+    m_Extent: {x: 6.73905, y: 6.0584497, z: 0}
   m_PointLightInnerAngle: 360
   m_PointLightOuterAngle: 360
   m_PointLightInnerRadius: 0

@@ -1374,8 +1374,8 @@ MonoBehaviour:
   m_ShadowVolumeIntensityEnabled: 0
   m_ShadowVolumeIntensity: 0.75
   m_LocalBounds:
-    m_Center: {x: 1.041748, y: -1.295166, z: 0}
-    m_Extent: {x: 1367.3274, y: 1159.6753, z: 0}
+    m_Center: {x: 1.0384521, y: -1.2848511, z: 0}
+    m_Extent: {x: 1367.3257, y: 1159.6829, z: 0}
   m_PointLightInnerAngle: 360
   m_PointLightOuterAngle: 360
   m_PointLightInnerRadius: 0
@@ -2242,17 +2242,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &976661811 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 8007989940420325970, guid: ba8d6f6da79d0a842be8e67fe4871bd4, type: 3}
-  m_PrefabInstance: {fileID: 5675563737777175754}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fd65207c42dbbc24a99aa178f6d22936, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &981606643
 GameObject:
   m_ObjectHideFlags: 0
@@ -5767,11 +5756,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4349236322559562435, guid: f2a3009427343d242bbcd83ad388f400, type: 3}
       propertyPath: isLit
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4349236322559562435, guid: f2a3009427343d242bbcd83ad388f400, type: 3}
       propertyPath: fadeIn
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4349236322559562435, guid: f2a3009427343d242bbcd83ad388f400, type: 3}
+      propertyPath: flickerOn
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4349236322559562435, guid: f2a3009427343d242bbcd83ad388f400, type: 3}
       propertyPath: fadeDuration
@@ -5781,10 +5774,6 @@ PrefabInstance:
       propertyPath: maxFadeIntensity
       value: 14.36
       objectReference: {fileID: 0}
-    - target: {fileID: 5842550115718026136, guid: f2a3009427343d242bbcd83ad388f400, type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
-      value: 
-      objectReference: {fileID: 976661811}
     - target: {fileID: 7238494160119104812, guid: f2a3009427343d242bbcd83ad388f400, type: 3}
       propertyPath: m_Name
       value: Light

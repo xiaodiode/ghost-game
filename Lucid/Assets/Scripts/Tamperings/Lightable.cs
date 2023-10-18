@@ -63,7 +63,10 @@ public class Lightable : MonoBehaviour
     }
 
     public void onInteraction(){
-        StartCoroutine(changeLitState());
+        if(switchAnimReady){
+            StartCoroutine(changeLitState());
+        }
+        
     }
 
     public IEnumerator changeLitState(){
@@ -103,7 +106,6 @@ public class Lightable : MonoBehaviour
                 Debug.Log("counter: " + counter);
                 light2D.enabled = !lightOn;
 
-                Debug.Log("flickerOnInterval*(counter*flickerPercentFall: " + flickerOnInterval*(counter*flickerPercentFall));
                 yield return new WaitForSeconds(flickerOnInterval*(counter*flickerPercentFall));
 
                 light2D.enabled = lightOn;
@@ -114,6 +116,8 @@ public class Lightable : MonoBehaviour
             }
         }
         else if(fadeIn){
+            elapsedTime = 0;
+            
             while(elapsedTime < fadeDuration){
                 if(lightOn){
                     light2D.intensity = Mathf.Lerp(0, maxFadeIntensity, elapsedTime/fadeDuration);
@@ -126,8 +130,8 @@ public class Lightable : MonoBehaviour
 
                 yield return null; 
             }
+            
         }
-
         switchAnimReady = true;
 
     }
