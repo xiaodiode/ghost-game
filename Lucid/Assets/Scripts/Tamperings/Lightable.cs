@@ -8,7 +8,8 @@ public class Lightable : MonoBehaviour
     [SerializeField] public bool isLit;
 
     [Header("Light Tampering")]
-    [SerializeField] private bool litOverlay, changeSprite;
+    [SerializeField] private bool litOverlay;
+    [SerializeField] private bool changeSprite;
 
     [Header("Lightable Object Properties")]
     [SerializeField] private SpriteRenderer unlitState;
