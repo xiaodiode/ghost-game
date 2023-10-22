@@ -26,7 +26,7 @@ Transform:
   m_GameObject: {fileID: 1034837287904856753}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.0076923077, y: 0.05, z: 1}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 2608868560232456046}
@@ -112,7 +112,7 @@ RectTransform:
   m_GameObject: {fileID: 1205608540253628508}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.0002, y: 0.009, z: 1}
+  m_LocalScale: {x: 0.03, y: 0.18, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 2608868560232456046}
@@ -120,7 +120,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 0.221}
+  m_AnchoredPosition: {x: 0, y: 4.61}
   m_SizeDelta: {x: 160, y: 30}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &3472459062990663507
@@ -243,7 +243,7 @@ Transform:
   m_GameObject: {fileID: 5370581522058507476}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.0076923077, y: 0.05, z: 1}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 2608868560232456046}
@@ -318,15 +318,15 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!224 &2608868560232456046
-RectTransform:
+--- !u!4 &2608868560232456046
+Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7870717148664529797}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: -2.8999999, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -336,11 +336,6 @@ RectTransform:
   m_Father: {fileID: 0}
   m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 100, y: 100}
-  m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &8007989940420325970
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -355,9 +350,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   data: {fileID: 0}
   monologue: {fileID: 0}
-  baseMonologue: []
-  plantName: 
-  description: []
-  deadState: {fileID: 0}
-  aliveState: {fileID: 0}
-  isAlive: 0
+  plantName: plant1
+  deadComments: []
+  aliveComments: []
+  isAlive: 1
+  deadState: {fileID: 7604444203749709428}
+  aliveState: {fileID: 3308484800689106008}
+  deadOverlay: 1
+  aliveOverlay: 0
+  changeSprite: 0

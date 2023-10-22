@@ -11,10 +11,12 @@ public class Breakable : MonoBehaviour
     [Header("Breakable Object Properties")]
     [SerializeField] private SpriteRenderer unbrokenState;
     [SerializeField] private SpriteRenderer brokenState;
+    [SerializeField] private AudioClip breakSound;
     [SerializeField] private GameObject[] children;
-    [SerializeField] private float objectWeight;
+    [SerializeField] private float heaviness;
     [SerializeField] private bool onWall;
     [SerializeField] private bool onTable;
+    [SerializeField] private bool isStandalone;
 
     [Header("Breakable Sprite State Settings")]
     [SerializeField] private bool changeSprite;
@@ -22,6 +24,7 @@ public class Breakable : MonoBehaviour
 
     [Header("Wall Object Animation Settings")]
     [SerializeField] private bool canSwing;
+    [SerializeField] private AudioClip swingingSound;
     [SerializeField] private float baseMaxSwingAngle; // = 40;
     [SerializeField] private float baseMinSwingAngle; // = -40;
     [SerializeField] private float actualMaxSwingAngle;
@@ -36,6 +39,7 @@ public class Breakable : MonoBehaviour
     
     [Header("Vibration Animation Settings")]
     [SerializeField] private bool canVibrate;
+    [SerializeField] private AudioClip vibrateSound;
     [SerializeField] private float baseMaxVibrateSpeed;
     [SerializeField] private float actualMaxVibrateSpeed;
     [SerializeField] private float baseVibrateDistance;
@@ -44,6 +48,7 @@ public class Breakable : MonoBehaviour
 
     [Header("Teeter Animation Settings")]
     [SerializeField] private bool canTeeter;
+    [SerializeField] private AudioClip teeterSound;
     [SerializeField] private float maxTeeterAngle;
     [SerializeField] private float teeterSpeed;
     [SerializeField] private float teeterInDuration;
@@ -51,10 +56,17 @@ public class Breakable : MonoBehaviour
     [Header("Fall Animation Settings")]
     [SerializeField] private bool canFall;
     [SerializeField] private bool fallClockwise;
+    [SerializeField] private bool madeImpact;
+    [SerializeField] private float impactAngle;
     [SerializeField] private float rotationSpeed;
+    [SerializeField] private float XFallDistance;
     [SerializeField] private float YFallDistance;
 
-    
+    [Header("Bounce Animation Settings")]
+    [SerializeField] private bool canBounce;
+    [SerializeField] AudioClip bounceSound;
+    [SerializeField] 
+
     
 
     // Start is called before the first frame update
