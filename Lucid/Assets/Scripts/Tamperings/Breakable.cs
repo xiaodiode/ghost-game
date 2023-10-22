@@ -1,4 +1,5 @@
 using System.Collections;
+using Unity.Mathematics;
 using UnityEngine;
 
 public class Breakable : MonoBehaviour
@@ -40,21 +41,28 @@ public class Breakable : MonoBehaviour
     [SerializeField] private float moveRight;
     [SerializeField] private float moveDuration;
     [SerializeField] private float XDistanceToFall;
+
     
     [Header("Vibration Animation Settings")]
     [SerializeField] private bool canVibrate;
     [SerializeField] private AudioClip vibrateSound;
-    [SerializeField] [Range(0, 0.6f)] private float vibrateInterval;
+    [SerializeField] [Range(0, 1f)] private float vibrateDelay;
+    [SerializeField] [Range(0, 0.8f)] private float vibrateInterval;
     [SerializeField] [Range(0, 0.1f)]private float vibratePercentFall;
-    [SerializeField] [Range(0, 0.1f)] private float vibrateXDistance;
+    [SerializeField] [Range(0, 0.05f)] private float vibrateXDistance;
     [SerializeField] private float vibrateDuration;
+
 
     [Header("Teeter Animation Settings")]
     [SerializeField] private bool canTeeter;
     [SerializeField] private AudioClip teeterSound;
-    [SerializeField] private float maxTeeterAngle;
-    [SerializeField] private float teeterSpeed;
-    [SerializeField] private float teeterInDuration;
+    [SerializeField] [Range(0, 1f)] private float teeterDelay;
+    [SerializeField] [Range(0.5f, 1.5f)] private float maxTeeterInterval;
+    [SerializeField] [Range(0.2f, 0.5f)] private float minTeeterInterval;
+    [SerializeField] [Range(0, 0.5f)] private float teeterPercentFall;
+    [SerializeField] [Range(0,20f)] private float maxTeeterAngle;
+    [SerializeField] [Range(2f, 5f)] private float minTeeterAngle;
+
 
     [Header("Fall Animation Settings")]
     [SerializeField] private bool canFall;
@@ -65,13 +73,15 @@ public class Breakable : MonoBehaviour
     [SerializeField] private float XFallDistance;
     [SerializeField] private float YFallDistance;
 
+
     [Header("Bounce Animation Settings")]
     [SerializeField] private bool canBounce;
     [SerializeField] private AudioClip bounceSound;
     [SerializeField] private float initialYBounce;
     [SerializeField] [Range(0,1)] private float heightPercentDrop;
     
-    Vector3 initialPosition;
+    Vector3 initialPosition, initialRotation;
+
     bool initialMovementReady = false, touchedGround = false, finishedBouncing = false,
         isFalling = false, isVibrating = false;
 
@@ -83,6 +93,7 @@ public class Breakable : MonoBehaviour
         isBreaking = false;
 
         initialPosition = transform.position;
+        initialRotation = transform.rotation.eulerAngles;
 
         initializeActuals();
 
@@ -158,6 +169,10 @@ public class Breakable : MonoBehaviour
             StartCoroutine(startVibrating());
 
             Debug.Log("starting vibration");
+
+            if(canTeeter){
+                StartCoroutine(startTeetering());
+            }
         }
 
 
@@ -177,13 +192,12 @@ public class Breakable : MonoBehaviour
         float elapsedTime = 0;
         float elapsedInterval = 0;
 
-        Debug.Log("intiial position: " + initialPosition);
-        Debug.Log("vibrateXDistance: " +vibrateXDistance);
         Vector3 XTranslation = initialPosition + new Vector3(vibrateXDistance, 0, 0);
-        Debug.Log("XTranslation: " + XTranslation);
+        
+        yield return new WaitForSeconds(vibrateDelay);
 
         while(elapsedTime < vibrateDuration){
-            Debug.Log("elapsedInterval: " + elapsedInterval + ", vibrateInterval: " + vibrateInterval);
+            // Debug.Log("elapsedInterval: " + elapsedInterval + ", vibrateInterval: " + vibrateInterval);
             if(elapsedInterval > vibrateInterval){
                 elapsedInterval = 0;    
                 vibrateInterval *= 1-(vibrateInterval*vibratePercentFall);
@@ -202,6 +216,54 @@ public class Breakable : MonoBehaviour
             yield return null;
         }
 
+    }
+
+    private IEnumerator startTeetering(){
+        float elapsedTime = 0;
+        float elapsedInterval = 0;
+        float currentAngle = minTeeterAngle;
+        float currentInterval = maxTeeterInterval;
+
+        Quaternion newRotation = Quaternion.Euler(new Vector3());
+        Vector3 targetRightRotation = new Vector3(0, 0, -currentAngle);
+        Vector3 targetLeftRotation = new Vector3(0, 0, currentAngle);
+
+        yield return new WaitForSeconds(vibrateDelay + teeterDelay);
+
+        while(elapsedTime < vibrateDuration + teeterDelay){
+            // Debug.Log("elapsedInterval: " + elapsedInterval + ", teeterInterval: " + teeterInterval);
+            if(elapsedInterval > currentInterval){
+                elapsedInterval = 0;    
+
+                currentInterval *= 1 - (currentInterval*teeterPercentFall);
+                currentInterval = Mathf.Clamp(currentInterval, minTeeterInterval, maxTeeterInterval);
+
+                currentAngle *= 1 - teeterPercentFall;
+                currentAngle = Mathf.Clamp(currentAngle, minTeeterAngle, maxTeeterAngle);
+
+                targetRightRotation = new Vector3(0, 0, -currentAngle);
+                targetLeftRotation = new Vector3(0, 0, currentAngle);
+
+                Debug.Log("targetRightRotation: " + targetRightRotation + ", targetLeftRotation: " + targetLeftRotation);
+
+
+                initialRotation = transform.rotation.eulerAngles;
+            }
+            
+            if(elapsedInterval < (currentInterval/2)){
+                newRotation.eulerAngles = Vector3.LerpUnclamped(initialRotation, targetRightRotation, elapsedInterval/(currentInterval/2));
+            }
+            else{
+                newRotation.eulerAngles = Vector3.LerpUnclamped(targetRightRotation, targetLeftRotation, (elapsedInterval - currentInterval/2)/(currentInterval/2));
+            }
+
+            transform.rotation = newRotation;
+
+            elapsedInterval += Time.deltaTime;
+            elapsedTime += Time.deltaTime;
+
+            yield return null;
+        }
     }
 
     private IEnumerator startSwinging(){
