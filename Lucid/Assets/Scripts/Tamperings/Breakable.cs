@@ -44,9 +44,9 @@ public class Breakable : MonoBehaviour
     [Header("Vibration Animation Settings")]
     [SerializeField] private bool canVibrate;
     [SerializeField] private AudioClip vibrateSound;
-    [SerializeField] private float vibrateInterval;
-    [SerializeField] private float vibratePercentFall;
-    [SerializeField] private float vibrateXDistance;
+    [SerializeField] [Range(0, 0.6f)] private float vibrateInterval;
+    [SerializeField] [Range(0, 0.1f)]private float vibratePercentFall;
+    [SerializeField] [Range(0, 0.1f)] private float vibrateXDistance;
     [SerializeField] private float vibrateDuration;
 
     [Header("Teeter Animation Settings")]
@@ -86,6 +86,8 @@ public class Breakable : MonoBehaviour
 
         initializeActuals();
 
+        breakObject();
+
     }
 
     // Update is called once per frame
@@ -108,6 +110,8 @@ public class Breakable : MonoBehaviour
         if(!isBreaking && !isBroken){
             isBreaking = true;
             StartCoroutine(breakProcedure());
+
+            Debug.Log("starting breaking procedure");
         }
     }
 
@@ -142,7 +146,7 @@ public class Breakable : MonoBehaviour
         }
 
         isBreaking = false;
-        
+
         changeToBroken();
         
     }
@@ -152,6 +156,8 @@ public class Breakable : MonoBehaviour
         if(canVibrate){
             isVibrating = true;
             StartCoroutine(startVibrating());
+
+            Debug.Log("starting vibration");
         }
 
 
@@ -169,13 +175,20 @@ public class Breakable : MonoBehaviour
 
     private IEnumerator startVibrating(){
         float elapsedTime = 0;
-        float elapsedInterval;
+        float elapsedInterval = 0;
 
-        Vector3 XTranslation = transform.position + new Vector3(vibrateXDistance, 0, 0);
+        Debug.Log("intiial position: " + initialPosition);
+        Debug.Log("vibrateXDistance: " +vibrateXDistance);
+        Vector3 XTranslation = initialPosition + new Vector3(vibrateXDistance, 0, 0);
+        Debug.Log("XTranslation: " + XTranslation);
 
         while(elapsedTime < vibrateDuration){
-            elapsedInterval = 0;
-
+            Debug.Log("elapsedInterval: " + elapsedInterval + ", vibrateInterval: " + vibrateInterval);
+            if(elapsedInterval > vibrateInterval){
+                elapsedInterval = 0;    
+                vibrateInterval *= 1-(vibrateInterval*vibratePercentFall);
+            }
+            
             if(elapsedInterval < (vibrateInterval/2)){
                 transform.position = Vector3.Lerp(initialPosition, XTranslation, elapsedInterval/(vibrateInterval/2));
             }
@@ -183,12 +196,12 @@ public class Breakable : MonoBehaviour
                 transform.position = Vector3.Lerp(XTranslation, initialPosition, (elapsedInterval - vibrateInterval/2)/(vibrateInterval/2));
             }
 
+            elapsedInterval += Time.deltaTime;
             elapsedTime += Time.deltaTime;
 
             yield return null;
         }
 
-        yield return null;
     }
 
     private IEnumerator startSwinging(){

@@ -66,8 +66,8 @@ MonoBehaviour:
   m_ShadowVolumeIntensityEnabled: 0
   m_ShadowVolumeIntensity: 0.75
   m_LocalBounds:
-    m_Center: {x: 0.020099878, y: -0.35514998, z: 0}
-    m_Extent: {x: 6.7342997, y: 6.0560503, z: 0}
+    m_Center: {x: 0.010799885, y: -0.35115004, z: 0}
+    m_Extent: {x: 6.7339, y: 6.05895, z: 0}
   m_PointLightInnerAngle: 360
   m_PointLightOuterAngle: 360
   m_PointLightInnerRadius: 0
@@ -385,8 +385,9 @@ GameObject:
   m_Component:
   - component: {fileID: 2438539412132048391}
   - component: {fileID: 8442905366295167395}
+  - component: {fileID: 8517464927248895579}
   m_Layer: 0
-  m_Name: Unlit Sprite
+  m_Name: Lamp Base
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -459,6 +460,63 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &8517464927248895579
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4866911046613903466}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4102e2171097f644bb7359440b85309c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  isBreaking: 0
+  isBroken: 0
+  unbrokenState: {fileID: 0}
+  brokenState: {fileID: 0}
+  breakSound: {fileID: 0}
+  weightMultiplier: 0
+  onWall: 0
+  onTable: 1
+  isStandalone: 0
+  changeSprite: 0
+  brokenOverlay: 0
+  canSwing: 0
+  swingingSound: {fileID: 0}
+  maxSwingAngle: 0
+  startSwingAngle: 0
+  peakAngleWaittime: 0
+  peakAngleOffset: 0
+  swingAngleMultiplier: 0
+  swingCount: 0
+  baseSwingDuration: 0
+  moveRight: 0
+  moveDuration: 0
+  XDistanceToFall: 0
+  canVibrate: 1
+  vibrateSound: {fileID: 0}
+  vibrateInterval: 0.75
+  vibratePercentFall: 0.021
+  vibrateXDistance: 0.04
+  vibrateDuration: 10
+  canTeeter: 0
+  teeterSound: {fileID: 0}
+  maxTeeterAngle: 0
+  teeterSpeed: 0
+  teeterInDuration: 0
+  canFall: 0
+  fallClockwise: 0
+  madeImpact: 0
+  impactAngle: 0
+  rotationSpeed: 0
+  XFallDistance: 0
+  YFallDistance: 0
+  canBounce: 0
+  bounceSound: {fileID: 0}
+  initialYBounce: 0
+  heightPercentDrop: 0
 --- !u!1 &8203005864234302685
 GameObject:
   m_ObjectHideFlags: 0

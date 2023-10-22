@@ -879,8 +879,8 @@ MonoBehaviour:
   m_ShadowVolumeIntensityEnabled: 0
   m_ShadowVolumeIntensity: 0.75
   m_LocalBounds:
-    m_Center: {x: 1.0350952, y: -1.2946777, z: 0}
-    m_Extent: {x: 1367.3179, y: 1159.6904, z: 0}
+    m_Center: {x: 1.0302734, y: -1.2932739, z: 0}
+    m_Extent: {x: 1367.3303, y: 1159.6848, z: 0}
   m_PointLightInnerAngle: 360
   m_PointLightOuterAngle: 360
   m_PointLightInnerRadius: 0
@@ -3808,8 +3808,29 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7602873283226294453, guid: 5ff5b2c082ac047458da61612f3b1566, type: 3}
+      propertyPath: vibrateDuration
+      value: 40
+      objectReference: {fileID: 0}
+    - target: {fileID: 7602873283226294453, guid: 5ff5b2c082ac047458da61612f3b1566, type: 3}
+      propertyPath: vibrateInterval
+      value: 0.6
+      objectReference: {fileID: 0}
+    - target: {fileID: 7602873283226294453, guid: 5ff5b2c082ac047458da61612f3b1566, type: 3}
+      propertyPath: vibratePercentFall
+      value: 0.04
+      objectReference: {fileID: 0}
+    - target: {fileID: 8419221968754460134, guid: 5ff5b2c082ac047458da61612f3b1566, type: 3}
+      propertyPath: data
+      value: 
+      objectReference: {fileID: 160592819}
+    - target: {fileID: 8419221968754460134, guid: 5ff5b2c082ac047458da61612f3b1566, type: 3}
+      propertyPath: monologue
+      value: 
+      objectReference: {fileID: 1802898643}
     m_RemovedComponents: []
-    m_RemovedGameObjects: []
+    m_RemovedGameObjects:
+    - {fileID: 7953400502243797555, guid: 5ff5b2c082ac047458da61612f3b1566, type: 3}
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 5ff5b2c082ac047458da61612f3b1566, type: 3}
