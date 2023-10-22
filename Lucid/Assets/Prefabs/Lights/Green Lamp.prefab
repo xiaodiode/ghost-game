@@ -66,8 +66,8 @@ MonoBehaviour:
   m_ShadowVolumeIntensityEnabled: 0
   m_ShadowVolumeIntensity: 0.75
   m_LocalBounds:
-    m_Center: {x: 0.017349958, y: -0.35439992, z: 0}
-    m_Extent: {x: 6.73415, y: 6.0535, z: 0}
+    m_Center: {x: 0.020099878, y: -0.35514998, z: 0}
+    m_Extent: {x: 6.7342997, y: 6.0560503, z: 0}
   m_PointLightInnerAngle: 360
   m_PointLightOuterAngle: 360
   m_PointLightInnerRadius: 0
@@ -117,6 +117,7 @@ Transform:
   m_Children:
   - {fileID: 74188260963238405}
   - {fileID: 2377603105186537278}
+  - {fileID: 6354882066193675117}
   - {fileID: 2438539412132048391}
   - {fileID: 2533047962275515542}
   m_Father: {fileID: 0}
@@ -319,7 +320,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 2438539412132048391}
+  m_Father: {fileID: 2833703441817995347}
   m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &3452063446646382517
@@ -402,8 +403,7 @@ Transform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children:
-  - {fileID: 6354882066193675117}
+  m_Children: []
   m_Father: {fileID: 2833703441817995347}
   m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}

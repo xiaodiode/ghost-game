@@ -6,13 +6,13 @@ using UnityEngine;
 
 public class Breakable : MonoBehaviour
 {
-    [SerializeField] public bool isBroken;
+    [SerializeField] public bool isBreaking;
+    [SerializeField] private bool isBroken;
 
     [Header("Breakable Object Properties")]
     [SerializeField] private SpriteRenderer unbrokenState;
     [SerializeField] private SpriteRenderer brokenState;
     [SerializeField] private AudioClip breakSound;
-    [SerializeField] private GameObject[] children;
     [SerializeField] private float heaviness;
     [SerializeField] private bool onWall;
     [SerializeField] private bool onTable;
@@ -69,10 +69,16 @@ public class Breakable : MonoBehaviour
     [SerializeField] [Range(0,1)] private float heightPercentDrop;
     
 
+    bool initialMovementReady = false, touchedGround = false, finishedBouncing = false,
+        isFalling = false;
+
+
     // Start is called before the first frame update
     void Start()
     {
-        
+        isBroken = false;
+        isBreaking = false;
+
     }
 
     // Update is called once per frame
@@ -80,4 +86,107 @@ public class Breakable : MonoBehaviour
     {
         
     }
+
+    public void breakObject(){
+
+        if(!isBreaking){
+            isBreaking = true;
+            StartCoroutine(breakProcedure());
+        }
+    }
+
+    private IEnumerator breakProcedure(){
+        
+        initialMovement();
+
+        while(!initialMovementReady){
+            yield return null;
+        }
+
+        if(canFall){
+           StartCoroutine(startFalling()); 
+        }
+        else{
+            touchedGround = true;
+        }
+
+        while(!touchedGround){
+            yield return null;
+        }
+
+        if(canBounce){
+            StartCoroutine(startBouncing());
+        }
+        else{
+            finishedBouncing = true;
+        }
+
+        while(!finishedBouncing){
+            yield return null;
+        }
+
+        changeToBroken();
+        
+    }
+
+    private void initialMovement(){
+
+        if(onWall){
+            StartCoroutine(startSwinging());
+        }
+        else if(onTable){
+            StartCoroutine(startShifting());
+        }
+        else if(isStandalone){
+            StartCoroutine(startToppling());
+        }
+
+    }
+
+    private IEnumerator startSwinging(){
+        if(canVibrate){
+
+        }
+        yield return null;
+    }
+
+    private IEnumerator startShifting(){
+        
+        yield return null;
+    }
+
+    private IEnumerator startToppling(){
+        
+        yield return null;
+    }
+
+    private IEnumerator startVibrating(){
+
+        yield return null;
+    }
+
+    private IEnumerator startFalling(){
+
+        yield return null;
+    }
+
+    private IEnumerator startBouncing(){
+
+        yield return null;
+    }
+
+    private void changeToBroken(){
+        if(brokenOverlay){
+            brokenState.enabled = true;
+        }
+        else if(changeSprite){
+            unbrokenState.enabled = false;
+            brokenState.enabled = true;
+        }
+
+        isBroken = true;
+    }
+
+
+
 }

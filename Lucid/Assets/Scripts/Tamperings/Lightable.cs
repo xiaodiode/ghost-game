@@ -96,7 +96,6 @@ public class Lightable : MonoBehaviour
             StartCoroutine(litAnimation());
         }
         
-
     }
 
     private IEnumerator switchAnimation(bool lightOn){
