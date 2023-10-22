@@ -6,15 +6,15 @@ public class Lightable : MonoBehaviour
 {   
     [SerializeField] public bool isLit;
 
-    [Header("Light Tampering")]
-    [SerializeField] private bool litOverlay;
-    [SerializeField] private bool changeSprite;
-
     [Header("Lightable Object Properties")]
     [SerializeField] private SpriteRenderer unlitState;
     [SerializeField] private SpriteRenderer litState;
     [SerializeField] private Light2D light2D;
     [SerializeField] private float idealIntensity;
+
+    [Header("Lightable Sprite State Settings")]
+    [SerializeField] private bool litOverlay;
+    [SerializeField] private bool changeSprite;
     
     [Header("Switch On/Off Animations Options")]
     [SerializeField] private bool flickerOn;
@@ -24,7 +24,7 @@ public class Lightable : MonoBehaviour
     [Header("Flicker On Settings")]
     [SerializeField] private int flickerOnCount;
     [SerializeField] private float flickerOnInterval;
-    [SerializeField] private float flickerPercentFall;
+    [SerializeField] [Range(0, 1)] private float flickerPercentFall;
     
     [Header("Fade In Settings")]
     [SerializeField] private float maxFadeIntensity;
@@ -111,7 +111,6 @@ public class Lightable : MonoBehaviour
                 light2D.enabled = lightOn;
 
                 yield return new WaitForSeconds(flickerOnInterval*(counter*flickerPercentFall));
-
                 counter--;
             }
             switchAnimReady = true;

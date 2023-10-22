@@ -1379,8 +1379,8 @@ MonoBehaviour:
   m_ShadowVolumeIntensityEnabled: 0
   m_ShadowVolumeIntensity: 0.75
   m_LocalBounds:
-    m_Center: {x: 1.031189, y: -1.2946777, z: 0}
-    m_Extent: {x: 1367.3301, y: 1159.6904, z: 0}
+    m_Center: {x: 1.0369263, y: -1.2931519, z: 0}
+    m_Extent: {x: 1367.3286, y: 1159.6831, z: 0}
   m_PointLightInnerAngle: 360
   m_PointLightOuterAngle: 360
   m_PointLightInnerRadius: 0
@@ -2236,11 +2236,11 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 965772985}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0.07799996, y: -3.52, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalPosition: {x: -0.3482, y: -0.17500001, z: 0}
+  m_LocalScale: {x: 0.0076923077, y: 0.05, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 354254075}
+  m_Father: {fileID: 1609807243}
   m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &965772987
@@ -4385,6 +4385,7 @@ RectTransform:
   - {fileID: 1143595422}
   - {fileID: 39373585}
   - {fileID: 7516554}
+  - {fileID: 965772986}
   - {fileID: 1393841156}
   m_Father: {fileID: 1465998839}
   m_RootOrder: -1
@@ -4799,7 +4800,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7878350319992209165, guid: 7405b6a76f11aac40bac388cb6b55b56, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 4.8
+      value: 8.2
       objectReference: {fileID: 0}
     - target: {fileID: 7878350319992209165, guid: 7405b6a76f11aac40bac388cb6b55b56, type: 3}
       propertyPath: m_LocalPosition.z
@@ -6024,9 +6025,6 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 3874147439394215934, guid: f2a3009427343d242bbcd83ad388f400, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1291000660}
-    - targetCorrespondingSourceObject: {fileID: 3874147439394215934, guid: f2a3009427343d242bbcd83ad388f400, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 965772986}
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f2a3009427343d242bbcd83ad388f400, type: 3}
 --- !u!1001 &1006477804179470414
