@@ -1,7 +1,4 @@
 using System.Collections;
-using System.Collections.Generic;
-using Unity.VisualScripting;
-using UnityEditor.Search;
 using UnityEngine;
 
 public class Breakable : MonoBehaviour
@@ -9,28 +6,35 @@ public class Breakable : MonoBehaviour
     [SerializeField] public bool isBreaking;
     [SerializeField] private bool isBroken;
 
+
     [Header("Breakable Object Properties")]
     [SerializeField] private SpriteRenderer unbrokenState;
     [SerializeField] private SpriteRenderer brokenState;
     [SerializeField] private AudioClip breakSound;
-    [SerializeField] private float heaviness;
+    [SerializeField] private float weightMultiplier;
     [SerializeField] private bool onWall;
     [SerializeField] private bool onTable;
     [SerializeField] private bool isStandalone;
+
 
     [Header("Breakable Sprite State Settings")]
     [SerializeField] private bool changeSprite;
     [SerializeField] private bool brokenOverlay;
 
+
     [Header("Wall Object Animation Settings")]
     [SerializeField] private bool canSwing;
     [SerializeField] private AudioClip swingingSound;
-    [SerializeField] private float baseMaxSwingAngle; // = 40;
-    [SerializeField] private float baseMinSwingAngle; // = -40;
-    [SerializeField] private float actualMaxSwingAngle;
-    [SerializeField] private float actualMinSwingAngle;
+    [SerializeField] private float maxSwingAngle; // = 40;
+    [SerializeField] private float startSwingAngle; // = -40;
+    [SerializeField] private float peakAngleWaittime;
+    [SerializeField] private float peakAngleOffset;
+    [SerializeField] private float swingAngleMultiplier;
     [SerializeField] private int swingCount;
-    [SerializeField] private float swingDuration; 
+    [SerializeField] private float baseSwingDuration; 
+    private float actualMaxSwingAngle, actualStartSwingAngle, actualSwingDuration,
+        actualPeakAngleWait, actualPeakAngleOffset;
+
 
     [Header("Surface Object Animation Settings")]
     [SerializeField] private float moveRight;
@@ -40,10 +44,9 @@ public class Breakable : MonoBehaviour
     [Header("Vibration Animation Settings")]
     [SerializeField] private bool canVibrate;
     [SerializeField] private AudioClip vibrateSound;
-    [SerializeField] private float baseMaxVibrateSpeed;
-    [SerializeField] private float actualMaxVibrateSpeed;
-    [SerializeField] private float baseVibrateDistance;
-    [SerializeField] private float actualVibrateDistance;
+    [SerializeField] private float vibrateInterval;
+    [SerializeField] private float vibratePercentFall;
+    [SerializeField] private float vibrateXDistance;
     [SerializeField] private float vibrateDuration;
 
     [Header("Teeter Animation Settings")]
@@ -68,9 +71,9 @@ public class Breakable : MonoBehaviour
     [SerializeField] private float initialYBounce;
     [SerializeField] [Range(0,1)] private float heightPercentDrop;
     
-
+    Vector3 initialPosition;
     bool initialMovementReady = false, touchedGround = false, finishedBouncing = false,
-        isFalling = false;
+        isFalling = false, isVibrating = false;
 
 
     // Start is called before the first frame update
@@ -78,6 +81,10 @@ public class Breakable : MonoBehaviour
     {
         isBroken = false;
         isBreaking = false;
+
+        initialPosition = transform.position;
+
+        initializeActuals();
 
     }
 
@@ -87,9 +94,18 @@ public class Breakable : MonoBehaviour
         
     }
 
+    private void initializeActuals(){
+        if(canSwing){
+            actualMaxSwingAngle = maxSwingAngle/weightMultiplier;
+            actualStartSwingAngle = startSwingAngle/weightMultiplier;
+            actualSwingDuration = baseSwingDuration*weightMultiplier; 
+        }
+        
+    }
+
     public void breakObject(){
 
-        if(!isBreaking){
+        if(!isBreaking && !isBroken){
             isBreaking = true;
             StartCoroutine(breakProcedure());
         }
@@ -125,11 +141,19 @@ public class Breakable : MonoBehaviour
             yield return null;
         }
 
+        isBreaking = false;
+        
         changeToBroken();
         
     }
 
     private void initialMovement(){
+
+        if(canVibrate){
+            isVibrating = true;
+            StartCoroutine(startVibrating());
+        }
+
 
         if(onWall){
             StartCoroutine(startSwinging());
@@ -143,11 +167,40 @@ public class Breakable : MonoBehaviour
 
     }
 
+    private IEnumerator startVibrating(){
+        float elapsedTime = 0;
+        float elapsedInterval;
+
+        Vector3 XTranslation = transform.position + new Vector3(vibrateXDistance, 0, 0);
+
+        while(elapsedTime < vibrateDuration){
+            elapsedInterval = 0;
+
+            if(elapsedInterval < (vibrateInterval/2)){
+                transform.position = Vector3.Lerp(initialPosition, XTranslation, elapsedInterval/(vibrateInterval/2));
+            }
+            else{
+                transform.position = Vector3.Lerp(XTranslation, initialPosition, (elapsedInterval - vibrateInterval/2)/(vibrateInterval/2));
+            }
+
+            elapsedTime += Time.deltaTime;
+
+            yield return null;
+        }
+
+        yield return null;
+    }
+
     private IEnumerator startSwinging(){
-        if(canVibrate){
+        while(!isVibrating){
+            yield return null;
+        }
+
+        if(canSwing){
 
         }
-        yield return null;
+
+        
     }
 
     private IEnumerator startShifting(){
@@ -157,11 +210,6 @@ public class Breakable : MonoBehaviour
 
     private IEnumerator startToppling(){
         
-        yield return null;
-    }
-
-    private IEnumerator startVibrating(){
-
         yield return null;
     }
 
