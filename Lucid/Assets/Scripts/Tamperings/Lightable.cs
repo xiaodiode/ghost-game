@@ -44,7 +44,6 @@ public class Lightable : MonoBehaviour
     [SerializeField] private float minFallStrength;
     [SerializeField] private float glowDuration;
 
-    int counter;
     float elapsedTime;
     bool switchAnimReady;
     
@@ -66,17 +65,17 @@ public class Lightable : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        // Debug.Log("switchanimeready: " + switchAnimReady);
     }
 
     public void onInteraction(){
         if(switchAnimReady){
+            switchAnimReady = false;
             StartCoroutine(changeLitState());
         }
     }
 
     public IEnumerator changeLitState(){
-        switchAnimReady = false;
         if(litOverlay){
             litState.enabled = !isLit;
         }
@@ -102,7 +101,7 @@ public class Lightable : MonoBehaviour
 
     private IEnumerator switchAnimation(bool lightOn){
         if(flickerOn){
-            counter = flickerOnCount;
+            int counter = flickerOnCount;
             
             while(counter != 0){
                 light2D.enabled = !lightOn;
@@ -115,6 +114,7 @@ public class Lightable : MonoBehaviour
 
                 counter--;
             }
+            switchAnimReady = true;
         }
 
         else if(fadeIn){
@@ -132,20 +132,21 @@ public class Lightable : MonoBehaviour
 
                 yield return null; 
             }
-            
+            switchAnimReady = true;
         }
 
         else if(instant){
             light2D.enabled = lightOn;
+            switchAnimReady = true;
         }
-        switchAnimReady = true;
+        
 
     }
 
     private IEnumerator litAnimation(){
         while(isLit){
             if(flicker){
-                counter = flickerCount;
+                int counter = flickerCount;
                 while(counter != 0){
                     light2D.enabled = !light2D.enabled;
 
