@@ -64,9 +64,9 @@ public class Breakable : MonoBehaviour
 
     [Header("Bounce Animation Settings")]
     [SerializeField] private bool canBounce;
-    [SerializeField] AudioClip bounceSound;
-    [SerializeField] 
-
+    [SerializeField] private AudioClip bounceSound;
+    [SerializeField] private float initialYBounce;
+    [SerializeField] [Range(0,1)] private float heightPercentDrop;
     
 
     // Start is called before the first frame update
