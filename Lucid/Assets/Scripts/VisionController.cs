@@ -6,7 +6,6 @@ using UnityEngine.UI;
 public class VisionController : MonoBehaviour
 {
     [Header("Vision Settings")]
-    [SerializeField] private Camera visionCamera;
     [SerializeField] private Canvas visionCanvas;
     [SerializeField] private MouseController mouse;
 

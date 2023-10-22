@@ -17,9 +17,7 @@ public class MouseController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(isLocked){
-            Mouse.current.WarpCursorPosition(oldMousePosition);
-        }
+        
     }
 
     public void lockMouse(bool locked){
