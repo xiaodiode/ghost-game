@@ -3829,40 +3829,8 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 1802898643}
     - target: {fileID: 8926105550332656735, guid: 5ff5b2c082ac047458da61612f3b1566, type: 3}
-      propertyPath: canTeeter
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 8926105550332656735, guid: 5ff5b2c082ac047458da61612f3b1566, type: 3}
-      propertyPath: teeterDelay
-      value: 0.401
-      objectReference: {fileID: 0}
-    - target: {fileID: 8926105550332656735, guid: 5ff5b2c082ac047458da61612f3b1566, type: 3}
-      propertyPath: vibrateDelay
-      value: 0.382
-      objectReference: {fileID: 0}
-    - target: {fileID: 8926105550332656735, guid: 5ff5b2c082ac047458da61612f3b1566, type: 3}
-      propertyPath: maxTeeterAngle
-      value: 6
-      objectReference: {fileID: 0}
-    - target: {fileID: 8926105550332656735, guid: 5ff5b2c082ac047458da61612f3b1566, type: 3}
-      propertyPath: minTeeterAngle
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 8926105550332656735, guid: 5ff5b2c082ac047458da61612f3b1566, type: 3}
       propertyPath: teeterInterval
       value: 1.01
-      objectReference: {fileID: 0}
-    - target: {fileID: 8926105550332656735, guid: 5ff5b2c082ac047458da61612f3b1566, type: 3}
-      propertyPath: maxTeeterInterval
-      value: 1.341
-      objectReference: {fileID: 0}
-    - target: {fileID: 8926105550332656735, guid: 5ff5b2c082ac047458da61612f3b1566, type: 3}
-      propertyPath: minTeeterInterval
-      value: 0.313
-      objectReference: {fileID: 0}
-    - target: {fileID: 8926105550332656735, guid: 5ff5b2c082ac047458da61612f3b1566, type: 3}
-      propertyPath: teeterPercentFall
-      value: 0.08
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects:

@@ -1,14 +1,14 @@
 using System.Collections;
-using Unity.Mathematics;
 using UnityEngine;
 
 public class Breakable : MonoBehaviour
 {
     [SerializeField] public bool isBreaking;
-    [SerializeField] private bool isBroken;
+    [SerializeField] public bool isBroken;
 
 
     [Header("Breakable Object Properties")]
+    [SerializeField] private GameObject breakableBody;
     [SerializeField] private SpriteRenderer unbrokenState;
     [SerializeField] private SpriteRenderer brokenState;
     [SerializeField] private AudioClip breakSound;
@@ -38,9 +38,11 @@ public class Breakable : MonoBehaviour
 
 
     [Header("Surface Object Animation Settings")]
-    [SerializeField] private float moveRight;
-    [SerializeField] private float moveDuration;
-    [SerializeField] private float XDistanceToFall;
+    [SerializeField] private bool canShift;
+    [SerializeField] private bool shiftRight;
+    [SerializeField] [Range(0, 1f)] private float shiftDelay;
+    [SerializeField] [Range(0.5f, 10f)] private float XDistanceToFall;
+    [SerializeField] private float shiftDuration;
 
     
     [Header("Vibration Animation Settings")]
@@ -58,10 +60,10 @@ public class Breakable : MonoBehaviour
     [SerializeField] private AudioClip teeterSound;
     [SerializeField] [Range(0, 1f)] private float teeterDelay;
     [SerializeField] [Range(0.5f, 1.5f)] private float maxTeeterInterval;
-    [SerializeField] [Range(0.2f, 0.5f)] private float minTeeterInterval;
-    [SerializeField] [Range(0, 0.5f)] private float teeterPercentFall;
-    [SerializeField] [Range(0,20f)] private float maxTeeterAngle;
-    [SerializeField] [Range(2f, 5f)] private float minTeeterAngle;
+    [SerializeField] [Range(0f, 0.5f)] private float minTeeterInterval;
+    [SerializeField] [Range(0.2f, 0.5f)] private float teeterPercentFall;
+    [SerializeField] [Range(0, 20f)] private float maxTeeterAngle;
+    [SerializeField] [Range(0f, 5f)] private float minTeeterAngle;
 
 
     [Header("Fall Animation Settings")]
@@ -80,7 +82,7 @@ public class Breakable : MonoBehaviour
     [SerializeField] private float initialYBounce;
     [SerializeField] [Range(0,1)] private float heightPercentDrop;
     
-    Vector3 initialPosition, initialRotation;
+    Vector3 initialPartPos, initialPartRot, initialBodyPos, initialBodyRot;
 
     bool initialMovementReady = false, touchedGround = false, finishedBouncing = false,
         isFalling = false, isVibrating = false;
@@ -92,8 +94,11 @@ public class Breakable : MonoBehaviour
         isBroken = false;
         isBreaking = false;
 
-        initialPosition = transform.position;
-        initialRotation = transform.rotation.eulerAngles;
+        initialPartPos = transform.position;
+        initialPartRot = transform.rotation.eulerAngles;
+
+        // initialBodyPos = breakableBody.transform.position;
+        // initialBodyRot = breakableBody.transform.rotation.eulerAngles;
 
         initializeActuals();
 
@@ -167,20 +172,21 @@ public class Breakable : MonoBehaviour
         if(canVibrate){
             isVibrating = true;
             StartCoroutine(startVibrating());
-
-            Debug.Log("starting vibration");
-
-            if(canTeeter){
-                StartCoroutine(startTeetering());
-            }
         }
+        if(canTeeter){
+            StartCoroutine(startTeetering());
+        }
+
 
 
         if(onWall){
             StartCoroutine(startSwinging());
         }
         else if(onTable){
-            StartCoroutine(startShifting());
+            if(canShift){
+                StartCoroutine(startShifting());
+            }
+            
         }
         else if(isStandalone){
             StartCoroutine(startToppling());
@@ -192,22 +198,21 @@ public class Breakable : MonoBehaviour
         float elapsedTime = 0;
         float elapsedInterval = 0;
 
-        Vector3 XTranslation = initialPosition + new Vector3(vibrateXDistance, 0, 0);
+        Vector3 XTranslation = initialPartPos + new Vector3(vibrateXDistance, 0, 0);
         
         yield return new WaitForSeconds(vibrateDelay);
 
         while(elapsedTime < vibrateDuration){
-            // Debug.Log("elapsedInterval: " + elapsedInterval + ", vibrateInterval: " + vibrateInterval);
             if(elapsedInterval > vibrateInterval){
                 elapsedInterval = 0;    
                 vibrateInterval *= 1-(vibrateInterval*vibratePercentFall);
             }
             
             if(elapsedInterval < (vibrateInterval/2)){
-                transform.position = Vector3.Lerp(initialPosition, XTranslation, elapsedInterval/(vibrateInterval/2));
+                transform.position = Vector3.Lerp(initialPartPos, XTranslation, elapsedInterval/(vibrateInterval/2));
             }
             else{
-                transform.position = Vector3.Lerp(XTranslation, initialPosition, (elapsedInterval - vibrateInterval/2)/(vibrateInterval/2));
+                transform.position = Vector3.Lerp(XTranslation, initialPartPos, (elapsedInterval - vibrateInterval/2)/(vibrateInterval/2));
             }
 
             elapsedInterval += Time.deltaTime;
@@ -219,6 +224,8 @@ public class Breakable : MonoBehaviour
     }
 
     private IEnumerator startTeetering(){
+        yield return new WaitForSeconds(vibrateDelay + teeterDelay);
+
         float elapsedTime = 0;
         float elapsedInterval = 0;
         float currentAngle = minTeeterAngle;
@@ -228,10 +235,7 @@ public class Breakable : MonoBehaviour
         Vector3 targetRightRotation = new Vector3(0, 0, -currentAngle);
         Vector3 targetLeftRotation = new Vector3(0, 0, currentAngle);
 
-        yield return new WaitForSeconds(vibrateDelay + teeterDelay);
-
         while(elapsedTime < vibrateDuration + teeterDelay){
-            // Debug.Log("elapsedInterval: " + elapsedInterval + ", teeterInterval: " + teeterInterval);
             if(elapsedInterval > currentInterval){
                 elapsedInterval = 0;    
 
@@ -247,11 +251,11 @@ public class Breakable : MonoBehaviour
                 Debug.Log("targetRightRotation: " + targetRightRotation + ", targetLeftRotation: " + targetLeftRotation);
 
 
-                initialRotation = transform.rotation.eulerAngles;
+                initialPartRot = transform.rotation.eulerAngles;
             }
             
             if(elapsedInterval < (currentInterval/2)){
-                newRotation.eulerAngles = Vector3.LerpUnclamped(initialRotation, targetRightRotation, elapsedInterval/(currentInterval/2));
+                newRotation.eulerAngles = Vector3.LerpUnclamped(initialPartRot, targetRightRotation, elapsedInterval/(currentInterval/2));
             }
             else{
                 newRotation.eulerAngles = Vector3.LerpUnclamped(targetRightRotation, targetLeftRotation, (elapsedInterval - currentInterval/2)/(currentInterval/2));
@@ -279,8 +283,24 @@ public class Breakable : MonoBehaviour
     }
 
     private IEnumerator startShifting(){
+        yield return new WaitForSeconds(vibrateDelay + shiftDelay);
         
-        yield return null;
+        float elapsedTime = 0;
+
+        if(!shiftRight){
+            XDistanceToFall = -XDistanceToFall;
+        }
+
+        Vector3 targetXPosition = new Vector3(initialPartPos.x + XDistanceToFall, initialPartPos.y, initialPartPos.z);
+
+        while(elapsedTime < shiftDuration){
+
+            transform.position = Vector3.Lerp(initialPartPos, targetXPosition, elapsedTime/shiftDuration);
+            
+            elapsedTime += Time.deltaTime;
+
+            yield return null;
+        }
     }
 
     private IEnumerator startToppling(){
