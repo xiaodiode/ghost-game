@@ -198,7 +198,13 @@ public class Breakable : MonoBehaviour
         float elapsedTime = 0;
         float elapsedInterval = 0;
 
-        Vector3 XTranslation = initialPartPos + new Vector3(vibrateXDistance, 0, 0);
+        float shiftXDistance = XDistanceToFall/(vibrateDuration*2);
+        // Vector3 shiftTargetPos = new Vector3(XDistanceToFall, 0, 0);
+        // Vector3 shiftDistance = Vector3.Lerp(initialPartPos, shiftTargetPos, (vibrateDuration/* - shiftDelay*/)*2);
+        Vector3 shiftDistance = new Vector3(shiftXDistance, 0, 0);
+
+        Vector3 vibrateRefPos = initialPartPos;
+        Vector3 XTranslation = new Vector3(vibrateXDistance + shiftXDistance, 0, 0);
         
         yield return new WaitForSeconds(vibrateDelay);
 
@@ -206,13 +212,17 @@ public class Breakable : MonoBehaviour
             if(elapsedInterval > vibrateInterval){
                 elapsedInterval = 0;    
                 vibrateInterval *= 1-(vibrateInterval*vibratePercentFall);
+
+                vibrateRefPos += shiftDistance;
+                Debug.Log("vibrateRefPos: " + vibrateRefPos);
+                // XTranslation += shiftDistance;
             }
             
             if(elapsedInterval < (vibrateInterval/2)){
-                transform.position = Vector3.Lerp(initialPartPos, XTranslation, elapsedInterval/(vibrateInterval/2));
+                transform.position = Vector3.Lerp(vibrateRefPos, vibrateRefPos + XTranslation, elapsedInterval/(vibrateInterval/2));
             }
             else{
-                transform.position = Vector3.Lerp(XTranslation, initialPartPos, (elapsedInterval - vibrateInterval/2)/(vibrateInterval/2));
+                transform.position = Vector3.Lerp(XTranslation + vibrateRefPos, vibrateRefPos, (elapsedInterval - vibrateInterval/2)/(vibrateInterval/2));
             }
 
             elapsedInterval += Time.deltaTime;
