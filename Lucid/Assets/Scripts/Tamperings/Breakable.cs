@@ -204,7 +204,7 @@ public class Breakable : MonoBehaviour
         Vector3 shiftDistance = new Vector3(shiftXDistance, 0, 0);
 
         Vector3 vibrateRefPos = initialPartPos;
-        Vector3 XTranslation = new Vector3(vibrateXDistance + shiftXDistance, 0, 0);
+        Vector3 XTranslation = new Vector3(vibrateXDistance, 0, 0);
         
         yield return new WaitForSeconds(vibrateDelay);
 
@@ -222,7 +222,7 @@ public class Breakable : MonoBehaviour
                 transform.position = Vector3.Lerp(vibrateRefPos, vibrateRefPos + XTranslation, elapsedInterval/(vibrateInterval/2));
             }
             else{
-                transform.position = Vector3.Lerp(XTranslation + vibrateRefPos, vibrateRefPos, (elapsedInterval - vibrateInterval/2)/(vibrateInterval/2));
+                transform.position = Vector3.Lerp(vibrateRefPos + XTranslation, vibrateRefPos, (elapsedInterval - vibrateInterval/2)/(vibrateInterval/2));
             }
 
             elapsedInterval += Time.deltaTime;
