@@ -36,23 +36,20 @@ public class Breakable : MonoBehaviour
     private float actualMaxSwingAngle, actualStartSwingAngle, actualSwingDuration,
         actualPeakAngleWait, actualPeakAngleOffset;
 
-
-    [Header("Surface Object Animation Settings")]
+    
+    [Header("Vibrate/Shift Animation Settings")]
+    [SerializeField] private bool canVibrate;
+    [SerializeField] private AudioClip vibrateSound;
+    [SerializeField] [Range(0, 1f)] private float vibrateDelay;
+    [SerializeField] [Range(0, 0.03f)] private float vibrateIntervalFactor;
+    [SerializeField] [Range(0, 0.1f)]private float vibratePercentFall;
+    [SerializeField] [Range(0, 0.05f)] private float vibrateXDistance;
+    [SerializeField] private float vibrateDuration;
     [SerializeField] private bool canShift;
     [SerializeField] private bool shiftRight;
     [SerializeField] [Range(0, 1f)] private float shiftDelay;
     [SerializeField] [Range(0.5f, 10f)] private float XDistanceToFall;
-    [SerializeField] private float shiftDuration;
-
-    
-    [Header("Vibration Animation Settings")]
-    [SerializeField] private bool canVibrate;
-    [SerializeField] private AudioClip vibrateSound;
-    [SerializeField] [Range(0, 1f)] private float vibrateDelay;
-    [SerializeField] [Range(0, 0.8f)] private float vibrateInterval;
-    [SerializeField] [Range(0, 0.1f)]private float vibratePercentFall;
-    [SerializeField] [Range(0, 0.05f)] private float vibrateXDistance;
-    [SerializeField] private float vibrateDuration;
+    private float vibrateInterval;
 
 
     [Header("Teeter Animation Settings")]
@@ -96,6 +93,8 @@ public class Breakable : MonoBehaviour
 
         initialPartPos = transform.position;
         initialPartRot = transform.rotation.eulerAngles;
+
+        vibrateInterval = vibrateDuration*vibrateIntervalFactor;
 
         // initialBodyPos = breakableBody.transform.position;
         // initialBodyRot = breakableBody.transform.rotation.eulerAngles;
@@ -183,9 +182,6 @@ public class Breakable : MonoBehaviour
             StartCoroutine(startSwinging());
         }
         else if(onTable){
-            if(canShift){
-                StartCoroutine(startShifting());
-            }
             
         }
         else if(isStandalone){
@@ -198,11 +194,16 @@ public class Breakable : MonoBehaviour
         float elapsedTime = 0;
         float elapsedInterval = 0;
 
-        float shiftXDistance = XDistanceToFall/(vibrateDuration*2);
-        // Vector3 shiftTargetPos = new Vector3(XDistanceToFall, 0, 0);
-        // Vector3 shiftDistance = Vector3.Lerp(initialPartPos, shiftTargetPos, (vibrateDuration/* - shiftDelay*/)*2);
-        Vector3 shiftDistance = new Vector3(shiftXDistance, 0, 0);
+        Vector3 shiftDistance = new();
 
+        if(canShift){
+            if(!shiftRight){
+                XDistanceToFall = -XDistanceToFall;
+            }
+            float shiftXDistance = XDistanceToFall/((vibrateDuration - shiftDelay)*(40/vibrateDuration + 3)); //40 = 4, 20 = 5, 10 = 8, 5 = 13: 10, 4, 1.25
+            shiftDistance = new Vector3(shiftXDistance, 0, 0);
+        }
+        
         Vector3 vibrateRefPos = initialPartPos;
         Vector3 XTranslation = new Vector3(vibrateXDistance, 0, 0);
         
@@ -213,9 +214,10 @@ public class Breakable : MonoBehaviour
                 elapsedInterval = 0;    
                 vibrateInterval *= 1-(vibrateInterval*vibratePercentFall);
 
-                vibrateRefPos += shiftDistance;
-                Debug.Log("vibrateRefPos: " + vibrateRefPos);
-                // XTranslation += shiftDistance;
+                if(canShift && elapsedTime >= shiftDelay){
+                    vibrateRefPos += shiftDistance;
+                }
+                
             }
             
             if(elapsedInterval < (vibrateInterval/2)){
@@ -258,9 +260,6 @@ public class Breakable : MonoBehaviour
                 targetRightRotation = new Vector3(0, 0, -currentAngle);
                 targetLeftRotation = new Vector3(0, 0, currentAngle);
 
-                Debug.Log("targetRightRotation: " + targetRightRotation + ", targetLeftRotation: " + targetLeftRotation);
-
-
                 initialPartRot = transform.rotation.eulerAngles;
             }
             
@@ -290,27 +289,6 @@ public class Breakable : MonoBehaviour
         }
 
         
-    }
-
-    private IEnumerator startShifting(){
-        yield return new WaitForSeconds(vibrateDelay + shiftDelay);
-        
-        float elapsedTime = 0;
-
-        if(!shiftRight){
-            XDistanceToFall = -XDistanceToFall;
-        }
-
-        Vector3 targetXPosition = new Vector3(initialPartPos.x + XDistanceToFall, initialPartPos.y, initialPartPos.z);
-
-        while(elapsedTime < shiftDuration){
-
-            transform.position = Vector3.Lerp(initialPartPos, targetXPosition, elapsedTime/shiftDuration);
-            
-            elapsedTime += Time.deltaTime;
-
-            yield return null;
-        }
     }
 
     private IEnumerator startToppling(){
