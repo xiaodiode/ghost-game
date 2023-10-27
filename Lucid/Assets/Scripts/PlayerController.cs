@@ -27,6 +27,7 @@ public class PlayerController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        // Debug.Log("lockmovement: " + lockMovement);
         if(!lockMovement){
             horizontalInput = Input.GetAxis("Horizontal");
             if(horizontalInput < 0 && player.transform.localScale.x > 0 ||

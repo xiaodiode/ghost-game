@@ -15,7 +15,7 @@ public class TextInputController : MonoBehaviour, IPointerClickHandler
     [SerializeField] private TextMeshProUGUI autocomplete;
     
     
-    [SerializeField] private string firstDemonMatch;
+    [SerializeField] private string firstDemonMatch = "";
 
     string latestGuess;
     bool validDemon;
@@ -28,11 +28,13 @@ public class TextInputController : MonoBehaviour, IPointerClickHandler
     // Update is called once per frame
     void Update()
     {
-        if(inputField.isFocused && Input.GetKeyDown(KeyCode.Tab) && firstDemonMatch != ""){
+        if(inputField.isFocused && Input.GetKeyDown(KeyCode.Tab) && firstDemonMatch.Length > 1){
+            Debug.Log("firstDemonMatch: " + firstDemonMatch);
             inputField.text = firstDemonMatch;
+            inputField.caretPosition = firstDemonMatch.Length;
         }
 
-        if(!inputField.isFocused && Input.GetKeyDown(KeyCode.Return)){
+        else if(!inputField.isFocused && Input.GetKeyDown(KeyCode.Return)){
             enterGuess();
         }
     }
@@ -46,10 +48,11 @@ public class TextInputController : MonoBehaviour, IPointerClickHandler
         if(input != ""){
             firstDemonMatch = data.demonList.FirstOrDefault(demon => demon.StartsWith(input, System.StringComparison.OrdinalIgnoreCase));
             autocomplete.text = firstDemonMatch;
-            inputField.caretPosition = firstDemonMatch.Length;
+            
         }
         else{
             autocomplete.text = "";
+            firstDemonMatch = "";
         }
     }
 
@@ -57,7 +60,7 @@ public class TextInputController : MonoBehaviour, IPointerClickHandler
         latestGuess = input;
 
         autocomplete.text = "";
-        inputField.text = "";
+        // inputField.text = "";
 
         player.lockMovement = false;
         player.sceneController.lockMovement = false;
@@ -72,5 +75,9 @@ public class TextInputController : MonoBehaviour, IPointerClickHandler
         else{
             Debug.Log("did not enter valid demon");
         }
+
+        inputField.text = "";
+        autocomplete.text = "";
+        firstDemonMatch = "";
     }
 }
