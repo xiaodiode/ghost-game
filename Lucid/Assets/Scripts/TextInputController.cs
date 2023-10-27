@@ -28,7 +28,7 @@ public class TextInputController : MonoBehaviour, IPointerClickHandler
     // Update is called once per frame
     void Update()
     {
-        
+        // Debug.Log("inputField.isFocused: " + inputField.isFocused);
         if(inputField.isFocused && Input.GetKeyDown(KeyCode.Tab) && firstDemonMatch != null)
         {
             inputField.text = firstDemonMatch;
@@ -42,6 +42,7 @@ public class TextInputController : MonoBehaviour, IPointerClickHandler
     }
 
     public void OnPointerClick(PointerEventData eventData){
+        Debug.Log("OnPointerClick inputField.isFocused: " + inputField.isFocused);
         player.lockMovement = true;
         player.sceneController.lockMovement = true;
     }
@@ -61,7 +62,9 @@ public class TextInputController : MonoBehaviour, IPointerClickHandler
         latestGuess = input;
 
         autocomplete.text = "";
-        // inputField.text = "";
+
+        Debug.Log("clearAutocomplete inputField.isFocused: " + inputField.isFocused);
+
 
         player.lockMovement = false;
         player.sceneController.lockMovement = false;

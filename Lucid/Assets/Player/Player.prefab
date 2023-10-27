@@ -49,7 +49,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   player: {fileID: 4546870554242521715}
-  sceneController: {fileID: 825844006688627286, guid: abe5ada22c5ed694daa36425a9aafd75, type: 3}
+  sceneController: {fileID: 0}
   lockMovement: 0
   playerXMax: 11
   playerXMin: -7
@@ -328,11 +328,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4385083095020060463, guid: 51a878f11376ff14490389f95694f2e8, type: 3}
       propertyPath: m_AnchorMax.x
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4385083095020060463, guid: 51a878f11376ff14490389f95694f2e8, type: 3}
       propertyPath: m_AnchorMax.y
-      value: 0.99999183
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4385083095020060463, guid: 51a878f11376ff14490389f95694f2e8, type: 3}
       propertyPath: m_AnchorMin.y
@@ -376,15 +376,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5374958396520527927, guid: 51a878f11376ff14490389f95694f2e8, type: 3}
       propertyPath: m_AnchorMax.x
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5374958396520527927, guid: 51a878f11376ff14490389f95694f2e8, type: 3}
       propertyPath: m_AnchorMax.y
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5374958396520527927, guid: 51a878f11376ff14490389f95694f2e8, type: 3}
       propertyPath: m_SizeDelta.x
-      value: -17
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5824730846042429839, guid: 51a878f11376ff14490389f95694f2e8, type: 3}
       propertyPath: m_Layer
@@ -504,7 +504,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8868814427159914896, guid: 51a878f11376ff14490389f95694f2e8, type: 3}
       propertyPath: m_SizeDelta.y
-      value: 10
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8868814427159914896, guid: 51a878f11376ff14490389f95694f2e8, type: 3}
       propertyPath: m_AnchoredPosition.y
