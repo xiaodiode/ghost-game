@@ -879,8 +879,8 @@ MonoBehaviour:
   m_ShadowVolumeIntensityEnabled: 0
   m_ShadowVolumeIntensity: 0.75
   m_LocalBounds:
-    m_Center: {x: 1.0372314, y: -1.2890015, z: 0}
-    m_Extent: {x: 1367.3314, y: 1159.6775, z: 0}
+    m_Center: {x: 1.0378418, y: -1.2868042, z: 0}
+    m_Extent: {x: 1367.3208, y: 1159.6855, z: 0}
   m_PointLightInnerAngle: 360
   m_PointLightOuterAngle: 360
   m_PointLightInnerRadius: 0
@@ -3994,6 +3994,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8926105550332656735, guid: 5ff5b2c082ac047458da61612f3b1566, type: 3}
       propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8926105550332656735, guid: 5ff5b2c082ac047458da61612f3b1566, type: 3}
+      propertyPath: canVibrate
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8926105550332656735, guid: 5ff5b2c082ac047458da61612f3b1566, type: 3}

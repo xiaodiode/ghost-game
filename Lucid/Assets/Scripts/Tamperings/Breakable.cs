@@ -210,6 +210,7 @@ public class Breakable : MonoBehaviour
         yield return new WaitForSeconds(vibrateDelay);
 
         while(elapsedTime < vibrateDuration){
+            Debug.Log("vibrateRefPos: " + vibrateRefPos + " vibrateRefPos + XTranslation: " + vibrateRefPos + XTranslation);
             if(elapsedInterval > vibrateInterval){
                 elapsedInterval = 0;    
                 vibrateInterval *= 1-(vibrateInterval*vibratePercentFall);
