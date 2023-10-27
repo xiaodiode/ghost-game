@@ -28,10 +28,12 @@ public class TextInputController : MonoBehaviour, IPointerClickHandler
     // Update is called once per frame
     void Update()
     {
-        if(inputField.isFocused && Input.GetKeyDown(KeyCode.Tab) && firstDemonMatch.Length > 1){
-            Debug.Log("firstDemonMatch: " + firstDemonMatch);
+        
+        if(inputField.isFocused && Input.GetKeyDown(KeyCode.Tab) && firstDemonMatch != null)
+        {
             inputField.text = firstDemonMatch;
             inputField.caretPosition = firstDemonMatch.Length;
+            
         }
 
         else if(!inputField.isFocused && Input.GetKeyDown(KeyCode.Return)){
@@ -48,7 +50,6 @@ public class TextInputController : MonoBehaviour, IPointerClickHandler
         if(input != ""){
             firstDemonMatch = data.demonList.FirstOrDefault(demon => demon.StartsWith(input, System.StringComparison.OrdinalIgnoreCase));
             autocomplete.text = firstDemonMatch;
-            
         }
         else{
             autocomplete.text = "";
