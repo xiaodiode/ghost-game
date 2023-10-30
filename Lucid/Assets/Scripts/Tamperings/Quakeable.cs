@@ -1,20 +1,21 @@
 using System.Collections;
+using TMPro;
 using UnityEngine;
 
-public class Breakable : MonoBehaviour
+public class Quakeable : MonoBehaviour
 {
-    [SerializeField] public bool isBreaking;
-    [SerializeField] public bool isBroken;
+    // [SerializeField] public bool isQuaking;
+    // [SerializeField] public bool hasQuaked;
 
-    [Header("Movement Controllers")]
+    [Header("Controllers")]
     [SerializeField] private SceneController sceneController;
+    [SerializeField] private QuakeableController quakeableController;
+
+
+    [Header("Quakeable Object Properties")]
     [SerializeField] private RectTransform objectRect;
-
-
-    [Header("Breakable Object Properties")]
-    [SerializeField] private GameObject breakableBody;
-    [SerializeField] private SpriteRenderer unbrokenState;
-    [SerializeField] private SpriteRenderer brokenState;
+    [SerializeField] private SpriteRenderer unquakedState;
+    [SerializeField] private SpriteRenderer quakedState;
     [SerializeField] private AudioClip breakSound;
     [SerializeField] private float weightMultiplier;
     [SerializeField] private bool onWall;
@@ -22,9 +23,9 @@ public class Breakable : MonoBehaviour
     [SerializeField] private bool isStandalone;
 
 
-    [Header("Breakable Sprite State Settings")]
+    [Header("Quakeable Sprite State Settings")]
     [SerializeField] private bool changeSprite;
-    [SerializeField] private bool brokenOverlay;
+    [SerializeField] private bool quakedOverlay;
 
 
     [Header("Wall Object Animation Settings")]
@@ -83,29 +84,19 @@ public class Breakable : MonoBehaviour
     [SerializeField] private float initialYBounce;
     [SerializeField] [Range(0,1)] private float heightPercentDrop;
     
-    Vector2 initialPartPos, initialPartRot, initialBodyPos, initialBodyRot;
+    Vector2 initialPartPos, initialPartRot;
+    Vector2 shiftDistance;
 
-    bool initialMovementReady = false, touchedGround = false, finishedBouncing = false,
-        isFalling = false, isVibrating = false;
+    bool touchedGround = false, finishedBouncing = false,
+        isVibrating = false, isTeetering = false, isShifting = false, isSwinging = false,
+        isToppling = false, isFalling = false, isBouncing = false;
 
 
     // Start is called before the first frame update
     void Start()
     {
-        isBroken = false;
-        isBreaking = false;
 
-        initialPartPos = objectRect.anchoredPosition;
-        initialPartRot = transform.rotation.eulerAngles;
-
-        vibrateInterval = vibrateDuration*vibrateIntervalFactor;
-
-        // initialBodyPos = breakableBody.transform.position;
-        // initialBodyRot = breakableBody.transform.rotation.eulerAngles;
-
-        initializeActuals();
-
-        breakObject();
+        
 
     }
 
@@ -124,23 +115,31 @@ public class Breakable : MonoBehaviour
         
     }
 
-    public void breakObject(){
+    public void quakeObject(){
 
-        if(!isBreaking && !isBroken){
-            isBreaking = true;
-            StartCoroutine(breakProcedure());
+        initialPartPos = objectRect.anchoredPosition;
+        initialPartRot = transform.rotation.eulerAngles;
 
-            Debug.Log("starting breaking procedure");
-        }
+        vibrateInterval = vibrateDuration*vibrateIntervalFactor;
+
+
+        initializeActuals();
+        // if(!isQuaking && !hasQuaked){
+        //     isQuaking = true;
+        StartCoroutine(quakeProcedure());
+
+        Debug.Log("starting quaking procedure");
+        // }
     }
 
-    private IEnumerator breakProcedure(){
+    private IEnumerator quakeProcedure(){
         
         initialMovement();
 
-        while(!initialMovementReady){
+        while(!isVibrating && !isSwinging && !isShifting && !isTeetering && !isToppling){
             yield return null;
         }
+
 
         if(canFall){
            StartCoroutine(startFalling()); 
@@ -164,9 +163,9 @@ public class Breakable : MonoBehaviour
             yield return null;
         }
 
-        isBreaking = false;
+        // isQuaking = false;
 
-        changeToBroken();
+        changeToQuaked();
         
     }
 
@@ -176,19 +175,27 @@ public class Breakable : MonoBehaviour
             isVibrating = true;
             StartCoroutine(startVibrating());
         }
-        if(canTeeter){
-            StartCoroutine(startTeetering());
-        }
-
-
-
+        
         if(onWall){
+            isSwinging = true;
             StartCoroutine(startSwinging());
         }
         else if(onTable){
-            
+            if(canShift){
+                isShifting = true;
+                if(!shiftRight){
+                    XDistanceToFall = -XDistanceToFall;
+                }
+                float shiftXDistance = XDistanceToFall/((vibrateDuration - shiftDelay)*(40/vibrateDuration + 3)); //40 = 4, 20 = 5, 10 = 8, 5 = 13: 10, 4, 1.25
+                shiftDistance = new Vector2(shiftXDistance, 0);
+            }
+            if(canTeeter){
+                isTeetering = true;
+                StartCoroutine(startTeetering());
+            }
         }
         else if(isStandalone){
+            isToppling = true;
             StartCoroutine(startToppling());
         }
 
@@ -197,16 +204,6 @@ public class Breakable : MonoBehaviour
     private IEnumerator startVibrating(){
         float elapsedTime = 0;
         float elapsedInterval = 0;
-
-        Vector2 shiftDistance = new();
-
-        if(canShift){
-            if(!shiftRight){
-                XDistanceToFall = -XDistanceToFall;
-            }
-            float shiftXDistance = XDistanceToFall/((vibrateDuration - shiftDelay)*(40/vibrateDuration + 3)); //40 = 4, 20 = 5, 10 = 8, 5 = 13: 10, 4, 1.25
-            shiftDistance = new Vector2(shiftXDistance, 0);
-        }
         
         Vector2 vibrateRefPos = initialPartPos;
         Vector2 XTranslation = new Vector2(vibrateXDistance, 0);
@@ -214,9 +211,6 @@ public class Breakable : MonoBehaviour
         yield return new WaitForSeconds(vibrateDelay);
 
         while(elapsedTime < vibrateDuration){
-            // Debug.Log("vibrateRefPos: " + vibrateRefPos + " vibrateRefPos + XTranslation: " + vibrateRefPos + XTranslation);
-            // Debug.Log("transform.position: " + transform.position);
-            Debug.Log("elapsedTime: " + elapsedTime);
 
             if(sceneController.isMoving){
                 yield return null;
@@ -247,6 +241,8 @@ public class Breakable : MonoBehaviour
             }
             
         }
+
+        isVibrating = false;
 
     }
 
@@ -292,6 +288,8 @@ public class Breakable : MonoBehaviour
 
             yield return null;
         }
+
+        isTeetering = false;
     }
 
     private IEnumerator startSwinging(){
@@ -303,34 +301,38 @@ public class Breakable : MonoBehaviour
 
         }
 
-        
+        isSwinging = false;
     }
 
     private IEnumerator startToppling(){
         
         yield return null;
+        isToppling = false;
     }
 
     private IEnumerator startFalling(){
 
         yield return null;
+        isFalling = false;
     }
 
     private IEnumerator startBouncing(){
 
         yield return null;
+        isBouncing = false;
     }
 
-    private void changeToBroken(){
-        if(brokenOverlay){
-            brokenState.enabled = true;
+    private void changeToQuaked(){
+        if(quakedOverlay){
+            quakedState.enabled = true;
         }
         else if(changeSprite){
-            unbrokenState.enabled = false;
-            brokenState.enabled = true;
+            unquakedState.enabled = false;
+            quakedState.enabled = true;
         }
 
-        isBroken = true;
+        // hasQuaked = true;
+        quakeableController.updateQuakingStatus();
     }
 
 

@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2377603105186537278}
   - component: {fileID: 5409207794247908152}
+  - component: {fileID: 2018278684837037160}
   m_Layer: 0
   m_Name: Light 2D
   m_TagString: Untagged
@@ -66,8 +67,8 @@ MonoBehaviour:
   m_ShadowVolumeIntensityEnabled: 0
   m_ShadowVolumeIntensity: 0.75
   m_LocalBounds:
-    m_Center: {x: 0.012050152, y: -0.35439992, z: 0}
-    m_Extent: {x: 6.73595, y: 6.0647, z: 0}
+    m_Center: {x: 0.008949995, y: -0.3566501, z: 0}
+    m_Extent: {x: 6.73495, y: 6.0546503, z: 0}
   m_PointLightInnerAngle: 360
   m_PointLightOuterAngle: 360
   m_PointLightInnerRadius: 0
@@ -86,59 +87,19 @@ MonoBehaviour:
   - {x: -1.6290144, y: -1.1065222, z: 0}
   - {x: -3.1605415, y: -2.7834525, z: 0}
   - {x: 3.1944249, y: -2.850296, z: 0}
---- !u!1 &2042418149451127865
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 2833703441817995347}
-  - component: {fileID: 5831704738509002574}
-  m_Layer: 0
-  m_Name: Green Lamp
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!224 &2833703441817995347
-RectTransform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2042418149451127865}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children:
-  - {fileID: 74188260963238405}
-  - {fileID: 6354882066193675117}
-  - {fileID: 2438539412132048391}
-  m_Father: {fileID: 0}
-  m_RootOrder: -1
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -45.23, y: 0}
-  m_SizeDelta: {x: 100, y: 100}
-  m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &5831704738509002574
+--- !u!114 &2018278684837037160
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2042418149451127865}
+  m_GameObject: {fileID: 458511173363633618}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 6b2194b2a76a6114baa1e8d98687cba8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  isLit: 1
+  isLit: 0
   unlitState: {fileID: 8442905366295167395}
   litState: {fileID: 0}
   light2D: {fileID: 5409207794247908152}
@@ -161,6 +122,44 @@ MonoBehaviour:
   maxFallStrength: 0.7
   minFallStrength: 0.3
   glowDuration: 6
+--- !u!1 &2042418149451127865
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2833703441817995347}
+  m_Layer: 0
+  m_Name: Green Lamp
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &2833703441817995347
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2042418149451127865}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 6354882066193675117}
+  - {fileID: 2438539412132048391}
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: -45.23, y: 0}
+  m_SizeDelta: {x: 100, y: 100}
+  m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &3335145907979629470
 GameObject:
   m_ObjectHideFlags: 0
@@ -174,7 +173,7 @@ GameObject:
   - component: {fileID: 5700311166486222185}
   - component: {fileID: 716045449276966655}
   m_Layer: 0
-  m_Name: Button
+  m_Name: Light Button
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -192,13 +191,13 @@ RectTransform:
   m_LocalScale: {x: 0.03, y: 0.18, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 2833703441817995347}
+  m_Father: {fileID: 2438539412132048391}
   m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 1.1}
-  m_SizeDelta: {x: 83.7345, y: 17.551}
+  m_AnchoredPosition: {x: -0.000000059605, y: 1.627}
+  m_SizeDelta: {x: 61.312, y: 11.6959}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &260809521513290735
 CanvasRenderer:
@@ -282,7 +281,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 5831704738509002574}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: Lightable, Assembly-CSharp
         m_MethodName: onInteraction
         m_Mode: 1
@@ -396,19 +395,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4102e2171097f644bb7359440b85309c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  isBreaking: 0
-  isBroken: 0
   sceneController: {fileID: 0}
-  breakableBody: {fileID: 0}
-  unbrokenState: {fileID: 3452063446646382517}
-  brokenState: {fileID: 0}
+  quakeableController: {fileID: 0}
+  objectRect: {fileID: 0}
+  unquakedState: {fileID: 0}
+  quakedState: {fileID: 0}
   breakSound: {fileID: 0}
   weightMultiplier: 0
   onWall: 0
   onTable: 1
   isStandalone: 0
   changeSprite: 0
-  brokenOverlay: 0
+  quakedOverlay: 0
   canSwing: 0
   swingingSound: {fileID: 0}
   maxSwingAngle: 0
@@ -479,6 +477,7 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 2377603105186537278}
+  - {fileID: 74188260963238405}
   m_Father: {fileID: 2833703441817995347}
   m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -551,19 +550,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4102e2171097f644bb7359440b85309c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  isBreaking: 0
-  isBroken: 0
   sceneController: {fileID: 0}
-  breakableBody: {fileID: 0}
-  unbrokenState: {fileID: 8442905366295167395}
-  brokenState: {fileID: 0}
+  quakeableController: {fileID: 0}
+  objectRect: {fileID: 0}
+  unquakedState: {fileID: 0}
+  quakedState: {fileID: 0}
   breakSound: {fileID: 0}
   weightMultiplier: 0
   onWall: 0
   onTable: 1
   isStandalone: 0
   changeSprite: 0
-  brokenOverlay: 0
+  quakedOverlay: 0
   canSwing: 0
   swingingSound: {fileID: 0}
   maxSwingAngle: 0

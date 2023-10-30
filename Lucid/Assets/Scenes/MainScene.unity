@@ -128,6 +128,17 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 5154328338776417667, guid: 5ff5b2c082ac047458da61612f3b1566, type: 3}
   m_PrefabInstance: {fileID: 2409317808429461649}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &23430323 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 8926105550332656735, guid: 5ff5b2c082ac047458da61612f3b1566, type: 3}
+  m_PrefabInstance: {fileID: 2409317808429461649}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4102e2171097f644bb7359440b85309c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &73275343
 GameObject:
   m_ObjectHideFlags: 0
@@ -357,6 +368,17 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 112966882}
   m_CullTransparentMesh: 1
+--- !u!114 &144793135 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 267001023559783046, guid: 5ff5b2c082ac047458da61612f3b1566, type: 3}
+  m_PrefabInstance: {fileID: 2409317808429461649}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6b2194b2a76a6114baa1e8d98687cba8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &160236793
 GameObject:
   m_ObjectHideFlags: 0
@@ -403,20 +425,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4102e2171097f644bb7359440b85309c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  isBreaking: 0
-  isBroken: 0
   sceneController: {fileID: 1063774803}
+  quakeableController: {fileID: 0}
   objectRect: {fileID: 0}
-  breakableBody: {fileID: 1145476589}
-  unbrokenState: {fileID: 160236796}
-  brokenState: {fileID: 0}
+  unquakedState: {fileID: 0}
+  quakedState: {fileID: 0}
   breakSound: {fileID: 0}
   weightMultiplier: 0
   onWall: 0
   onTable: 1
   isStandalone: 0
   changeSprite: 0
-  brokenOverlay: 0
+  quakedOverlay: 0
   canSwing: 0
   swingingSound: {fileID: 0}
   maxSwingAngle: 0
@@ -1035,8 +1055,8 @@ MonoBehaviour:
   m_ShadowVolumeIntensityEnabled: 0
   m_ShadowVolumeIntensity: 0.75
   m_LocalBounds:
-    m_Center: {x: 1.0361328, y: -1.2964478, z: 0}
-    m_Extent: {x: 1367.3213, y: 1159.6753, z: 0}
+    m_Center: {x: 1.0341187, y: -1.2953491, z: 0}
+    m_Extent: {x: 1367.3203, y: 1159.6838, z: 0}
   m_PointLightInnerAngle: 360
   m_PointLightOuterAngle: 360
   m_PointLightInnerRadius: 0
@@ -1535,6 +1555,17 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 4495057992075294953, guid: 5ff5b2c082ac047458da61612f3b1566, type: 3}
   m_PrefabInstance: {fileID: 2409317808429461649}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &824883841 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 7602873283226294453, guid: 5ff5b2c082ac047458da61612f3b1566, type: 3}
+  m_PrefabInstance: {fileID: 2409317808429461649}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4102e2171097f644bb7359440b85309c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &904564093
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2029,71 +2060,23 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 283420825340496599, guid: 5ff5b2c082ac047458da61612f3b1566, type: 3}
   m_PrefabInstance: {fileID: 2409317808429461649}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &1145476592
+--- !u!114 &1145476595
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1145476589}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4102e2171097f644bb7359440b85309c, type: 3}
+  m_Script: {fileID: 11500000, guid: 755ddcf9c096b694eb13f4d4851454d8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  isBreaking: 0
-  isBroken: 0
-  sceneController: {fileID: 0}
-  objectRect: {fileID: 0}
-  breakableBody: {fileID: 0}
-  unbrokenState: {fileID: 0}
-  brokenState: {fileID: 0}
-  breakSound: {fileID: 0}
-  weightMultiplier: 0
-  onWall: 0
-  onTable: 1
-  isStandalone: 0
-  changeSprite: 0
-  brokenOverlay: 0
-  canSwing: 0
-  swingingSound: {fileID: 0}
-  maxSwingAngle: 0
-  startSwingAngle: 0
-  peakAngleWaittime: 0
-  peakAngleOffset: 0
-  swingAngleMultiplier: 0
-  swingCount: 0
-  baseSwingDuration: 0
-  canVibrate: 0
-  vibrateSound: {fileID: 0}
-  vibrateDelay: 0
-  vibrateIntervalFactor: 0
-  vibratePercentFall: 0
-  vibrateXDistance: 0
-  vibrateDuration: 0
-  canShift: 1
-  shiftRight: 1
-  shiftDelay: 0.5
-  XDistanceToFall: 1.3
-  canTeeter: 0
-  teeterSound: {fileID: 0}
-  teeterDelay: 0
-  maxTeeterInterval: 0
-  minTeeterInterval: 0
-  teeterPercentFall: 0
-  maxTeeterAngle: 0
-  minTeeterAngle: 0
-  canFall: 0
-  fallClockwise: 0
-  madeImpact: 0
-  impactAngle: 0
-  rotationSpeed: 0
-  XFallDistance: 0
-  YFallDistance: 0
-  canBounce: 0
-  bounceSound: {fileID: 0}
-  initialYBounce: 0
-  heightPercentDrop: 0
+  quakeables:
+  - {fileID: 23430323}
+  - {fileID: 824883841}
+  isQuaking: 0
+  quakingComplete: 0
 --- !u!1 &1153575711
 GameObject:
   m_ObjectHideFlags: 0
@@ -3506,20 +3489,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4102e2171097f644bb7359440b85309c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  isBreaking: 0
-  isBroken: 0
   sceneController: {fileID: 1063774803}
+  quakeableController: {fileID: 0}
   objectRect: {fileID: 0}
-  breakableBody: {fileID: 1145476589}
-  unbrokenState: {fileID: 1981009866}
-  brokenState: {fileID: 0}
+  unquakedState: {fileID: 0}
+  quakedState: {fileID: 0}
   breakSound: {fileID: 0}
   weightMultiplier: 0
   onWall: 0
   onTable: 1
   isStandalone: 0
   changeSprite: 0
-  brokenOverlay: 0
+  quakedOverlay: 0
   canSwing: 0
   swingingSound: {fileID: 0}
   maxSwingAngle: 0
@@ -4191,6 +4172,14 @@ PrefabInstance:
       propertyPath: uiElement
       value: 
       objectReference: {fileID: 1153575712}
+    - target: {fileID: 1610369244635484177, guid: 5ff5b2c082ac047458da61612f3b1566, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 144793135}
+    - target: {fileID: 1610369244635484177, guid: 5ff5b2c082ac047458da61612f3b1566, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: onInteraction
+      objectReference: {fileID: 0}
     - target: {fileID: 1857557759077221384, guid: 5ff5b2c082ac047458da61612f3b1566, type: 3}
       propertyPath: m_Name
       value: Foreground 30 Canvas
@@ -4396,6 +4385,10 @@ PrefabInstance:
       value: 0.04
       objectReference: {fileID: 0}
     - target: {fileID: 7602873283226294453, guid: 5ff5b2c082ac047458da61612f3b1566, type: 3}
+      propertyPath: quakeableController
+      value: 
+      objectReference: {fileID: 1145476595}
+    - target: {fileID: 7602873283226294453, guid: 5ff5b2c082ac047458da61612f3b1566, type: 3}
       propertyPath: vibrateIntervalFactor
       value: 0.015
       objectReference: {fileID: 0}
@@ -4456,6 +4449,10 @@ PrefabInstance:
       value: 20
       objectReference: {fileID: 0}
     - target: {fileID: 8926105550332656735, guid: 5ff5b2c082ac047458da61612f3b1566, type: 3}
+      propertyPath: quakeableController
+      value: 
+      objectReference: {fileID: 1145476595}
+    - target: {fileID: 8926105550332656735, guid: 5ff5b2c082ac047458da61612f3b1566, type: 3}
       propertyPath: vibrateIntervalFactor
       value: 0.015
       objectReference: {fileID: 0}
@@ -4472,7 +4469,7 @@ PrefabInstance:
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 283420825340496599, guid: 5ff5b2c082ac047458da61612f3b1566, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 1145476592}
+      addedObject: {fileID: 1145476595}
   m_SourcePrefab: {fileID: 100100000, guid: 5ff5b2c082ac047458da61612f3b1566, type: 3}
 --- !u!1001 &2480233843331719340
 PrefabInstance:
