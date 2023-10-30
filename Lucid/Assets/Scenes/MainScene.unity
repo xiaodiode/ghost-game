@@ -123,6 +123,11 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
+--- !u!224 &23430322 stripped
+RectTransform:
+  m_CorrespondingSourceObject: {fileID: 5154328338776417667, guid: 5ff5b2c082ac047458da61612f3b1566, type: 3}
+  m_PrefabInstance: {fileID: 2409317808429461649}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &73275343
 GameObject:
   m_ObjectHideFlags: 0
@@ -401,6 +406,7 @@ MonoBehaviour:
   isBreaking: 0
   isBroken: 0
   sceneController: {fileID: 1063774803}
+  objectRect: {fileID: 0}
   breakableBody: {fileID: 1145476589}
   unbrokenState: {fileID: 160236796}
   brokenState: {fileID: 0}
@@ -1029,8 +1035,8 @@ MonoBehaviour:
   m_ShadowVolumeIntensityEnabled: 0
   m_ShadowVolumeIntensity: 0.75
   m_LocalBounds:
-    m_Center: {x: 1.0350342, y: -1.2960205, z: 0}
-    m_Extent: {x: 1367.3206, y: 1159.6777, z: 0}
+    m_Center: {x: 1.0361328, y: -1.2964478, z: 0}
+    m_Extent: {x: 1367.3213, y: 1159.6753, z: 0}
   m_PointLightInnerAngle: 360
   m_PointLightOuterAngle: 360
   m_PointLightInnerRadius: 0
@@ -1524,6 +1530,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 71d687851a61c6d409b628bf297e3754, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!224 &824883840 stripped
+RectTransform:
+  m_CorrespondingSourceObject: {fileID: 4495057992075294953, guid: 5ff5b2c082ac047458da61612f3b1566, type: 3}
+  m_PrefabInstance: {fileID: 2409317808429461649}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &904564093
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2033,6 +2044,7 @@ MonoBehaviour:
   isBreaking: 0
   isBroken: 0
   sceneController: {fileID: 0}
+  objectRect: {fileID: 0}
   breakableBody: {fileID: 0}
   unbrokenState: {fileID: 0}
   brokenState: {fileID: 0}
@@ -3497,6 +3509,7 @@ MonoBehaviour:
   isBreaking: 0
   isBroken: 0
   sceneController: {fileID: 1063774803}
+  objectRect: {fileID: 0}
   breakableBody: {fileID: 1145476589}
   unbrokenState: {fileID: 1981009866}
   brokenState: {fileID: 0}
@@ -4303,6 +4316,10 @@ PrefabInstance:
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7602873283226294453, guid: 5ff5b2c082ac047458da61612f3b1566, type: 3}
+      propertyPath: breakable
+      value: 
+      objectReference: {fileID: 824883840}
+    - target: {fileID: 7602873283226294453, guid: 5ff5b2c082ac047458da61612f3b1566, type: 3}
       propertyPath: canTeeter
       value: 0
       objectReference: {fileID: 0}
@@ -4318,6 +4335,10 @@ PrefabInstance:
       propertyPath: canVibrate
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 7602873283226294453, guid: 5ff5b2c082ac047458da61612f3b1566, type: 3}
+      propertyPath: objectRect
+      value: 
+      objectReference: {fileID: 824883840}
     - target: {fileID: 7602873283226294453, guid: 5ff5b2c082ac047458da61612f3b1566, type: 3}
       propertyPath: shiftDelay
       value: 0.5
@@ -4391,6 +4412,10 @@ PrefabInstance:
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8926105550332656735, guid: 5ff5b2c082ac047458da61612f3b1566, type: 3}
+      propertyPath: breakable
+      value: 
+      objectReference: {fileID: 23430322}
+    - target: {fileID: 8926105550332656735, guid: 5ff5b2c082ac047458da61612f3b1566, type: 3}
       propertyPath: m_Enabled
       value: 1
       objectReference: {fileID: 0}
@@ -4398,6 +4423,10 @@ PrefabInstance:
       propertyPath: canVibrate
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 8926105550332656735, guid: 5ff5b2c082ac047458da61612f3b1566, type: 3}
+      propertyPath: objectRect
+      value: 
+      objectReference: {fileID: 23430322}
     - target: {fileID: 8926105550332656735, guid: 5ff5b2c082ac047458da61612f3b1566, type: 3}
       propertyPath: shiftDelay
       value: 0.5

@@ -8,6 +8,7 @@ public class Breakable : MonoBehaviour
 
     [Header("Movement Controllers")]
     [SerializeField] private SceneController sceneController;
+    [SerializeField] private RectTransform objectRect;
 
 
     [Header("Breakable Object Properties")]
@@ -82,7 +83,7 @@ public class Breakable : MonoBehaviour
     [SerializeField] private float initialYBounce;
     [SerializeField] [Range(0,1)] private float heightPercentDrop;
     
-    Vector3 initialPartPos, initialPartRot, initialBodyPos, initialBodyRot;
+    Vector2 initialPartPos, initialPartRot, initialBodyPos, initialBodyRot;
 
     bool initialMovementReady = false, touchedGround = false, finishedBouncing = false,
         isFalling = false, isVibrating = false;
@@ -94,7 +95,7 @@ public class Breakable : MonoBehaviour
         isBroken = false;
         isBreaking = false;
 
-        initialPartPos = transform.position;
+        initialPartPos = objectRect.anchoredPosition;
         initialPartRot = transform.rotation.eulerAngles;
 
         vibrateInterval = vibrateDuration*vibrateIntervalFactor;
@@ -197,18 +198,18 @@ public class Breakable : MonoBehaviour
         float elapsedTime = 0;
         float elapsedInterval = 0;
 
-        Vector3 shiftDistance = new();
+        Vector2 shiftDistance = new();
 
         if(canShift){
             if(!shiftRight){
                 XDistanceToFall = -XDistanceToFall;
             }
             float shiftXDistance = XDistanceToFall/((vibrateDuration - shiftDelay)*(40/vibrateDuration + 3)); //40 = 4, 20 = 5, 10 = 8, 5 = 13: 10, 4, 1.25
-            shiftDistance = new Vector3(shiftXDistance, 0, 0);
+            shiftDistance = new Vector2(shiftXDistance, 0);
         }
         
-        Vector3 vibrateRefPos = initialPartPos;
-        Vector3 XTranslation = new Vector3(vibrateXDistance, 0, 0);
+        Vector2 vibrateRefPos = initialPartPos;
+        Vector2 XTranslation = new Vector2(vibrateXDistance, 0);
         
         yield return new WaitForSeconds(vibrateDelay);
 
@@ -233,10 +234,10 @@ public class Breakable : MonoBehaviour
                 }
                 
                 if(elapsedInterval < (vibrateInterval/2)){
-                    transform.GetComponent<RectTransform>().anchoredPosition = Vector3.Lerp(vibrateRefPos, vibrateRefPos + XTranslation, elapsedInterval/(vibrateInterval/2));
+                    objectRect.anchoredPosition = Vector2.Lerp(vibrateRefPos, vibrateRefPos + XTranslation, elapsedInterval/(vibrateInterval/2));
                 }
                 else{
-                    transform.GetComponent<RectTransform>().anchoredPosition = Vector3.Lerp(vibrateRefPos + XTranslation, vibrateRefPos, (elapsedInterval - vibrateInterval/2)/(vibrateInterval/2));
+                    objectRect.anchoredPosition = Vector2.Lerp(vibrateRefPos + XTranslation, vibrateRefPos, (elapsedInterval - vibrateInterval/2)/(vibrateInterval/2));
                 }
 
                 elapsedInterval += Time.deltaTime;
