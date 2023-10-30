@@ -10,8 +10,8 @@ public class VisionController : MonoBehaviour
     [SerializeField] private MouseController mouse;
 
     [Header("Player Movement Settings")]
-    [SerializeField] private PlayerController player;
-    [SerializeField] private SceneController scene;
+    [SerializeField] public PlayerController player;
+    [SerializeField] public SceneController scene;
 
     [Header("Zoom Settings")]
     [SerializeField] private float maxZoomOffset;

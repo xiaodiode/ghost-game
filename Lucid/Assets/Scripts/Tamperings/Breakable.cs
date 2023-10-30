@@ -6,6 +6,9 @@ public class Breakable : MonoBehaviour
     [SerializeField] public bool isBreaking;
     [SerializeField] public bool isBroken;
 
+    [Header("Movement Controllers")]
+    [SerializeField] private SceneController sceneController;
+
 
     [Header("Breakable Object Properties")]
     [SerializeField] private GameObject breakableBody;
@@ -210,28 +213,38 @@ public class Breakable : MonoBehaviour
         yield return new WaitForSeconds(vibrateDelay);
 
         while(elapsedTime < vibrateDuration){
-            Debug.Log("vibrateRefPos: " + vibrateRefPos + " vibrateRefPos + XTranslation: " + vibrateRefPos + XTranslation);
-            if(elapsedInterval > vibrateInterval){
-                elapsedInterval = 0;    
-                vibrateInterval *= 1-(vibrateInterval*vibratePercentFall);
+            // Debug.Log("vibrateRefPos: " + vibrateRefPos + " vibrateRefPos + XTranslation: " + vibrateRefPos + XTranslation);
+            // Debug.Log("transform.position: " + transform.position);
+            Debug.Log("elapsedTime: " + elapsedTime);
 
-                if(canShift && elapsedTime >= shiftDelay){
-                    vibrateRefPos += shiftDistance;
+            if(sceneController.isMoving){
+                yield return null;
+            }
+
+            else{
+               if(elapsedInterval > vibrateInterval){
+                    elapsedInterval = 0;    
+                    vibrateInterval *= 1-(vibrateInterval*vibratePercentFall);
+
+                    if(canShift && elapsedTime >= shiftDelay){
+                        vibrateRefPos += shiftDistance;
+                    }
+                    
                 }
                 
+                if(elapsedInterval < (vibrateInterval/2)){
+                    transform.position = Vector3.Lerp(vibrateRefPos, vibrateRefPos + XTranslation, elapsedInterval/(vibrateInterval/2));
+                }
+                else{
+                    transform.position = Vector3.Lerp(vibrateRefPos + XTranslation, vibrateRefPos, (elapsedInterval - vibrateInterval/2)/(vibrateInterval/2));
+                }
+
+                elapsedInterval += Time.deltaTime;
+                elapsedTime += Time.deltaTime;
+
+                yield return null; 
             }
             
-            if(elapsedInterval < (vibrateInterval/2)){
-                transform.position = Vector3.Lerp(vibrateRefPos, vibrateRefPos + XTranslation, elapsedInterval/(vibrateInterval/2));
-            }
-            else{
-                transform.position = Vector3.Lerp(vibrateRefPos + XTranslation, vibrateRefPos, (elapsedInterval - vibrateInterval/2)/(vibrateInterval/2));
-            }
-
-            elapsedInterval += Time.deltaTime;
-            elapsedTime += Time.deltaTime;
-
-            yield return null;
         }
 
     }
