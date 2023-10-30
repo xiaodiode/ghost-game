@@ -233,10 +233,10 @@ public class Breakable : MonoBehaviour
                 }
                 
                 if(elapsedInterval < (vibrateInterval/2)){
-                    transform.position = Vector3.Lerp(vibrateRefPos, vibrateRefPos + XTranslation, elapsedInterval/(vibrateInterval/2));
+                    transform.GetComponent<RectTransform>().anchoredPosition = Vector3.Lerp(vibrateRefPos, vibrateRefPos + XTranslation, elapsedInterval/(vibrateInterval/2));
                 }
                 else{
-                    transform.position = Vector3.Lerp(vibrateRefPos + XTranslation, vibrateRefPos, (elapsedInterval - vibrateInterval/2)/(vibrateInterval/2));
+                    transform.GetComponent<RectTransform>().anchoredPosition = Vector3.Lerp(vibrateRefPos + XTranslation, vibrateRefPos, (elapsedInterval - vibrateInterval/2)/(vibrateInterval/2));
                 }
 
                 elapsedInterval += Time.deltaTime;

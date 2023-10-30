@@ -72,6 +72,9 @@ public class SceneController : MonoBehaviour
             }
             
         }
+        else{
+            isMoving = false;
+        }
         
     }
 }
