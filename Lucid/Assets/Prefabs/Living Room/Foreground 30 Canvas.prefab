@@ -175,7 +175,7 @@ MonoBehaviour:
   m_FallbackScreenDPI: 96
   m_DefaultSpriteDPI: 96
   m_DynamicPixelsPerUnit: 1
-  m_PresetInfoIsWorld: 1
+  m_PresetInfoIsWorld: 0
 --- !u!114 &733464617619951102
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -262,8 +262,8 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ba8d6f6da79d0a842be8e67fe4871bd4, type: 3}
---- !u!4 &4594126303027194074 stripped
-Transform:
+--- !u!224 &4594126303027194074 stripped
+RectTransform:
   m_CorrespondingSourceObject: {fileID: 2608868560232456046, guid: ba8d6f6da79d0a842be8e67fe4871bd4, type: 3}
   m_PrefabInstance: {fileID: 2014531433177151412}
   m_PrefabAsset: {fileID: 0}
@@ -325,7 +325,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2833703441817995347, guid: 9955574059285634eb2ce9b829e819b4, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -45.23
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2833703441817995347, guid: 9955574059285634eb2ce9b829e819b4, type: 3}
       propertyPath: m_LocalPosition.y
@@ -404,8 +404,8 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 9955574059285634eb2ce9b829e819b4, type: 3}
---- !u!4 &4099858429921402557 stripped
-Transform:
+--- !u!224 &4099858429921402557 stripped
+RectTransform:
   m_CorrespondingSourceObject: {fileID: 2833703441817995347, guid: 9955574059285634eb2ce9b829e819b4, type: 3}
   m_PrefabInstance: {fileID: 2285235693456594670}
   m_PrefabAsset: {fileID: 0}

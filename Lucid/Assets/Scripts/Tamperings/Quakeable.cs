@@ -29,20 +29,27 @@ public class Quakeable : MonoBehaviour
 
 
     [Header("Wall Object Animation Settings")]
-    [SerializeField] private bool canSwing;
     [SerializeField] private AudioClip swingingSound;
-    [SerializeField] private float maxSwingAngle; // = 40;
-    [SerializeField] private float startSwingAngle; // = -40;
+    [SerializeField] [Range(2,5)] private float minSwingAngle; // = 40;
+    [SerializeField] [Range(30,45)] private float maxSwingAngle; // = -40;
+    [SerializeField] [Range(0.5f, 1.5f)] private float maxSwingInterval;
+    [SerializeField] [Range(0f, 0.5f)] private float minSwingInterval;
+    [SerializeField] [Range(0.2f, 0.5f)] private float swingPercentFall;
     [SerializeField] private float peakAngleWaittime;
     [SerializeField] private float peakAngleOffset;
     [SerializeField] private float swingAngleMultiplier;
     [SerializeField] private int swingCount;
-    [SerializeField] private float baseSwingDuration; 
-    private float actualMaxSwingAngle, actualStartSwingAngle, actualSwingDuration,
-        actualPeakAngleWait, actualPeakAngleOffset;
+    [SerializeField] private float swingDuration; 
 
-    
-    [Header("Vibrate/Shift Animation Settings")]
+
+    [Header("Table Object Animation Settings")]
+    [SerializeField] private bool canShift;
+    [SerializeField] private bool shiftRight;
+    [SerializeField] [Range(0, 1f)] private float shiftDelay;
+    [SerializeField] [Range(0.5f, 10f)] private float XDistanceToFall;
+
+
+    [Header("Vibrate Animation Settings")]
     [SerializeField] private bool canVibrate;
     [SerializeField] private AudioClip vibrateSound;
     [SerializeField] [Range(0, 1f)] private float vibrateDelay;
@@ -50,10 +57,6 @@ public class Quakeable : MonoBehaviour
     [SerializeField] [Range(0, 0.1f)]private float vibratePercentFall;
     [SerializeField] [Range(0, 0.05f)] private float vibrateXDistance;
     [SerializeField] private float vibrateDuration;
-    [SerializeField] private bool canShift;
-    [SerializeField] private bool shiftRight;
-    [SerializeField] [Range(0, 1f)] private float shiftDelay;
-    [SerializeField] [Range(0.5f, 10f)] private float XDistanceToFall;
     private float vibrateInterval;
 
 
@@ -106,15 +109,6 @@ public class Quakeable : MonoBehaviour
         
     }
 
-    private void initializeActuals(){
-        if(canSwing){
-            actualMaxSwingAngle = maxSwingAngle/weightMultiplier;
-            actualStartSwingAngle = startSwingAngle/weightMultiplier;
-            actualSwingDuration = baseSwingDuration*weightMultiplier; 
-        }
-        
-    }
-
     public void quakeObject(){
 
         initialPartPos = objectRect.anchoredPosition;
@@ -123,7 +117,6 @@ public class Quakeable : MonoBehaviour
         vibrateInterval = vibrateDuration*vibrateIntervalFactor;
 
 
-        initializeActuals();
         // if(!isQuaking && !hasQuaked){
         //     isQuaking = true;
         StartCoroutine(quakeProcedure());
@@ -177,7 +170,6 @@ public class Quakeable : MonoBehaviour
         }
         
         if(onWall){
-            isSwinging = true;
             StartCoroutine(startSwinging());
         }
         else if(onTable){
@@ -293,12 +285,50 @@ public class Quakeable : MonoBehaviour
     }
 
     private IEnumerator startSwinging(){
-        while(!isVibrating){
+        while(isVibrating){
             yield return null;
         }
+        isSwinging = true;
 
-        if(canSwing){
+        float elapsedTime = 0;
+        float elapsedInterval = 0;
+        float currentAngle = minSwingAngle;
+        float currentInterval = maxSwingInterval;
 
+        Quaternion newRotation = Quaternion.Euler(new Vector3());
+        Vector3 targetLeftRotation = new Vector3(0, 0, currentAngle);
+        Vector3 targetRightRotation = new Vector3(0, 0, -currentAngle);
+
+        while(elapsedTime < swingDuration){
+            if(elapsedTime < (swingDuration/2)){
+                currentAngle = Mathf.SmoothStep(minSwingAngle, maxSwingAngle, elapsedTime/(swingDuration/2));
+            }
+            else{
+                currentAngle = Mathf.SmoothStep(maxSwingAngle, minSwingAngle, (elapsedInterval - currentInterval/2)/(currentInterval/2));
+            }
+            
+            if(elapsedInterval > currentInterval){
+                    elapsedInterval = 0;    
+
+                    targetRightRotation = new Vector3(0, 0, -currentAngle);
+                    targetLeftRotation = new Vector3(0, 0, currentAngle);
+
+                    initialPartRot = transform.rotation.eulerAngles;
+                }
+            
+            if(elapsedInterval < (currentInterval/2)){
+                newRotation.eulerAngles = Vector3.Slerp(initialPartRot, targetRightRotation, elapsedInterval/(currentInterval/2));
+            }
+            else{
+                newRotation.eulerAngles = Vector3.Slerp(targetRightRotation, targetLeftRotation, (elapsedInterval - currentInterval/2)/(currentInterval/2));
+            }
+
+            transform.rotation = newRotation;
+
+            elapsedInterval += Time.deltaTime;
+            elapsedTime += Time.deltaTime;
+
+            yield return null;
         }
 
         isSwinging = false;

@@ -45,12 +45,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   sceneLayers:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
+  - {fileID: 923564173392672692, guid: d2ccd1aa8bcc1f9419e856772dbe8ffe, type: 3}
+  - {fileID: 1311303806418927770, guid: 5ff5b2c082ac047458da61612f3b1566, type: 3}
+  - {fileID: 8050068657659927697, guid: 62927fb9610512340be139f3f462b4c6, type: 3}
   atLeftEdge: 0
   atRightEdge: 0
   lockMovement: 0
+  isMoving: 0
   sceneXMax:
   - -64
   - -94
