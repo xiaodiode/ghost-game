@@ -440,13 +440,10 @@ MonoBehaviour:
   swingingSound: {fileID: 0}
   minSwingAngle: 0
   maxSwingAngle: 0
-  maxSwingInterval: 0
-  minSwingInterval: 0
+  swingInterval: 0
   swingPercentFall: 0
   peakAngleWaittime: 0
   peakAngleOffset: 0
-  swingAngleMultiplier: 0
-  swingCount: 0
   swingDuration: 0
   canShift: 1
   shiftRight: 1
@@ -1057,8 +1054,8 @@ MonoBehaviour:
   m_ShadowVolumeIntensityEnabled: 0
   m_ShadowVolumeIntensity: 0.75
   m_LocalBounds:
-    m_Center: {x: 1.0256348, y: -1.2999878, z: 0}
-    m_Extent: {x: 1367.3263, y: 1159.6838, z: 0}
+    m_Center: {x: 1.0313721, y: -1.2944946, z: 0}
+    m_Extent: {x: 1367.3245, y: 1159.6812, z: 0}
   m_PointLightInnerAngle: 360
   m_PointLightOuterAngle: 360
   m_PointLightInnerRadius: 0
@@ -3196,13 +3193,10 @@ MonoBehaviour:
   swingingSound: {fileID: 0}
   minSwingAngle: 0
   maxSwingAngle: 0
-  maxSwingInterval: 0
-  minSwingInterval: 0
+  swingInterval: 0
   swingPercentFall: 0
   peakAngleWaittime: 0
   peakAngleOffset: 0
-  swingAngleMultiplier: 0
-  swingCount: 0
   swingDuration: 0
   canShift: 1
   shiftRight: 1
@@ -4513,6 +4507,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: Background Canvas
       objectReference: {fileID: 0}
+    - target: {fileID: 2863370093276718018, guid: d2ccd1aa8bcc1f9419e856772dbe8ffe, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 4550493056334219958, guid: 7405b6a76f11aac40bac388cb6b55b56, type: 3}
+    - target: {fileID: 2863370093276718018, guid: d2ccd1aa8bcc1f9419e856772dbe8ffe, type: 3}
+      propertyPath: m_WasSpriteAssigned
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 3323245651705479920, guid: d2ccd1aa8bcc1f9419e856772dbe8ffe, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
@@ -4643,11 +4645,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4672784720796456276, guid: d2ccd1aa8bcc1f9419e856772dbe8ffe, type: 3}
       propertyPath: maxSwingAngle
-      value: 35
+      value: 15
       objectReference: {fileID: 0}
     - target: {fileID: 4672784720796456276, guid: d2ccd1aa8bcc1f9419e856772dbe8ffe, type: 3}
       propertyPath: swingDuration
       value: 30
+      objectReference: {fileID: 0}
+    - target: {fileID: 4672784720796456276, guid: d2ccd1aa8bcc1f9419e856772dbe8ffe, type: 3}
+      propertyPath: swingInterval
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 4672784720796456276, guid: d2ccd1aa8bcc1f9419e856772dbe8ffe, type: 3}
       propertyPath: maxTeeterAngle
@@ -4660,6 +4666,10 @@ PrefabInstance:
     - target: {fileID: 4672784720796456276, guid: d2ccd1aa8bcc1f9419e856772dbe8ffe, type: 3}
       propertyPath: XDistanceToFall
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4672784720796456276, guid: d2ccd1aa8bcc1f9419e856772dbe8ffe, type: 3}
+      propertyPath: peakAngleOffset
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 4672784720796456276, guid: d2ccd1aa8bcc1f9419e856772dbe8ffe, type: 3}
       propertyPath: sceneController
@@ -4688,6 +4698,10 @@ PrefabInstance:
     - target: {fileID: 4672784720796456276, guid: d2ccd1aa8bcc1f9419e856772dbe8ffe, type: 3}
       propertyPath: minTeeterInterval
       value: 0.313
+      objectReference: {fileID: 0}
+    - target: {fileID: 4672784720796456276, guid: d2ccd1aa8bcc1f9419e856772dbe8ffe, type: 3}
+      propertyPath: peakAngleWaittime
+      value: 0.5
       objectReference: {fileID: 0}
     - target: {fileID: 4672784720796456276, guid: d2ccd1aa8bcc1f9419e856772dbe8ffe, type: 3}
       propertyPath: teeterPercentFall

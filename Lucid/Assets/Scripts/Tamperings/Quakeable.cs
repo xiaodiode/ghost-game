@@ -30,15 +30,12 @@ public class Quakeable : MonoBehaviour
 
     [Header("Wall Object Animation Settings")]
     [SerializeField] private AudioClip swingingSound;
-    [SerializeField] [Range(2,5)] private float minSwingAngle; // = 40;
-    [SerializeField] [Range(30,45)] private float maxSwingAngle; // = -40;
-    [SerializeField] [Range(0.5f, 1.5f)] private float maxSwingInterval;
-    [SerializeField] [Range(0f, 0.5f)] private float minSwingInterval;
+    [SerializeField] [Range(0.5f, 2)] private float minSwingAngle;
+    [SerializeField] [Range(15f, 25f)] private float maxSwingAngle;
+    [SerializeField] [Range(2f, 4f)] private float swingInterval;
     [SerializeField] [Range(0.2f, 0.5f)] private float swingPercentFall;
     [SerializeField] private float peakAngleWaittime;
     [SerializeField] private float peakAngleOffset;
-    [SerializeField] private float swingAngleMultiplier;
-    [SerializeField] private int swingCount;
     [SerializeField] private float swingDuration; 
 
 
@@ -286,50 +283,96 @@ public class Quakeable : MonoBehaviour
     }
 
     private IEnumerator startSwinging(){
-        // while(isVibrating){
-        //     yield return null;
-        // }
         isSwinging = true;
 
         float elapsedTime = 0;
         float elapsedInterval = 0;
-        float currentAngle = minSwingAngle;
-        float currentInterval = maxSwingInterval;
+        float currPeakAngle = minSwingAngle;
+        float currentInterval = swingInterval;
 
         Quaternion newRotation = Quaternion.Euler(new Vector3());
-        Vector3 targetLeftRotation = new Vector3(0, 0, currentAngle);
-        Vector3 targetRightRotation = new Vector3(0, 0, -currentAngle);
+        Vector3 targetLeftRotation = new Vector3(0, 0, currPeakAngle);
+        Vector3 targetRightRotation = new Vector3(0, 0, -currPeakAngle);
+        Vector3 velocity = Vector3.zero;
 
+        // if (isSwinging)
+        // {
+        //     // Calculate the target angular velocity based on the swingSpeed
+        //     float targetVelocity = Mathf.Sign(swingAngle - currentAngle) * swingSpeed;
+
+        //     // Smoothly dampen the velocity using Mathf.SmoothDamp
+        //     velocity = Mathf.SmoothDamp(velocity, targetVelocity, ref velocity, swingDelay);
+
+        //     // Update the current angle based on the angular velocity
+        //     currentAngle += velocity * Time.deltaTime;
+
+        //     // Clamp the angle within the range
+        //     currentAngle = Mathf.Clamp(currentAngle, -swingAngle, swingAngle);
+
+        //     // Rotate the object
+        //     transform.rotation = Quaternion.Euler(0, currentAngle, 0);
+        // }
+
+        // // Check if the object has reached the end of the swing
+        // if (Mathf.Approximately(currentAngle, -swingAngle) || Mathf.Approximately(currentAngle, swingAngle))
+        // {
+        //     // Object has reached the end of the swing, hold for a bit
+        //     isSwinging = false;
+        //     Invoke("StartSwing", swingDelay);
+        // }
         while(elapsedTime < swingDuration){
-
+            Debug.Log("peak");
             if(elapsedInterval > currentInterval){
+
+                
                 elapsedInterval = 0;    
 
                 if(elapsedTime < (swingDuration/2)){
-                    currentAngle = Mathf.SmoothStep(minSwingAngle, maxSwingAngle, elapsedTime/(swingDuration/2));
+                    currPeakAngle = Mathf.SmoothStep(minSwingAngle, maxSwingAngle, elapsedTime/(swingDuration/2));
                 }
                 else{
-                    currentAngle = Mathf.SmoothStep(maxSwingAngle, minSwingAngle, (elapsedInterval - currentInterval/2)/(currentInterval/2));
+                    currPeakAngle = Mathf.SmoothStep(maxSwingAngle, minSwingAngle, (elapsedInterval - currentInterval/2)/(currentInterval/2));
                 }
 
-                targetRightRotation = new Vector3(0, 0, -currentAngle);
-                targetLeftRotation = new Vector3(0, 0, currentAngle);
+                targetRightRotation = new Vector3(0, 0, -currPeakAngle);
+                targetLeftRotation = new Vector3(0, 0, currPeakAngle);
+                // peakRotationOffset = new Vector3(0, 0, currPeakAngle*0.2f);
 
                 initialPartRot = objectRect.rotation.eulerAngles;
+                
             }
-            
-            if(elapsedInterval < (currentInterval/2)){
-                newRotation.eulerAngles = Vector3.Lerp(initialPartRot, targetRightRotation, elapsedInterval/(currentInterval/2));
+
+            else if(elapsedInterval < (currentInterval/2)){
+                // newRotation.eulerAngles = Vector3.Lerp(initialPartRot, targetRightRotation, elapsedInterval/(currentInterval/2));
+                while(elapsedInterval < (currentInterval/2)){
+                    newRotation.eulerAngles = Vector3.SmoothDamp(initialPartRot, targetRightRotation, ref velocity, currentInterval/2);
+                    objectRect.rotation = newRotation;
+
+                    elapsedInterval += Time.deltaTime;
+                    elapsedTime += Time.deltaTime;
+                    
+                    yield return null;
+                }
+                
             }
             else{
-                newRotation.eulerAngles = Vector3.Lerp(targetRightRotation, targetLeftRotation, (elapsedInterval - currentInterval/2)/(currentInterval/2));
+                // newRotation.eulerAngles = Vector3.Lerp(targetRightRotation, targetLeftRotation, (elapsedInterval - currentInterval/2)/(currentInterval/2));
+                while(elapsedInterval < (currentInterval/2)){
+                    newRotation.eulerAngles = Vector3.SmoothDamp(targetRightRotation, targetLeftRotation, ref velocity, currentInterval/2);
+                    objectRect.rotation = newRotation;
+
+                    elapsedInterval += Time.deltaTime;
+                    elapsedTime += Time.deltaTime;
+                    
+                    yield return null;
+                }
+                
             }
 
-            objectRect.rotation = newRotation;
-            // transform.rotation
+            // objectRect.rotation = newRotation;
 
-            elapsedInterval += Time.deltaTime;
-            elapsedTime += Time.deltaTime;
+            // elapsedInterval += Time.deltaTime;
+            // elapsedTime += Time.deltaTime;
 
             yield return null;
         }
