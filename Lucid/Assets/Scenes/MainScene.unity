@@ -1057,8 +1057,8 @@ MonoBehaviour:
   m_ShadowVolumeIntensityEnabled: 0
   m_ShadowVolumeIntensity: 0.75
   m_LocalBounds:
-    m_Center: {x: 1.0443115, y: -1.2913208, z: 0}
-    m_Extent: {x: 1367.3265, y: 1159.6809, z: 0}
+    m_Center: {x: 1.0256348, y: -1.2999878, z: 0}
+    m_Extent: {x: 1367.3263, y: 1159.6838, z: 0}
   m_PointLightInnerAngle: 360
   m_PointLightOuterAngle: 360
   m_PointLightInnerRadius: 0
@@ -3897,6 +3897,10 @@ PrefabInstance:
       propertyPath: m_LocalBounds.m_Extent.y
       value: 6.0538
       objectReference: {fileID: 0}
+    - target: {fileID: 6860502768835816690, guid: 5ff5b2c082ac047458da61612f3b1566, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -17.36
+      objectReference: {fileID: 0}
     - target: {fileID: 7602873283226294453, guid: 5ff5b2c082ac047458da61612f3b1566, type: 3}
       propertyPath: canShift
       value: 1
@@ -4593,6 +4597,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4022378420238401168, guid: d2ccd1aa8bcc1f9419e856772dbe8ffe, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: -21.75
+      objectReference: {fileID: 0}
     - target: {fileID: 4672784720796456276, guid: d2ccd1aa8bcc1f9419e856772dbe8ffe, type: 3}
       propertyPath: onWall
       value: 1
@@ -4634,6 +4642,14 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4672784720796456276, guid: d2ccd1aa8bcc1f9419e856772dbe8ffe, type: 3}
+      propertyPath: maxSwingAngle
+      value: 35
+      objectReference: {fileID: 0}
+    - target: {fileID: 4672784720796456276, guid: d2ccd1aa8bcc1f9419e856772dbe8ffe, type: 3}
+      propertyPath: swingDuration
+      value: 30
+      objectReference: {fileID: 0}
+    - target: {fileID: 4672784720796456276, guid: d2ccd1aa8bcc1f9419e856772dbe8ffe, type: 3}
       propertyPath: maxTeeterAngle
       value: 6
       objectReference: {fileID: 0}
@@ -4651,11 +4667,19 @@ PrefabInstance:
       objectReference: {fileID: 1063774803}
     - target: {fileID: 4672784720796456276, guid: d2ccd1aa8bcc1f9419e856772dbe8ffe, type: 3}
       propertyPath: vibrateDuration
-      value: 3
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 4672784720796456276, guid: d2ccd1aa8bcc1f9419e856772dbe8ffe, type: 3}
+      propertyPath: maxSwingInterval
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4672784720796456276, guid: d2ccd1aa8bcc1f9419e856772dbe8ffe, type: 3}
+      propertyPath: minSwingInterval
+      value: 0.4
       objectReference: {fileID: 0}
     - target: {fileID: 4672784720796456276, guid: d2ccd1aa8bcc1f9419e856772dbe8ffe, type: 3}
       propertyPath: vibrateXDistance
-      value: 0.028
+      value: 0.0246
       objectReference: {fileID: 0}
     - target: {fileID: 4672784720796456276, guid: d2ccd1aa8bcc1f9419e856772dbe8ffe, type: 3}
       propertyPath: maxTeeterInterval
@@ -4679,7 +4703,7 @@ PrefabInstance:
       objectReference: {fileID: 7878350318221408595}
     - target: {fileID: 4672784720796456276, guid: d2ccd1aa8bcc1f9419e856772dbe8ffe, type: 3}
       propertyPath: vibrateIntervalFactor
-      value: 0.015
+      value: 0.03
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

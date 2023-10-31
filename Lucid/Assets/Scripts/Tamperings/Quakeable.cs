@@ -87,7 +87,8 @@ public class Quakeable : MonoBehaviour
     [SerializeField] private float initialYBounce;
     [SerializeField] [Range(0,1)] private float heightPercentDrop;
     
-    Vector2 initialPartPos, initialPartRot;
+    Vector2 initialPartPos; 
+    Vector3 initialPartRot;
     Vector2 shiftDistance;
 
     bool touchedGround = false, finishedBouncing = false,
@@ -285,9 +286,9 @@ public class Quakeable : MonoBehaviour
     }
 
     private IEnumerator startSwinging(){
-        while(isVibrating){
-            yield return null;
-        }
+        // while(isVibrating){
+        //     yield return null;
+        // }
         isSwinging = true;
 
         float elapsedTime = 0;
@@ -300,30 +301,32 @@ public class Quakeable : MonoBehaviour
         Vector3 targetRightRotation = new Vector3(0, 0, -currentAngle);
 
         while(elapsedTime < swingDuration){
-            if(elapsedTime < (swingDuration/2)){
-                currentAngle = Mathf.SmoothStep(minSwingAngle, maxSwingAngle, elapsedTime/(swingDuration/2));
-            }
-            else{
-                currentAngle = Mathf.SmoothStep(maxSwingAngle, minSwingAngle, (elapsedInterval - currentInterval/2)/(currentInterval/2));
-            }
-            
+
             if(elapsedInterval > currentInterval){
-                    elapsedInterval = 0;    
+                elapsedInterval = 0;    
 
-                    targetRightRotation = new Vector3(0, 0, -currentAngle);
-                    targetLeftRotation = new Vector3(0, 0, currentAngle);
-
-                    initialPartRot = transform.rotation.eulerAngles;
+                if(elapsedTime < (swingDuration/2)){
+                    currentAngle = Mathf.SmoothStep(minSwingAngle, maxSwingAngle, elapsedTime/(swingDuration/2));
                 }
+                else{
+                    currentAngle = Mathf.SmoothStep(maxSwingAngle, minSwingAngle, (elapsedInterval - currentInterval/2)/(currentInterval/2));
+                }
+
+                targetRightRotation = new Vector3(0, 0, -currentAngle);
+                targetLeftRotation = new Vector3(0, 0, currentAngle);
+
+                initialPartRot = objectRect.rotation.eulerAngles;
+            }
             
             if(elapsedInterval < (currentInterval/2)){
-                newRotation.eulerAngles = Vector3.Slerp(initialPartRot, targetRightRotation, elapsedInterval/(currentInterval/2));
+                newRotation.eulerAngles = Vector3.Lerp(initialPartRot, targetRightRotation, elapsedInterval/(currentInterval/2));
             }
             else{
-                newRotation.eulerAngles = Vector3.Slerp(targetRightRotation, targetLeftRotation, (elapsedInterval - currentInterval/2)/(currentInterval/2));
+                newRotation.eulerAngles = Vector3.Lerp(targetRightRotation, targetLeftRotation, (elapsedInterval - currentInterval/2)/(currentInterval/2));
             }
 
-            transform.rotation = newRotation;
+            objectRect.rotation = newRotation;
+            // transform.rotation
 
             elapsedInterval += Time.deltaTime;
             elapsedTime += Time.deltaTime;
