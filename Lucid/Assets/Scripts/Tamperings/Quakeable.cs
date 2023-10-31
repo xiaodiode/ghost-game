@@ -336,43 +336,23 @@ public class Quakeable : MonoBehaviour
 
                 targetRightRotation = new Vector3(0, 0, -currPeakAngle);
                 targetLeftRotation = new Vector3(0, 0, currPeakAngle);
-                // peakRotationOffset = new Vector3(0, 0, currPeakAngle*0.2f);
 
                 initialPartRot = objectRect.rotation.eulerAngles;
                 
             }
 
             else if(elapsedInterval < (currentInterval/2)){
-                // newRotation.eulerAngles = Vector3.Lerp(initialPartRot, targetRightRotation, elapsedInterval/(currentInterval/2));
-                while(elapsedInterval < (currentInterval/2)){
-                    newRotation.eulerAngles = Vector3.SmoothDamp(initialPartRot, targetRightRotation, ref velocity, currentInterval/2);
-                    objectRect.rotation = newRotation;
-
-                    elapsedInterval += Time.deltaTime;
-                    elapsedTime += Time.deltaTime;
-                    
-                    yield return null;
-                }
-                
+                newRotation.eulerAngles = Vector3.Lerp(initialPartRot, targetRightRotation, elapsedInterval/(currentInterval/2));
             }
             else{
-                // newRotation.eulerAngles = Vector3.Lerp(targetRightRotation, targetLeftRotation, (elapsedInterval - currentInterval/2)/(currentInterval/2));
-                while(elapsedInterval < (currentInterval/2)){
-                    newRotation.eulerAngles = Vector3.SmoothDamp(targetRightRotation, targetLeftRotation, ref velocity, currentInterval/2);
-                    objectRect.rotation = newRotation;
-
-                    elapsedInterval += Time.deltaTime;
-                    elapsedTime += Time.deltaTime;
-                    
-                    yield return null;
-                }
+                newRotation.eulerAngles = Vector3.Lerp(targetRightRotation, targetLeftRotation, (elapsedInterval - currentInterval/2)/(currentInterval/2));
                 
             }
 
-            // objectRect.rotation = newRotation;
+            objectRect.rotation = newRotation;
 
-            // elapsedInterval += Time.deltaTime;
-            // elapsedTime += Time.deltaTime;
+            elapsedInterval += Time.deltaTime;
+            elapsedTime += Time.deltaTime;
 
             yield return null;
         }
