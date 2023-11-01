@@ -359,10 +359,6 @@ public class Quakeable : MonoBehaviour
         while(elapsedTime < fallDuration){
             velocity = Mathf.Lerp(0, YFallDistance, elapsedTime/fallDuration);
 
-            // if(objectRect.anchoredPosition.y - velocity < fallPosition.y){
-            //     velocity = fallPosition.y - objectRect.anchoredPosition.y;
-            // }
-
             currFallVector.y -= velocity*Time.deltaTime;
 
             if(currFallVector.y < fallPosition.y){

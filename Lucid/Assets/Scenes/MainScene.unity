@@ -1052,8 +1052,8 @@ MonoBehaviour:
   m_ShadowVolumeIntensityEnabled: 0
   m_ShadowVolumeIntensity: 0.75
   m_LocalBounds:
-    m_Center: {x: 1.0375977, y: -1.2937622, z: 0}
-    m_Extent: {x: 1367.3217, y: 1159.6765, z: 0}
+    m_Center: {x: 1.0340576, y: -1.2940674, z: 0}
+    m_Extent: {x: 1367.328, y: 1159.6731, z: 0}
   m_PointLightInnerAngle: 360
   m_PointLightOuterAngle: 360
   m_PointLightInnerRadius: 0
@@ -4041,7 +4041,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8926105550332656735, guid: 5ff5b2c082ac047458da61612f3b1566, type: 3}
       propertyPath: canShift
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8926105550332656735, guid: 5ff5b2c082ac047458da61612f3b1566, type: 3}
       propertyPath: breakable
@@ -4049,7 +4049,7 @@ PrefabInstance:
       objectReference: {fileID: 23430322}
     - target: {fileID: 8926105550332656735, guid: 5ff5b2c082ac047458da61612f3b1566, type: 3}
       propertyPath: canTeeter
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8926105550332656735, guid: 5ff5b2c082ac047458da61612f3b1566, type: 3}
       propertyPath: m_Enabled
@@ -4057,7 +4057,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8926105550332656735, guid: 5ff5b2c082ac047458da61612f3b1566, type: 3}
       propertyPath: canVibrate
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8926105550332656735, guid: 5ff5b2c082ac047458da61612f3b1566, type: 3}
       propertyPath: objectRect
