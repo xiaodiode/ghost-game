@@ -15,8 +15,9 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private float playerSpeed;
     [SerializeField] private TextMeshProUGUI monologueText;
 
-    private Vector3 playerScale;
-    private Vector3 monologueScale;
+    private Vector3 playerScale, monologueScale;
+    private Vector3 move = Vector3.zero;
+    private Vector3 newPosition;
     private float horizontalInput;
     // Start is called before the first frame update
     void Start()
@@ -53,8 +54,8 @@ public class PlayerController : MonoBehaviour
             || (sceneController.atRightEdge && transform.position.x!=playerXMax)){
             
             if(horizontalInput!=0){
-                Vector3 move = new Vector3(horizontalInput, 0f, 0f)*playerSpeed*Time.deltaTime;
-                Vector3 newPosition = transform.position + move;
+                move.x = horizontalInput*playerSpeed*Time.deltaTime;
+                newPosition = transform.position + move;
                 newPosition.x = Mathf.Clamp(newPosition.x, playerXMin, playerXMax);
                 
                 transform.position = newPosition;

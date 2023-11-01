@@ -1,6 +1,5 @@
 using System.Collections;
 using UnityEngine;
-using UnityEngine.InputSystem.Controls;
 
 public class Quakeable : MonoBehaviour
 {
@@ -194,7 +193,9 @@ public class Quakeable : MonoBehaviour
         float elapsedInterval = 0;
         
         Vector2 vibrateRefPos = initialPartPos;
-        Vector2 XTranslation = new Vector2(vibrateXDistance, 0);
+        
+        Vector2 XTranslation = Vector2.zero;
+        XTranslation.x = vibrateXDistance;
         
         yield return new WaitForSeconds(vibrateDelay);
 
@@ -243,9 +244,12 @@ public class Quakeable : MonoBehaviour
         float currentAngle = minTeeterAngle;
         float currentInterval = maxTeeterInterval;
 
-        Quaternion newRotation = Quaternion.Euler(new Vector3());
-        Vector3 targetRightRotation = new Vector3(0, 0, -currentAngle);
-        Vector3 targetLeftRotation = new Vector3(0, 0, currentAngle);
+        Quaternion newRotation = Quaternion.Euler(Vector3.zero);
+        Vector3 targetRightRotation = Vector3.zero;
+        targetRightRotation.z = -currentAngle;
+
+        Vector3 targetLeftRotation = Vector3.zero;
+        targetLeftRotation.z = currentAngle;
 
         while(elapsedTime < vibrateDuration + teeterDelay){
             if(elapsedInterval > currentInterval){
@@ -347,9 +351,19 @@ public class Quakeable : MonoBehaviour
     }
 
     private IEnumerator startFalling(){
-        Vector2 currFallVector = new Vector2(objectRect.anchoredPosition.x, objectRect.anchoredPosition.y);
-        Vector2 fallPosition =  new Vector2(objectRect.anchoredPosition.x, YFallPosition);
-        Vector3 currentAngle = objectRect.rotation.eulerAngles;
+        Vector2 currFallVector = Vector2.zero;
+        currFallVector.x = objectRect.anchoredPosition.x;
+        currFallVector.y = objectRect.anchoredPosition.y;
+
+        Vector2 fallPosition =  Vector2.zero;
+        fallPosition.x = objectRect.anchoredPosition.x;
+        fallPosition.y = YFallPosition;
+
+        Quaternion newRotation = Quaternion.Euler(Vector3.zero);
+        Vector3 currAngleVector = objectRect.rotation.eulerAngles;
+
+        Vector3 impactAngleVector = Vector3.zero;
+        impactAngleVector.z = impactAngle;
         
         float elapsedTime = 0;
         float velocity;
@@ -361,6 +375,7 @@ public class Quakeable : MonoBehaviour
 
         while(elapsedTime < fallDuration){
             velocity = Mathf.Lerp(0, YFallDistance, elapsedTime/fallDuration);
+            newRotation.eulerAngles = Vector3.Lerp(currAngleVector, impactAngleVector, elapsedTime/fallDuration);
 
             currFallVector.y -= velocity*Time.deltaTime;
 

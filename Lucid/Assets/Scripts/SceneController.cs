@@ -6,6 +6,7 @@ using UnityEngine.UI;
 public class SceneController : MonoBehaviour
 {
     [SerializeField] public Canvas[] sceneLayers;
+    [SerializeField] public RectTransform[] sceneRects;
     [SerializeField] public bool atLeftEdge, atRightEdge;
     [SerializeField] public bool lockMovement;
     [SerializeField] public bool isMoving;
@@ -15,6 +16,10 @@ public class SceneController : MonoBehaviour
     [SerializeField] private int depthValue;
     [SerializeField] private float[] sceneSpeed;
     [SerializeField] private float baseSpeed = 20f;
+
+
+    private Vector2 move = Vector2.zero;
+    private Vector2 newPosition;
     private float baseTime;
     private float horizontalInput;
     
@@ -44,12 +49,12 @@ public class SceneController : MonoBehaviour
     private void updateSceneMovement(){
         horizontalInput = Input.GetAxis("Horizontal");
         
-        if(sceneLayers[0].GetComponent<RectTransform>().anchoredPosition.x == sceneXMax[0]){
+        if(sceneRects[0].anchoredPosition.x == sceneXMax[0]){
             atRightEdge = true;
             isMoving = false;
             //Debug.Log("at right edge");
         }
-        else if(sceneLayers[0].GetComponent<RectTransform>().anchoredPosition.x == 0){
+        else if(sceneRects[0].anchoredPosition.x == 0){
             atLeftEdge = true;
             isMoving = false;
             //Debug.Log("at left edge");
@@ -62,13 +67,13 @@ public class SceneController : MonoBehaviour
         if(horizontalInput!=0){
             isMoving = true;
             for(int i=0; i<sceneLayers.Length; i++){
-                Vector2 move = new Vector2(-horizontalInput, 0f)*sceneSpeed[i]*Time.deltaTime;
+                move.x = -horizontalInput*sceneSpeed[i]*Time.deltaTime;
                 // Debug.Log("sceneSpeed: " + sceneSpeed[i]);
-                Vector2 newPosition = sceneLayers[i].GetComponent<RectTransform>().anchoredPosition + move;
+                newPosition = sceneRects[i].anchoredPosition + move;
                 // Debug.Log("anchoredPosition for " + i + ": " + sceneLayers[i].GetComponent<RectTransform>().anchoredPosition); 
                 newPosition.x = Mathf.Clamp(newPosition.x, sceneXMax[i] + depthValue*i, depthValue*i);
             
-                sceneLayers[i].GetComponent<RectTransform>().anchoredPosition = newPosition;
+                sceneRects[i].anchoredPosition = newPosition;
             }
             
         }

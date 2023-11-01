@@ -1052,8 +1052,8 @@ MonoBehaviour:
   m_ShadowVolumeIntensityEnabled: 0
   m_ShadowVolumeIntensity: 0.75
   m_LocalBounds:
-    m_Center: {x: 1.0340576, y: -1.2940674, z: 0}
-    m_Extent: {x: 1367.328, y: 1159.6731, z: 0}
+    m_Center: {x: 1.0275269, y: -1.295227, z: 0}
+    m_Extent: {x: 1367.3289, y: 1159.6765, z: 0}
   m_PointLightInnerAngle: 360
   m_PointLightOuterAngle: 360
   m_PointLightInnerRadius: 0
@@ -4796,6 +4796,22 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 968255034}
     m_Modifications:
+    - target: {fileID: 825844006688627286, guid: abe5ada22c5ed694daa36425a9aafd75, type: 3}
+      propertyPath: sceneRects.Array.size
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 825844006688627286, guid: abe5ada22c5ed694daa36425a9aafd75, type: 3}
+      propertyPath: sceneRects.Array.data[0]
+      value: 
+      objectReference: {fileID: 2124559300}
+    - target: {fileID: 825844006688627286, guid: abe5ada22c5ed694daa36425a9aafd75, type: 3}
+      propertyPath: sceneRects.Array.data[1]
+      value: 
+      objectReference: {fileID: 1465998839}
+    - target: {fileID: 825844006688627286, guid: abe5ada22c5ed694daa36425a9aafd75, type: 3}
+      propertyPath: sceneRects.Array.data[2]
+      value: 
+      objectReference: {fileID: 1110422874}
     - target: {fileID: 825844006688627286, guid: abe5ada22c5ed694daa36425a9aafd75, type: 3}
       propertyPath: sceneLayers.Array.data[0]
       value: 
