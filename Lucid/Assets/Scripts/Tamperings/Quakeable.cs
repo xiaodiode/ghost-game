@@ -175,7 +175,7 @@ public class Quakeable : MonoBehaviour
                     XDistanceToFall = -XDistanceToFall;
                 }
                 float shiftXDistance = XDistanceToFall/((vibrateDuration - shiftDelay)*(40/vibrateDuration + 3)); //40 = 4, 20 = 5, 10 = 8, 5 = 13: 10, 4, 1.25
-                shiftDistance = new Vector2(shiftXDistance, 0);
+                shiftDistance.x = shiftXDistance;
             }
             if(canTeeter){
                 isTeetering = true;
@@ -257,8 +257,8 @@ public class Quakeable : MonoBehaviour
                 currentAngle *= 1 - teeterPercentFall;
                 currentAngle = Mathf.Clamp(currentAngle, minTeeterAngle, maxTeeterAngle);
 
-                targetRightRotation = new Vector3(0, 0, -currentAngle);
-                targetLeftRotation = new Vector3(0, 0, currentAngle);
+                targetRightRotation.z = -currentAngle;
+                targetLeftRotation.z = currentAngle;
 
                 initialPartRot = transform.rotation.eulerAngles;
             }
@@ -289,6 +289,7 @@ public class Quakeable : MonoBehaviour
         float currentAngle = objectRect.rotation.eulerAngles.z;
 
         Quaternion newRotation = Quaternion.Euler(new Vector3());
+        Vector3 rotationVector = Vector3.zero;
         
         while(elapsedTime < swingDuration){
             if(elapsedInterval > swingInterval){
@@ -325,7 +326,8 @@ public class Quakeable : MonoBehaviour
                 }
             }
             
-            newRotation.eulerAngles = new Vector3(0, 0, currentAngle);
+            rotationVector.z = currentAngle; 
+            newRotation.eulerAngles = rotationVector;
 
             objectRect.rotation = newRotation;
 
@@ -347,6 +349,7 @@ public class Quakeable : MonoBehaviour
     private IEnumerator startFalling(){
         Vector2 currFallVector = new Vector2(objectRect.anchoredPosition.x, objectRect.anchoredPosition.y);
         Vector2 fallPosition =  new Vector2(objectRect.anchoredPosition.x, YFallPosition);
+        Vector3 currentAngle = objectRect.rotation.eulerAngles;
         
         float elapsedTime = 0;
         float velocity;
