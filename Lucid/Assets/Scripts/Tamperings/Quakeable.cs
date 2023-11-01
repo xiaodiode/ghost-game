@@ -1,5 +1,6 @@
 using System.Collections;
 using UnityEngine;
+using UnityEngine.InputSystem.Controls;
 
 public class Quakeable : MonoBehaviour
 {
@@ -27,8 +28,8 @@ public class Quakeable : MonoBehaviour
 
     [Header("Wall Object Animation Settings")]
     [SerializeField] private AudioClip swingingSound;
-    [SerializeField] [Range(0f, 0f)] private float minSwingAngle;
-    [SerializeField] [Range(2f,10f)] private float maxSwingAngle;
+    [SerializeField] private float minSwingAngle = 0;
+    [SerializeField] [Range(2f, 10f)] private float maxSwingAngle;
     [SerializeField] [Range(2f, 6f)] private float swingInterval;
     [SerializeField] private float swingDuration; 
 
@@ -69,7 +70,8 @@ public class Quakeable : MonoBehaviour
     [SerializeField] private float impactAngle;
     [SerializeField] private float rotationSpeed;
     [SerializeField] private float XFallDistance;
-    [SerializeField] private float YFallDistance;
+    [SerializeField] private float YFallPosition;
+    [SerializeField] private float fallDuration;
 
 
     [Header("Bounce Animation Settings")]
@@ -84,7 +86,7 @@ public class Quakeable : MonoBehaviour
 
     bool touchedGround = false, finishedBouncing = false,
         isVibrating = false, isTeetering = false, isShifting = false, isSwinging = false,
-        isToppling = false, isFalling = false, isBouncing = false;
+        isToppling = false, isFalling = false, isBouncing = false, finishedInitial = false;
 
 
     // Start is called before the first frame update
@@ -108,26 +110,26 @@ public class Quakeable : MonoBehaviour
 
         vibrateInterval = vibrateDuration*vibrateIntervalFactor;
 
+        fallClockwise = shiftRight;
 
-        // if(!isQuaking && !hasQuaked){
-        //     isQuaking = true;
         StartCoroutine(quakeProcedure());
 
         Debug.Log("starting quaking procedure");
-        // }
     }
 
     private IEnumerator quakeProcedure(){
         
         initialMovement();
 
-        while(!isVibrating && !isSwinging && !isShifting && !isTeetering && !isToppling){
+        while(isVibrating || isSwinging || isShifting || isTeetering || isToppling){
             yield return null;
         }
 
 
         if(canFall){
-           StartCoroutine(startFalling()); 
+            Debug.Log("finishedInitial: " + finishedInitial + " isVibrating: " + isVibrating + " isSwinging: " + isSwinging + " isShifting: " + isShifting + " isTeetering: " + isTeetering + "isToppling: " + isToppling);
+            Debug.Log("starting to fall");
+            StartCoroutine(startFalling()); 
         }
         else{
             touchedGround = true;
@@ -162,6 +164,7 @@ public class Quakeable : MonoBehaviour
         }
         
         if(onWall){
+            isSwinging = true;
             StartCoroutine(startSwinging());
         }
         else if(onTable){
@@ -182,6 +185,8 @@ public class Quakeable : MonoBehaviour
             isToppling = true;
             StartCoroutine(startToppling());
         }
+
+        finishedInitial = true;
 
     }
 
@@ -277,20 +282,16 @@ public class Quakeable : MonoBehaviour
     }
 
     private IEnumerator startSwinging(){
-        isSwinging = true;
-
         float elapsedTime = 0;
         float elapsedInterval = 0;
         float currPeakAngle = minSwingAngle;
-        float currentInterval = swingInterval;
         float velocity;
         float currentAngle = objectRect.rotation.eulerAngles.z;
 
         Quaternion newRotation = Quaternion.Euler(new Vector3());
         
         while(elapsedTime < swingDuration){
-            Debug.Log("currpeakAngle: " + currPeakAngle);
-            if(elapsedInterval > currentInterval){
+            if(elapsedInterval > swingInterval){
                 elapsedInterval = 0;    
             
                 if(elapsedTime < (swingDuration/2)){
@@ -302,37 +303,34 @@ public class Quakeable : MonoBehaviour
                 
             }
             else{
-                if(elapsedInterval < currentInterval/2){
-                    if(elapsedInterval < currentInterval/4){
-                        velocity = Mathf.Lerp(0, currPeakAngle, elapsedInterval/(currentInterval/4));
+                if(elapsedInterval < swingInterval/2){
+                    if(elapsedInterval < swingInterval/4){
+                        velocity = Mathf.Lerp(0, currPeakAngle, elapsedInterval/(swingInterval/4));
                     }
                     else{
-                        velocity = Mathf.Lerp(currPeakAngle, 0, elapsedInterval/(currentInterval/2));
+                        velocity = Mathf.Lerp(currPeakAngle, 0, elapsedInterval/(swingInterval/2));
                     }
-                    currentAngle += velocity * Time.deltaTime;
+                    currentAngle += velocity*Time.deltaTime;
                     
                 }
-                else if(elapsedInterval < currentInterval){
-                    if(elapsedInterval < 3*currentInterval/4){
-                        velocity = Mathf.Lerp(0, currPeakAngle, elapsedInterval/(3*currentInterval/4));
+                else if(elapsedInterval < swingInterval){
+                    if(elapsedInterval < 3*swingInterval/4){
+                        velocity = Mathf.Lerp(0, currPeakAngle, elapsedInterval/(3*swingInterval/4));
                     }
                     else{
-                        velocity = Mathf.Lerp(currPeakAngle, 0, elapsedInterval/currentInterval);
+                        velocity = Mathf.Lerp(currPeakAngle, 0, elapsedInterval/swingInterval);
                     }
-                    currentAngle -= velocity * Time.deltaTime;
+                    currentAngle -= velocity*Time.deltaTime;
                     
                 }
             }
             
-
             newRotation.eulerAngles = new Vector3(0, 0, currentAngle);
 
             objectRect.rotation = newRotation;
 
             elapsedInterval += Time.deltaTime;
             elapsedTime += Time.deltaTime;
-
-            
 
             yield return null;
         }
@@ -347,8 +345,34 @@ public class Quakeable : MonoBehaviour
     }
 
     private IEnumerator startFalling(){
+        float elapsedTime = 0;
+        float velocity;
+        float currFallPosition = objectRect.anchoredPosition.y;
+        float YFallDistance = currFallPosition - YFallPosition;
 
-        yield return null;
+        Vector2 fallVector;
+        Vector2 fallPosition = objectRect.anchoredPosition - new Vector2(0, YFallDistance);
+
+        while(elapsedTime < fallDuration){
+            velocity = Mathf.Lerp(0, YFallDistance, elapsedTime/fallDuration);
+
+            if(objectRect.anchoredPosition.y - velocity < fallPosition.y){
+                velocity = fallPosition.y - objectRect.anchoredPosition.y;
+            }
+
+            currFallPosition -= velocity*Time.deltaTime;
+
+            fallVector = new Vector2(0, currFallPosition);
+
+            objectRect.anchoredPosition -= fallVector;
+
+            elapsedTime += Time.deltaTime;
+
+            yield return null;
+        }
+        
+
+        
         isFalling = false;
     }
 

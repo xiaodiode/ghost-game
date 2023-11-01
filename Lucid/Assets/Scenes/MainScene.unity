@@ -467,7 +467,8 @@ MonoBehaviour:
   impactAngle: 0
   rotationSpeed: 0
   XFallDistance: 0
-  YFallDistance: 0
+  YFallPosition: 0
+  fallDuration: 0
   canBounce: 0
   bounceSound: {fileID: 0}
   initialYBounce: 0
@@ -1051,8 +1052,8 @@ MonoBehaviour:
   m_ShadowVolumeIntensityEnabled: 0
   m_ShadowVolumeIntensity: 0.75
   m_LocalBounds:
-    m_Center: {x: 1.0360107, y: -1.2947998, z: 0}
-    m_Extent: {x: 1367.3253, y: 1159.6812, z: 0}
+    m_Center: {x: 1.0369873, y: -1.2905273, z: 0}
+    m_Extent: {x: 1367.3278, y: 1159.6838, z: 0}
   m_PointLightInnerAngle: 360
   m_PointLightOuterAngle: 360
   m_PointLightInnerRadius: 0
@@ -3217,7 +3218,8 @@ MonoBehaviour:
   impactAngle: 0
   rotationSpeed: 0
   XFallDistance: 0
-  YFallDistance: 0
+  YFallPosition: 0
+  fallDuration: 0
   canBounce: 0
   bounceSound: {fileID: 0}
   initialYBounce: 0
@@ -3769,6 +3771,34 @@ PrefabInstance:
       propertyPath: m_Name
       value: Foreground 30 Canvas
       objectReference: {fileID: 0}
+    - target: {fileID: 4495057992075294953, guid: 5ff5b2c082ac047458da61612f3b1566, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4495057992075294953, guid: 5ff5b2c082ac047458da61612f3b1566, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4495057992075294953, guid: 5ff5b2c082ac047458da61612f3b1566, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4495057992075294953, guid: 5ff5b2c082ac047458da61612f3b1566, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4495057992075294953, guid: 5ff5b2c082ac047458da61612f3b1566, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4495057992075294953, guid: 5ff5b2c082ac047458da61612f3b1566, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4495057992075294953, guid: 5ff5b2c082ac047458da61612f3b1566, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4594126303027194074, guid: 5ff5b2c082ac047458da61612f3b1566, type: 3}
       propertyPath: m_LocalPosition.y
       value: 0
@@ -3890,6 +3920,10 @@ PrefabInstance:
       value: -17.36
       objectReference: {fileID: 0}
     - target: {fileID: 7602873283226294453, guid: 5ff5b2c082ac047458da61612f3b1566, type: 3}
+      propertyPath: canFall
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7602873283226294453, guid: 5ff5b2c082ac047458da61612f3b1566, type: 3}
       propertyPath: canShift
       value: 1
       objectReference: {fileID: 0}
@@ -3926,8 +3960,20 @@ PrefabInstance:
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7602873283226294453, guid: 5ff5b2c082ac047458da61612f3b1566, type: 3}
+      propertyPath: fallDuration
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 7602873283226294453, guid: 5ff5b2c082ac047458da61612f3b1566, type: 3}
       propertyPath: vibrateDelay
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7602873283226294453, guid: 5ff5b2c082ac047458da61612f3b1566, type: 3}
+      propertyPath: YFallDistance
+      value: -4.13
+      objectReference: {fileID: 0}
+    - target: {fileID: 7602873283226294453, guid: 5ff5b2c082ac047458da61612f3b1566, type: 3}
+      propertyPath: YFallPosition
+      value: -4.13
       objectReference: {fileID: 0}
     - target: {fileID: 7602873283226294453, guid: 5ff5b2c082ac047458da61612f3b1566, type: 3}
       propertyPath: breakableBody
@@ -3990,6 +4036,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 1802898643}
     - target: {fileID: 8926105550332656735, guid: 5ff5b2c082ac047458da61612f3b1566, type: 3}
+      propertyPath: canFall
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8926105550332656735, guid: 5ff5b2c082ac047458da61612f3b1566, type: 3}
       propertyPath: canShift
       value: 1
       objectReference: {fileID: 0}
@@ -4016,6 +4066,14 @@ PrefabInstance:
     - target: {fileID: 8926105550332656735, guid: 5ff5b2c082ac047458da61612f3b1566, type: 3}
       propertyPath: shiftRight
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8926105550332656735, guid: 5ff5b2c082ac047458da61612f3b1566, type: 3}
+      propertyPath: fallDuration
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 8926105550332656735, guid: 5ff5b2c082ac047458da61612f3b1566, type: 3}
+      propertyPath: YFallPosition
+      value: -4.13
       objectReference: {fileID: 0}
     - target: {fileID: 8926105550332656735, guid: 5ff5b2c082ac047458da61612f3b1566, type: 3}
       propertyPath: breakableBody
