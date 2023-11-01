@@ -109,7 +109,6 @@ public class Quakeable : MonoBehaviour
 
         vibrateInterval = vibrateDuration*vibrateIntervalFactor;
 
-        fallClockwise = shiftRight;
 
         StartCoroutine(quakeProcedure());
 
@@ -193,7 +192,7 @@ public class Quakeable : MonoBehaviour
         float elapsedInterval = 0;
         
         Vector2 vibrateRefPos = initialPartPos;
-        
+
         Vector2 XTranslation = Vector2.zero;
         XTranslation.x = vibrateXDistance;
         
@@ -375,7 +374,12 @@ public class Quakeable : MonoBehaviour
 
         while(elapsedTime < fallDuration){
             velocity = Mathf.Lerp(0, YFallDistance, elapsedTime/fallDuration);
-            newRotation.eulerAngles = Vector3.Lerp(currAngleVector, impactAngleVector, elapsedTime/fallDuration);
+            if(fallClockwise){
+                newRotation.eulerAngles = Vector3.Lerp(currAngleVector, impactAngleVector, elapsedTime/fallDuration);
+            }
+            else{
+                newRotation.eulerAngles = Vector3.Lerp(currAngleVector, -impactAngleVector, elapsedTime/fallDuration);
+            }
 
             currFallVector.y -= velocity*Time.deltaTime;
 
@@ -383,8 +387,8 @@ public class Quakeable : MonoBehaviour
                 currFallVector.y = fallPosition.y;
             }
 
-
             objectRect.anchoredPosition = currFallVector;
+            objectRect.rotation = newRotation;
 
             elapsedTime += Time.deltaTime;
 
