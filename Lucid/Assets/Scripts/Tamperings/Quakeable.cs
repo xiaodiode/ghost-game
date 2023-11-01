@@ -125,7 +125,7 @@ public class Quakeable : MonoBehaviour
             yield return null;
         }
 
-        Debug.Log(" isVibrating: " + isVibrating + " isSwinging: " + isSwinging + " isShifting: " + isShifting + " isTeetering: " + isTeetering + "isToppling: " + isToppling);
+        // Debug.Log(" isVibrating: " + isVibrating + " isSwinging: " + isSwinging + " isShifting: " + isShifting + " isTeetering: " + isTeetering + "isToppling: " + isToppling);
 
         
         if(canFall){
@@ -345,28 +345,32 @@ public class Quakeable : MonoBehaviour
     }
 
     private IEnumerator startFalling(){
+        Vector2 currFallVector = new Vector2(objectRect.anchoredPosition.x, objectRect.anchoredPosition.y);
+        Vector2 fallPosition =  new Vector2(objectRect.anchoredPosition.x, YFallPosition);
+        
         float elapsedTime = 0;
         float velocity;
-        float currFallPosition = objectRect.anchoredPosition.y;
-        float YFallDistance = currFallPosition - YFallPosition;
+        float YFallDistance = currFallVector.y - YFallPosition;
 
-        Vector2 fallVector;
-        Vector2 fallPosition = objectRect.anchoredPosition - new Vector2(0, YFallDistance);
+        
 
         Debug.Log("YFallDistance: " + YFallDistance + " fallPosition: " + fallPosition);
 
         while(elapsedTime < fallDuration){
             velocity = Mathf.Lerp(0, YFallDistance, elapsedTime/fallDuration);
 
-            if(objectRect.anchoredPosition.y - velocity < fallPosition.y){
-                velocity = fallPosition.y - objectRect.anchoredPosition.y;
+            // if(objectRect.anchoredPosition.y - velocity < fallPosition.y){
+            //     velocity = fallPosition.y - objectRect.anchoredPosition.y;
+            // }
+
+            currFallVector.y -= velocity*Time.deltaTime;
+
+            if(currFallVector.y < fallPosition.y){
+                currFallVector.y = fallPosition.y;
             }
 
-            currFallPosition -= velocity*Time.deltaTime;
 
-            fallVector = new Vector2(0, currFallPosition);
-
-            objectRect.anchoredPosition = fallVector;
+            objectRect.anchoredPosition = currFallVector;
 
             elapsedTime += Time.deltaTime;
 
