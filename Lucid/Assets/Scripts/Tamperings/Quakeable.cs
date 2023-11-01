@@ -67,6 +67,7 @@ public class Quakeable : MonoBehaviour
     [SerializeField] private bool fallClockwise;
     [SerializeField] private bool madeImpact;
     [SerializeField] private float impactAngle;
+    
     [SerializeField] private float rotationSpeed;
     [SerializeField] private float XFallDistance;
     [SerializeField] private float YFallPosition;
@@ -78,7 +79,9 @@ public class Quakeable : MonoBehaviour
     [SerializeField] private AudioClip bounceSound;
     [SerializeField] private float initialYBounce;
     [SerializeField] [Range(0,1)] private float heightPercentDrop;
-    
+    [SerializeField] private float groundAngle;
+
+
     Vector2 initialPartPos; 
     Vector3 initialPartRot;
     Vector2 shiftDistance;
@@ -373,7 +376,7 @@ public class Quakeable : MonoBehaviour
         Debug.Log("YFallDistance: " + YFallDistance + " fallPosition: " + fallPosition);
 
         while(elapsedTime < fallDuration){
-            velocity = Mathf.Lerp(0, YFallDistance, elapsedTime/fallDuration);
+            velocity = Mathf.SmoothStep(0, YFallDistance, elapsedTime/fallDuration);
             if(fallClockwise){
                 newRotation.eulerAngles = Vector3.Lerp(currAngleVector, impactAngleVector, elapsedTime/fallDuration);
             }
@@ -381,7 +384,7 @@ public class Quakeable : MonoBehaviour
                 newRotation.eulerAngles = Vector3.Lerp(currAngleVector, -impactAngleVector, elapsedTime/fallDuration);
             }
 
-            currFallVector.y -= velocity*Time.deltaTime;
+            currFallVector.y -= YFallDistance*Time.deltaTime;
 
             if(currFallVector.y < fallPosition.y){
                 currFallVector.y = fallPosition.y;
@@ -394,8 +397,6 @@ public class Quakeable : MonoBehaviour
 
             yield return null;
         }
-        
-
         
         isFalling = false;
     }
