@@ -1,5 +1,4 @@
 using System.Collections;
-using TMPro;
 using UnityEngine;
 
 public class Quakeable : MonoBehaviour
@@ -289,12 +288,92 @@ public class Quakeable : MonoBehaviour
         float elapsedInterval = 0;
         float currPeakAngle = minSwingAngle;
         float currentInterval = swingInterval;
+        float swingSpeed = currPeakAngle;
+        float targetVelocity = swingSpeed;
+        float velocity = 0;
+        float currentAngle = objectRect.rotation.eulerAngles.z;
+        bool change = false;
 
         Quaternion newRotation = Quaternion.Euler(new Vector3());
-        Vector3 targetLeftRotation = new Vector3(0, 0, currPeakAngle);
-        Vector3 targetRightRotation = new Vector3(0, 0, -currPeakAngle);
-        Vector3 velocity = Vector3.zero;
+        Vector3 targetLeftRotation = new Vector3(0, 0, -currPeakAngle);
+        Vector3 targetRightRotation = new Vector3(0, 0, currPeakAngle);
+        Vector3 velocityVector = Vector3.zero;
+        
 
+        while(elapsedTime < swingDuration){
+            if(elapsedInterval > currentInterval){
+                elapsedInterval = 0;    
+                // velocityVector = Vector3.zero;
+                // velocity = 0;
+                // targetVelocity = currPeakAngle*(-1);
+            
+                if(elapsedTime < (swingDuration/2)){
+                    currPeakAngle = Mathf.SmoothStep(minSwingAngle, maxSwingAngle, elapsedTime/(swingDuration/2));
+                }
+                else{
+                    currPeakAngle = Mathf.SmoothStep(maxSwingAngle, minSwingAngle, (elapsedInterval - currentInterval/2)/(currentInterval/2));
+                }
+
+                // targetRightRotation = new Vector3(0, 0, -currPeakAngle);
+                // targetLeftRotation = new Vector3(0, 0, currPeakAngle);
+
+                initialPartRot = objectRect.rotation.eulerAngles;
+                
+            }
+            // else if(elapsedInterval < (currentInterval/2)){
+            //     // newRotation.eulerAngles = Vector3.Lerp(initialPartRot, targetRightRotation, elapsedInterval/(currentInterval/2));
+            //     // newRotation.eulerAngles = Vector3.SmoothDamp(initialPartRot, targetRightRotation, Time.deltaTime*(currentInterval/2));
+                
+            // }
+            // else if(Mathf.Approximately(elapsedInterval, currentInterval/2)){
+            //     // velocityVector = Vector3.zero;
+            //     Debug.Log("peak");
+            //     velocity = 0;
+            //     targetVelocity *= -1;
+            // }
+            // else{
+            //     // newRotation.eulerAngles = Vector3.Lerp(targetRightRotation, targetLeftRotation, (elapsedInterval - currentInterval/2)/(currentInterval/2));
+            //     // newRotation.eulerAngles = Vector3.MoveTowards(targetRightRotation, targetLeftRotation, Time.deltaTime*(currentInterval/2));
+                
+            // }
+
+            
+            velocity = Mathf.SmoothDamp(velocity, currPeakAngle*60, ref velocity, currentInterval/2);
+            Debug.Log("velocity: " + velocity + " targetVelocity: " + currPeakAngle);
+
+            if(elapsedInterval < currentInterval/2){
+                if(!change){
+                    change = true;
+                    velocity = 0;
+                }
+                currentAngle += velocity * Time.deltaTime;
+            }
+            else{
+                if(change){
+                    change = false;
+                    velocity = 0;
+                }
+                currentAngle -= velocity * Time.deltaTime;
+            }
+
+            currentAngle = Mathf.Clamp(currentAngle, -currPeakAngle, currPeakAngle);
+
+            newRotation.eulerAngles = new Vector3(0, 0, currentAngle);
+
+            objectRect.rotation = newRotation;
+
+            // if (Mathf.Approximately(currentAngle, -currPeakAngle) || Mathf.Approximately(currentAngle, currPeakAngle)){
+            //     velocity = 0;
+            //     targetVelocity *= -1;
+            // }
+
+            elapsedInterval += Time.deltaTime;
+            elapsedTime += Time.deltaTime;
+
+            
+
+            yield return null;
+        }
         // if (isSwinging)
         // {
         //     // Calculate the target angular velocity based on the swingSpeed
@@ -320,42 +399,47 @@ public class Quakeable : MonoBehaviour
         //     isSwinging = false;
         //     Invoke("StartSwing", swingDelay);
         // }
-        while(elapsedTime < swingDuration){
-            Debug.Log("peak");
-            if(elapsedInterval > currentInterval){
+
+
+
+        // while(elapsedTime < swingDuration){
+        //     if(elapsedInterval > currentInterval){
 
                 
-                elapsedInterval = 0;    
+        //         elapsedInterval = 0;    
 
-                if(elapsedTime < (swingDuration/2)){
-                    currPeakAngle = Mathf.SmoothStep(minSwingAngle, maxSwingAngle, elapsedTime/(swingDuration/2));
-                }
-                else{
-                    currPeakAngle = Mathf.SmoothStep(maxSwingAngle, minSwingAngle, (elapsedInterval - currentInterval/2)/(currentInterval/2));
-                }
+        //         if(elapsedTime < (swingDuration/2)){
+        //             currPeakAngle = Mathf.SmoothStep(minSwingAngle, maxSwingAngle, elapsedTime/(swingDuration/2));
+        //         }
+        //         else{
+        //             currPeakAngle = Mathf.SmoothStep(maxSwingAngle, minSwingAngle, (elapsedInterval - currentInterval/2)/(currentInterval/2));
+        //         }
 
-                targetRightRotation = new Vector3(0, 0, -currPeakAngle);
-                targetLeftRotation = new Vector3(0, 0, currPeakAngle);
+        //         targetRightRotation = new Vector3(0, 0, -currPeakAngle);
+        //         targetLeftRotation = new Vector3(0, 0, currPeakAngle);
 
-                initialPartRot = objectRect.rotation.eulerAngles;
+        //         initialPartRot = objectRect.rotation.eulerAngles;
                 
-            }
+        //     }
 
-            else if(elapsedInterval < (currentInterval/2)){
-                newRotation.eulerAngles = Vector3.Lerp(initialPartRot, targetRightRotation, elapsedInterval/(currentInterval/2));
-            }
-            else{
-                newRotation.eulerAngles = Vector3.Lerp(targetRightRotation, targetLeftRotation, (elapsedInterval - currentInterval/2)/(currentInterval/2));
+        //     else if(elapsedInterval < (currentInterval/2)){
+        //         newRotation.eulerAngles = Vector3.Lerp(initialPartRot, targetRightRotation, elapsedInterval/(currentInterval/2));
+        //         // newRotation.eulerAngles = Vector3.Lerp(initialPartRot, targetRightRotation, 1 - Mathf.Exp(currentInterval/2 - Time.deltaTime ));
                 
-            }
+        //     }
+        //     else{
+        //         newRotation.eulerAngles = Vector3.Lerp(targetRightRotation, targetLeftRotation, (elapsedInterval - currentInterval/2)/(currentInterval/2));
+        //         // newRotation.eulerAngles = Vector3.Lerp(targetRightRotation, targetLeftRotation, 1 - Mathf.Exp(currentInterval/2 - Time.deltaTime ));
+                
+        //     }
 
-            objectRect.rotation = newRotation;
+        //     objectRect.rotation = newRotation;
 
-            elapsedInterval += Time.deltaTime;
-            elapsedTime += Time.deltaTime;
+        //     elapsedInterval += Time.deltaTime;
+        //     elapsedTime += Time.deltaTime;
 
-            yield return null;
-        }
+        //     yield return null;
+        // }
 
         isSwinging = false;
     }
