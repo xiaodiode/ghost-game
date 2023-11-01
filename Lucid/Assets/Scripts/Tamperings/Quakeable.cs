@@ -86,7 +86,7 @@ public class Quakeable : MonoBehaviour
 
     bool touchedGround = false, finishedBouncing = false,
         isVibrating = false, isTeetering = false, isShifting = false, isSwinging = false,
-        isToppling = false, isFalling = false, isBouncing = false, finishedInitial = false;
+        isToppling = false, isFalling = false, isBouncing = false;
 
 
     // Start is called before the first frame update
@@ -125,9 +125,10 @@ public class Quakeable : MonoBehaviour
             yield return null;
         }
 
+        Debug.Log(" isVibrating: " + isVibrating + " isSwinging: " + isSwinging + " isShifting: " + isShifting + " isTeetering: " + isTeetering + "isToppling: " + isToppling);
 
+        
         if(canFall){
-            Debug.Log("finishedInitial: " + finishedInitial + " isVibrating: " + isVibrating + " isSwinging: " + isSwinging + " isShifting: " + isShifting + " isTeetering: " + isTeetering + "isToppling: " + isToppling);
             Debug.Log("starting to fall");
             StartCoroutine(startFalling()); 
         }
@@ -186,8 +187,6 @@ public class Quakeable : MonoBehaviour
             StartCoroutine(startToppling());
         }
 
-        finishedInitial = true;
-
     }
 
     private IEnumerator startVibrating(){
@@ -232,6 +231,7 @@ public class Quakeable : MonoBehaviour
         }
 
         isVibrating = false;
+        isShifting = false;
 
     }
 
@@ -353,6 +353,8 @@ public class Quakeable : MonoBehaviour
         Vector2 fallVector;
         Vector2 fallPosition = objectRect.anchoredPosition - new Vector2(0, YFallDistance);
 
+        Debug.Log("YFallDistance: " + YFallDistance + " fallPosition: " + fallPosition);
+
         while(elapsedTime < fallDuration){
             velocity = Mathf.Lerp(0, YFallDistance, elapsedTime/fallDuration);
 
@@ -364,7 +366,7 @@ public class Quakeable : MonoBehaviour
 
             fallVector = new Vector2(0, currFallPosition);
 
-            objectRect.anchoredPosition -= fallVector;
+            objectRect.anchoredPosition = fallVector;
 
             elapsedTime += Time.deltaTime;
 
