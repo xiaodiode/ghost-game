@@ -18,7 +18,7 @@ public class QuakeableController : MonoBehaviour
 
         quakingObjects = quakeables.Count;
 
-        quakeObjects();
+        // quakeObjects();
     }
 
     public void Update()
