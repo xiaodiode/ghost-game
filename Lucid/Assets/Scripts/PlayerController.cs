@@ -13,9 +13,11 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private float playerXMax;
     [SerializeField] private float playerXMin;
     [SerializeField] private float playerSpeed;
-    [SerializeField] private TextMeshProUGUI monologueText;
+    [SerializeField] private RectTransform monologueText;
+    [SerializeField] private RectTransform narrativeLog;
+    [SerializeField] private RectTransform demonInput;
 
-    private Vector3 playerScale, monologueScale;
+    private Vector3 playerScale, monologueScale, logScale, inputScale;
     private Vector3 move = Vector3.zero;
     private Vector3 newPosition;
     private float horizontalInput;
@@ -37,11 +39,19 @@ public class PlayerController : MonoBehaviour
                 playerScale = player.transform.localScale;
                 playerScale.x = -playerScale.x;
 
-                monologueScale = monologueText.rectTransform.localScale;
+                monologueScale = monologueText.localScale;
                 monologueScale.x = -monologueScale.x;
 
+                logScale = narrativeLog.localScale;
+                logScale.x = -logScale.x;
+
+                inputScale = demonInput.localScale;
+                inputScale.x = -inputScale.x;
+
                 player.transform.localScale = playerScale;
-                monologueText.rectTransform.localScale = monologueScale;
+                monologueText.localScale = monologueScale;
+                narrativeLog.localScale = logScale;
+                demonInput.localScale = inputScale;
             }
             
             horizontalMovement();
