@@ -938,8 +938,8 @@ MonoBehaviour:
   m_ShadowVolumeIntensityEnabled: 0
   m_ShadowVolumeIntensity: 0.75
   m_LocalBounds:
-    m_Center: {x: 1.033081, y: -1.293396, z: 0}
-    m_Extent: {x: 1367.3273, y: 1159.6914, z: 0}
+    m_Center: {x: 1.0320435, y: -1.2922974, z: 0}
+    m_Extent: {x: 1367.3242, y: 1159.6892, z: 0}
   m_PointLightInnerAngle: 360
   m_PointLightOuterAngle: 360
   m_PointLightInnerRadius: 0
@@ -1376,6 +1376,22 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6b2194b2a76a6114baa1e8d98687cba8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &690676366 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 8926105550332656735, guid: 5ff5b2c082ac047458da61612f3b1566, type: 3}
+  m_PrefabInstance: {fileID: 2409317808429461649}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4102e2171097f644bb7359440b85309c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!224 &690676368 stripped
+RectTransform:
+  m_CorrespondingSourceObject: {fileID: 5154328338776417667, guid: 5ff5b2c082ac047458da61612f3b1566, type: 3}
+  m_PrefabInstance: {fileID: 2409317808429461649}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &738546213
 GameObject:
   m_ObjectHideFlags: 0
@@ -1853,7 +1869,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   quakeables:
-  - {fileID: 23430323}
+  - {fileID: 690676366}
   - {fileID: 824883841}
   isQuaking: 0
   quakingComplete: 0
@@ -3876,7 +3892,7 @@ PrefabInstance:
     - target: {fileID: 8926105550332656735, guid: 5ff5b2c082ac047458da61612f3b1566, type: 3}
       propertyPath: objectRect
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 690676368}
     - target: {fileID: 8926105550332656735, guid: 5ff5b2c082ac047458da61612f3b1566, type: 3}
       propertyPath: shiftDelay
       value: 0.5
@@ -3920,7 +3936,7 @@ PrefabInstance:
     - target: {fileID: 8926105550332656735, guid: 5ff5b2c082ac047458da61612f3b1566, type: 3}
       propertyPath: quakeableController
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 1145476595}
     - target: {fileID: 8926105550332656735, guid: 5ff5b2c082ac047458da61612f3b1566, type: 3}
       propertyPath: vibrateIntervalFactor
       value: 0.015
@@ -4079,7 +4095,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1053976171249551423, guid: 2b2a55eb381afd143828af6f36809f6a, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 9.785035
+      value: 9.784557
       objectReference: {fileID: 0}
     - target: {fileID: 1770357232106521533, guid: 2b2a55eb381afd143828af6f36809f6a, type: 3}
       propertyPath: m_RootOrder
