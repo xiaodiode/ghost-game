@@ -69,6 +69,7 @@ public class Lightable : MonoBehaviour
     }
 
     public void onInteraction(){
+        Debug.Log("pressed lightable object");
         if(switchAnimReady){
             switchAnimReady = false;
             StartCoroutine(changeLitState());
