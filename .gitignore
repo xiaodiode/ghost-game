@@ -75,3 +75,4 @@ crashlytics-build.properties
 
 /[Tt]ext[Mm]esh [Pp]ro/
 Lucid/MemoryCaptures/Lucid_2023-11-01_03-14-52.snap
+*.snap
