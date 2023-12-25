@@ -5,6 +5,7 @@ using UnityEngine.UI;
 
 public class SceneController : MonoBehaviour
 {
+    [SerializeField] public View currView;
     [SerializeField] public Canvas[] sceneLayers;
     [SerializeField] public RectTransform[] sceneRects;
     [SerializeField] public bool atLeftEdge, atRightEdge;
@@ -27,7 +28,12 @@ public class SceneController : MonoBehaviour
     void Start()
     {
         isMoving = false;
-        atLeftEdge = false; atRightEdge = false;
+        atLeftEdge = false; 
+        atRightEdge = false;
+
+        lockMovement = true;
+
+        StartCoroutine(waitForScenes());
         
         sceneSpeed = new float[sceneLayers.Length];
         baseTime = sceneXMax[sceneXMax.Length-1]/baseSpeed;
@@ -46,6 +52,13 @@ public class SceneController : MonoBehaviour
         }
         
     }
+
+    private IEnumerator waitForScenes(){
+        while(!currView.ready){
+            yield return null;
+        }
+    }
+
     private void updateSceneMovement(){
         horizontalInput = Input.GetAxis("Horizontal");
         
