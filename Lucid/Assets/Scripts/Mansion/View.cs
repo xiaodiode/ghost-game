@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class View : MonoBehaviour
 {
+    [SerializeField] private RectTransform wallpaper;
     [SerializeField] private float wallpaperWidth;
 
     [SerializeField] private List<Furniture> backFurniture = new();
@@ -18,10 +19,12 @@ public class View : MonoBehaviour
 
     private float backOffset, midOffset, frontOffset;
 
+    
+
     // Start is called before the first frame update
     void Start()
     {
-        
+        wallpaperWidth = wallpaper.rect.width;
     }
 
     // Update is called once per frame
