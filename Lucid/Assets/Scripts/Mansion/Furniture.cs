@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class Furniture : MonoBehaviour
 {
+    [Tooltip("Scene Layer Options: bot, mid, top")]
+    [SerializeField] public string sceneLayer;
     // Start is called before the first frame update
     void Start()
     {
