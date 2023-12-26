@@ -50,11 +50,11 @@ public class SceneController : MonoBehaviour
             yield return null;
         }
 
-        baseTime = currView.roomWidth / baseSpeed;
+        baseTime = (currView.roomWidth - cameraWidth) / baseSpeed;
 
-        botSpeed = currView.botWidth / baseTime;
-        midSpeed = currView.midWidth / baseTime;
-        topSpeed = currView.topWidth / baseTime;
+        botSpeed = (currView.botWidth - cameraWidth) / baseTime;
+        midSpeed = (currView.midWidth - cameraWidth) / baseTime;
+        topSpeed = (currView.topWidth - cameraWidth) / baseTime;
 
         startPosition = currView.wallLayer.anchoredPosition.x;
         endPosition = startPosition - currView.roomWidth + cameraWidth;
