@@ -21,7 +21,7 @@ public class PlayerController : MonoBehaviour
     private Vector3 playerScale, monologueScale, logScale, inputScale;
     private Vector2 move = Vector2.zero;
     private Vector3 newPosition;
-    private float horizontalInput;
+    private float verticalInput;
     // Start is called before the first frame update
     void Start()
     {
@@ -38,9 +38,9 @@ public class PlayerController : MonoBehaviour
     {
         // Debug.Log("lockmovement: " + lockMovement);
         if(!lockMovement){
-            horizontalInput = Input.GetAxis("Horizontal");
-            if(horizontalInput < 0 && player.localScale.x > 0 ||
-                    horizontalInput > 0 && player.localScale.x < 0){
+            verticalInput = Input.GetAxis("Vertical");
+            if(verticalInput < 0 && player.localScale.x > 0 ||
+                    verticalInput > 0 && player.localScale.x < 0){
                 
                 playerScale = player.localScale;
                 playerScale.x = -playerScale.x;
@@ -71,8 +71,8 @@ public class PlayerController : MonoBehaviour
         if((sceneController.atLeftEdge && player.anchoredPosition.x!=playerXMin) 
             || (sceneController.atRightEdge && player.anchoredPosition.x!=playerXMax)){
             
-            if(horizontalInput!=0){
-                move.x = horizontalInput*playerSpeed*Time.deltaTime;
+            if(verticalInput!=0){
+                move.x = verticalInput*playerSpeed*Time.deltaTime;
                 newPosition = player.anchoredPosition + move;
                 newPosition.x = Mathf.Clamp(newPosition.x, playerXMin, playerXMax);
                 
