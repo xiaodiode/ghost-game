@@ -4,8 +4,72 @@
         {
             "name": "Player",
             "id": "7925b91d-519a-4e09-aed1-937bb38e6696",
-            "actions": [],
-            "bindings": []
+            "actions": [
+                {
+                    "name": "ViewLeft",
+                    "type": "Button",
+                    "id": "be791b08-ff7f-405c-b479-5f62e47b88dc",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "ViewRight",
+                    "type": "Button",
+                    "id": "2602cd08-001d-41a6-8a07-24f9b44fa622",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "",
+                    "id": "8ed5e4f2-2ae1-4325-94d4-c2a10fca837d",
+                    "path": "<Keyboard>/a",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "ViewLeft",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "a85a8668-61a8-49aa-8aab-b635c04daf59",
+                    "path": "<Keyboard>/leftArrow",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "ViewLeft",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "c4f210c2-34cc-4f48-b3f2-08a376985cd7",
+                    "path": "<Keyboard>/d",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "ViewRight",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "b53b503e-f008-46ae-8474-ecb53e35c83e",
+                    "path": "<Keyboard>/rightArrow",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "ViewRight",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                }
+            ]
         },
         {
             "name": "Monologue",

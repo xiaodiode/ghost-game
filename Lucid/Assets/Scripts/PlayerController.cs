@@ -80,4 +80,12 @@ public class PlayerController : MonoBehaviour
             }
         }
     }
+
+    private void OnViewLeft(){
+
+    }
+
+    private void OnViewRight(){
+        
+    }
 }

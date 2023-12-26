@@ -7,6 +7,7 @@ public class SceneController : MonoBehaviour
 {   
     const float cameraWidth = 640;
 
+    [SerializeField] public Room currRoom;
     [SerializeField] public View currView;
     [SerializeField] public bool atLeftEdge, atRightEdge;
     [SerializeField] public bool lockMovement;
@@ -68,12 +69,12 @@ public class SceneController : MonoBehaviour
         if(currView.wallLayer.anchoredPosition.x == endPosition && verticalInput>=0){
             atRightEdge = true;
             isMoving = false;
-            Debug.Log("at right edge");
+            // Debug.Log("at right edge");
         }
         else if(currView.wallLayer.anchoredPosition.x == startPosition && verticalInput<=0){
             atLeftEdge = true;
             isMoving = false;
-            Debug.Log("at left edge");
+            // Debug.Log("at left edge");
         }
         else{
             atRightEdge = false;
@@ -101,6 +102,20 @@ public class SceneController : MonoBehaviour
         // Debug.Log("anchoredPosition for " + i + ": " + sceneLayers[i].GetComponent<RectTransform>().anchoredPosition); 
         newPosition.x = Mathf.Clamp(newPosition.x, -layerWidth/2 + cameraWidth, layerWidth/2);
     
+        layer.anchoredPosition = newPosition;
+    }
+
+    private void resetLayersLeft(RectTransform layer, float layerWidth){
+        newPosition = layer.anchoredPosition;
+        newPosition.x = layerWidth/2;
+
+        layer.anchoredPosition = newPosition;
+    }
+
+    private void resetLayersRight(RectTransform layer, float layerWidth){
+        newPosition = layer.anchoredPosition;
+        newPosition.x = -layerWidth/2 + cameraWidth;
+
         layer.anchoredPosition = newPosition;
     }
 }

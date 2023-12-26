@@ -4,19 +4,19 @@ using UnityEngine;
 
 public class View : MonoBehaviour
 {
-    public int numLayers = 4;
-    
-    public bool ready = false;
-
-    public float roomWidth, botWidth, midWidth, topWidth;
-    public RectTransform wallLayer, botLayer, midLayer, topLayer;
+    [SerializeField] public bool ready = false;
+    [SerializeField] public bool isLeft;
+    [SerializeField] public RectTransform view;
+    [SerializeField] public float yCameraPosition;
+    [SerializeField] public float roomWidth, botWidth, midWidth, topWidth;
+    [SerializeField] public RectTransform wallLayer, botLayer, midLayer, topLayer;
 
     [SerializeField] private List<RectTransform> wallFurniture = new(); // for organization purposes
     [SerializeField] private List<RectTransform> botFurniture = new();  
     [SerializeField] private List<RectTransform> midFurniture = new();
     [SerializeField] private List<RectTransform> topFurniture = new();
 
-    [SerializeField] private float yCameraPosition;
+    
 
     private float botOffset, midOffset, topOffset;
     private Vector2 newBotOffset, newMidOffset, newTopOffset;
@@ -24,6 +24,9 @@ public class View : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        yCameraPosition = view.anchoredPosition.y;
+        Debug.Log("yCameraPosition: " + yCameraPosition);
+
         adjustLayerWidths();
         updateFurniturePos(botFurniture, botWidth, botLayer);
         updateFurniturePos(midFurniture, midWidth, midLayer);
@@ -47,9 +50,17 @@ public class View : MonoBehaviour
         midOffset = 3*botOffset;
         topOffset = 3*midOffset;
 
-        botWidth = roomWidth + botOffset;
-        midWidth = roomWidth + midOffset;
-        topWidth = roomWidth + topOffset;
+        if(isLeft){
+            botWidth = roomWidth + botOffset;
+            midWidth = roomWidth + midOffset;
+            topWidth = roomWidth + topOffset;    
+        }
+        else{
+            botWidth = roomWidth - botOffset;
+            midWidth = roomWidth - midOffset;
+            topWidth = roomWidth - topOffset;
+        }
+        
 
         /* update layer lengths in game */
         newBotOffset = botLayer.offsetMax;
@@ -70,12 +81,12 @@ public class View : MonoBehaviour
         float oldX, newX;
         foreach(RectTransform furniture in furnitureList){
             position = furniture.anchoredPosition;
-            Debug.Log("furniture: " + furniture + ", furniture anchored position: " + position);
+            // Debug.Log("furniture: " + furniture + ", furniture anchored position: " + position);
             
             // scale x position to new layer length
             oldX = position.x;
             newX = newWidth*(oldX / roomWidth);    
-            Debug.Log("new X position: " + newX);
+            // Debug.Log("new X position: " + newX);
 
             // update furniture position
             position.x = newX;
