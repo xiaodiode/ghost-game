@@ -55,7 +55,7 @@ public class SceneController : MonoBehaviour
         topSpeed = currView.topWidth / baseTime;
 
         startPosition = currView.wallLayer.anchoredPosition.x;
-        endPosition = startPosition - currView.roomWidth;
+        endPosition = startPosition - currView.roomWidth + cameraWidth;
 
         lockMovement = false;
     }
@@ -63,12 +63,12 @@ public class SceneController : MonoBehaviour
     private void updateSceneMovement(){
         horizontalInput = Input.GetAxis("Horizontal");
         
-        if(currView.wallLayer.anchoredPosition.x == endPosition && horizontalInput>0){
+        if(currView.wallLayer.anchoredPosition.x == endPosition && horizontalInput>=0){
             atRightEdge = true;
             isMoving = false;
             Debug.Log("at right edge");
         }
-        else if(currView.wallLayer.anchoredPosition.x == startPosition && horizontalInput<0){
+        else if(currView.wallLayer.anchoredPosition.x == startPosition && horizontalInput<=0){
             atLeftEdge = true;
             isMoving = false;
             Debug.Log("at left edge");
