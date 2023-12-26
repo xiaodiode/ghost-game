@@ -10,16 +10,14 @@ public class SceneController : MonoBehaviour
     [SerializeField] public bool lockMovement;
     [SerializeField] public bool isMoving;
 
-
     [SerializeField] private float baseSpeed;
     [SerializeField] private float botSpeed, midSpeed, topSpeed;
     
-
-
     private Vector2 move = Vector2.zero;
     private Vector2 newPosition;
     private float baseTime;
     private float horizontalInput;
+    private const float cameraWidth = 640;
 
     [SerializeField] private float startPosition, endPosition;
     
@@ -99,7 +97,7 @@ public class SceneController : MonoBehaviour
         // Debug.Log("sceneSpeed: " + sceneSpeed[i]);
         newPosition = layer.anchoredPosition + move;
         // Debug.Log("anchoredPosition for " + i + ": " + sceneLayers[i].GetComponent<RectTransform>().anchoredPosition); 
-        // newPosition.x = Mathf.Clamp(newPosition.x, sceneXMax[i] + depthValue*i, depthValue*i);
+        newPosition.x = Mathf.Clamp(newPosition.x, -layerWidth/2 + cameraWidth, layerWidth/2);
     
         layer.anchoredPosition = newPosition;
     }
