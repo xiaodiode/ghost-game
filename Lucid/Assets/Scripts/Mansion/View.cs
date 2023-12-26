@@ -43,9 +43,9 @@ public class View : MonoBehaviour
 
         /* extend bot, mid, and top layer lengths 
         based on current room size */
-        botOffset = roomWidth/3;
-        midOffset = 2*(roomWidth/3);
-        topOffset = roomWidth;
+        botOffset = roomWidth/10;
+        midOffset = 3*botOffset;
+        topOffset = 3*midOffset;
 
         botWidth = roomWidth + botOffset;
         midWidth = roomWidth + midOffset;
