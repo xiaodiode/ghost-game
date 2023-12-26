@@ -4,34 +4,28 @@ using UnityEngine;
 
 public class View : MonoBehaviour
 {
-    [SerializeField] public bool ready = false;
+    public int numLayers = 4;
+    
+    public bool ready = false;
 
-    [SerializeField] public float roomWidth; 
-    [SerializeField] public float botWidth;
-    [SerializeField] public float midWidth;
-    [SerializeField] public float topWidth;
-
-    [SerializeField] private RectTransform wallpaper;
+    public float roomWidth, botWidth, midWidth, topWidth;
+    public RectTransform wallLayer, botLayer, midLayer, topLayer;
 
     [SerializeField] private List<RectTransform> wallFurniture = new(); // for organization purposes
     [SerializeField] private List<RectTransform> botFurniture = new();  
     [SerializeField] private List<RectTransform> midFurniture = new();
     [SerializeField] private List<RectTransform> topFurniture = new();
 
-    [SerializeField] private RectTransform botLayer;
-    [SerializeField] private RectTransform midLayer;
-    [SerializeField] private RectTransform topLayer;
-
     [SerializeField] private float yCameraPosition;
 
     private float botOffset, midOffset, topOffset;
-    Vector2 newBotOffset, newMidOffset, newTopOffset;
+    private Vector2 newBotOffset, newMidOffset, newTopOffset;
 
     // Start is called before the first frame update
     void Start()
     {
         adjustLayerWidths();
-        updateFurniturePos(botFurniture, roomWidth, botLayer);
+        updateFurniturePos(botFurniture, botWidth, botLayer);
         updateFurniturePos(midFurniture, midWidth, midLayer);
         updateFurniturePos(topFurniture, topWidth, topLayer);
 
@@ -45,7 +39,7 @@ public class View : MonoBehaviour
     }
 
     private void adjustLayerWidths(){
-        roomWidth = wallpaper.rect.width;  
+        roomWidth = wallLayer.rect.width;  
 
         /* extend bot, mid, and top layer lengths 
         based on current room size */
