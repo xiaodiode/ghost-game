@@ -4,22 +4,24 @@ using UnityEngine;
 using UnityEngine.UI;
 
 public class SceneController : MonoBehaviour
-{
+{   
+    const float cameraWidth = 640;
+
     [SerializeField] public View currView;
     [SerializeField] public bool atLeftEdge, atRightEdge;
     [SerializeField] public bool lockMovement;
     [SerializeField] public bool isMoving;
-
-    [SerializeField] private float baseSpeed;
-    [SerializeField] private float botSpeed, midSpeed, topSpeed;
+    [SerializeField] public float baseSpeed;
     
+    [SerializeField] private float botSpeed, midSpeed, topSpeed;
+    [SerializeField] private float startPosition, endPosition;
     private Vector2 move = Vector2.zero;
     private Vector2 newPosition;
     private float baseTime;
     private float horizontalInput;
-    private const float cameraWidth = 640;
+    
 
-    [SerializeField] private float startPosition, endPosition;
+    
     
     // Start is called before the first frame update
     void Start()
