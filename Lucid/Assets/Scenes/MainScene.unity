@@ -6738,7 +6738,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1157257304}
   m_HandleRect: {fileID: 1157257303}
   m_Direction: 2
-  m_Value: 0
+  m_Value: 1
   m_Size: 1
   m_NumberOfSteps: 0
   m_OnValueChanged:
@@ -11410,8 +11410,8 @@ MonoBehaviour:
   m_ShadowVolumeIntensityEnabled: 0
   m_ShadowVolumeIntensity: 0.75
   m_LocalBounds:
-    m_Center: {x: -1.3375015, y: 0.29499817, z: 0}
-    m_Extent: {x: 192.17511, y: 96.1035, z: 0}
+    m_Center: {x: -1.327652, y: 0.3042984, z: 0}
+    m_Extent: {x: 192.17725, y: 96.1019, z: 0}
   m_PointLightInnerAngle: 360
   m_PointLightOuterAngle: 360
   m_PointLightInnerRadius: 0
@@ -15448,8 +15448,8 @@ MonoBehaviour:
   m_ShadowVolumeIntensityEnabled: 0
   m_ShadowVolumeIntensity: 0.75
   m_LocalBounds:
-    m_Center: {x: 0.0038000345, y: 0.0031999946, z: 0}
-    m_Extent: {x: 1.0849, y: 1.0852001, z: 0}
+    m_Center: {x: -0.0061500072, y: 0.0037499666, z: 0}
+    m_Extent: {x: 1.07885, y: 1.08505, z: 0}
   m_PointLightInnerAngle: 360
   m_PointLightOuterAngle: 360
   m_PointLightInnerRadius: 0
