@@ -25,6 +25,7 @@ public class Instruments : MonoBehaviour
     }
 
     public void playSound(){
+        Debug.Log("playing sound");
         source.Play();
     }
 

@@ -6468,7 +6468,7 @@ MonoBehaviour:
   m_HandleRect: {fileID: 1157257303}
   m_Direction: 2
   m_Value: 1
-  m_Size: 0.9999942
+  m_Size: 1
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:
@@ -10987,8 +10987,8 @@ MonoBehaviour:
   m_ShadowVolumeIntensityEnabled: 0
   m_ShadowVolumeIntensity: 0.75
   m_LocalBounds:
-    m_Center: {x: -1.3253479, y: 0.30355072, z: 0}
-    m_Extent: {x: 192.17485, y: 96.10065, z: 0}
+    m_Center: {x: -1.3342514, y: 0.3071518, z: 0}
+    m_Extent: {x: 192.17145, y: 96.10425, z: 0}
   m_PointLightInnerAngle: 360
   m_PointLightOuterAngle: 360
   m_PointLightInnerRadius: 0
@@ -11117,7 +11117,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 0}
-  m_AnchoredPosition: {x: 0, y: 13.249099}
+  m_AnchoredPosition: {x: 0, y: 13.249999}
   m_SizeDelta: {x: -0.00005882906, y: 0}
   m_Pivot: {x: 0, y: 0.05}
 --- !u!114 &1752166573
@@ -14039,7 +14039,7 @@ RectTransform:
   m_GameObject: {fileID: 4769277449945867476}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.03, y: 0.18, z: 1}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1489466327994034654}
@@ -14047,8 +14047,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0.006918, y: 0.04584}
-  m_SizeDelta: {x: 196.46323, y: 83.04997}
+  m_AnchoredPosition: {x: 19.9, y: 10.8}
+  m_SizeDelta: {x: 100, y: 200}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!224 &828640010724855029
 RectTransform:
@@ -14376,7 +14376,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0.5}
   m_AnchorMax: {x: 0, y: 0.5}
-  m_AnchoredPosition: {x: 1782.9, y: 0}
+  m_AnchoredPosition: {x: 520, y: 0}
   m_SizeDelta: {x: 1, y: 1}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!212 &1532291520345761077
@@ -15268,8 +15268,8 @@ MonoBehaviour:
   m_ShadowVolumeIntensityEnabled: 0
   m_ShadowVolumeIntensity: 0.75
   m_LocalBounds:
-    m_Center: {x: -0.0032500029, y: 0.0064499974, z: 0}
-    m_Extent: {x: 1.08575, y: 1.07745, z: 0}
+    m_Center: {x: 0.001150012, y: 0.007250011, z: 0}
+    m_Extent: {x: 1.08295, y: 1.0806501, z: 0}
   m_PointLightInnerAngle: 360
   m_PointLightOuterAngle: 360
   m_PointLightInnerRadius: 0
