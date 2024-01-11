@@ -42,13 +42,9 @@ public class View : MonoBehaviour
     }
 
     private void adjustLayerWidths(){
-        float oldBotX, oldMidX, oldTopX;
+        float wallX;
 
-        oldBotX = wallLayer.anchoredPosition.x;
-        oldMidX = wallLayer.anchoredPosition.x;
-        oldTopX = wallLayer.anchoredPosition.x;
-        Debug.Log("oldBotX, oldMidX, oldTopX: " + oldBotX + " " + oldMidX + " " + oldTopX);
-
+        wallX = wallLayer.anchoredPosition.x;
         roomWidth = wallLayer.rect.width;  
 
         /* extend bot, mid, and top layer lengths 
@@ -57,16 +53,9 @@ public class View : MonoBehaviour
         midOffset = 3*botOffset;
         topOffset = 3*midOffset;
 
-        // if(isLeft){
-            botWidth = roomWidth + botOffset;
-            midWidth = roomWidth + midOffset;
-            topWidth = roomWidth + topOffset;    
-        // }
-        // else{
-        //     botWidth = roomWidth - botOffset;
-        //     midWidth = roomWidth - midOffset;
-        //     topWidth = roomWidth - topOffset;
-        // }
+        botWidth = roomWidth + botOffset;
+        midWidth = roomWidth + midOffset;
+        topWidth = roomWidth + topOffset;    
         
 
         /* update layer lengths in game */
@@ -95,9 +84,10 @@ public class View : MonoBehaviour
             newMidX = midLayer.anchoredPosition.x;
             newTopX = topLayer.anchoredPosition.x;
 
-            newBotX = newBotX - 2*(newBotX - oldBotX);
-            newMidX = newMidX - 2*(newMidX - oldMidX);
-            newTopX = newTopX - 2*(newTopX - oldTopX);
+            //update X anchored positions to the left of wall for right view
+            newBotX = newBotX - 2*(newBotX - wallX);
+            newMidX = newMidX - 2*(newMidX - wallX);
+            newTopX = newTopX - 2*(newTopX - wallX);
 
             newBot.x = newBotX;
             newMid.x = newMidX;
