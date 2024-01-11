@@ -9,6 +9,8 @@ public class SceneController : MonoBehaviour
 
     [SerializeField] public Room currRoom;
     [SerializeField] public View currView;
+    [SerializeField] public View otherView;
+    [SerializeField] public bool isLeftView;
     [SerializeField] public bool atLeftEdge, atRightEdge;
     [SerializeField] public bool lockMovement;
     [SerializeField] public bool isMoving;
@@ -53,6 +55,7 @@ public class SceneController : MonoBehaviour
 
         baseTime = (currView.roomWidth - cameraWidth) / baseSpeed;
 
+        // initializes the layer speeds based on the speed of the room
         botSpeed = (currView.botWidth - cameraWidth) / baseTime;
         midSpeed = (currView.midWidth - cameraWidth) / baseTime;
         topSpeed = (currView.topWidth - cameraWidth) / baseTime;
@@ -61,6 +64,16 @@ public class SceneController : MonoBehaviour
         endPosition = startPosition - currView.roomWidth + cameraWidth;
 
         lockMovement = false;
+
+        // checks if current view is left/right and initializes the other view of room
+        if(currView == currRoom.leftView){
+            isLeftView = true;
+            otherView = currRoom.rightView;
+        }
+        else{
+            isLeftView = false;
+            otherView = currRoom.leftView;
+        }
     }
 
     private void updateSceneMovement(){
@@ -83,10 +96,16 @@ public class SceneController : MonoBehaviour
             if(verticalInput!=0){
                 isMoving = true;
 
-                updateLayerPosition(baseSpeed, currView.wallLayer, currView.roomWidth);
-                updateLayerPosition(botSpeed, currView.botLayer, currView.botWidth);
-                updateLayerPosition(midSpeed, currView.midLayer, currView.midWidth);
-                updateLayerPosition(topSpeed, currView.topLayer, currView.topWidth);
+                // moves the layers of the current room's left and right layers
+                updateLayerPosition(true, baseSpeed, currView.wallLayer, currView.roomWidth);
+                updateLayerPosition(true, botSpeed, currView.botLayer, currView.botWidth);
+                updateLayerPosition(true, midSpeed, currView.midLayer, currView.midWidth);
+                updateLayerPosition(true, topSpeed, currView.topLayer, currView.topWidth);
+
+                updateLayerPosition(false, baseSpeed, otherView.wallLayer, otherView.roomWidth);
+                updateLayerPosition(false, botSpeed, otherView.botLayer, otherView.botWidth);
+                updateLayerPosition(false, midSpeed, otherView.midLayer, otherView.midWidth);
+                updateLayerPosition(false, topSpeed, otherView.topLayer, otherView.topWidth);
                 
             }
             else{
@@ -95,12 +114,21 @@ public class SceneController : MonoBehaviour
         }
     }
 
-    private void updateLayerPosition(float layerSpeed, RectTransform layer, float layerWidth){
-        move.x = -verticalInput*layerSpeed*Time.deltaTime;
-        // Debug.Log("sceneSpeed: " + sceneSpeed[i]);
-        newPosition = layer.anchoredPosition + move;
-        // Debug.Log("anchoredPosition for " + i + ": " + sceneLayers[i].GetComponent<RectTransform>().anchoredPosition); 
-        newPosition.x = Mathf.Clamp(newPosition.x, -layerWidth/2 + cameraWidth, layerWidth/2);
+    private void updateLayerPosition(bool isLeft, float layerSpeed, RectTransform layer, float layerWidth){
+        if(isLeft){
+            move.x = -verticalInput*layerSpeed*Time.deltaTime;
+            // Debug.Log("sceneSpeed: " + sceneSpeed[i]);
+            newPosition = layer.anchoredPosition + move;
+            // Debug.Log("anchoredPosition for " + i + ": " + sceneLayers[i].GetComponent<RectTransform>().anchoredPosition); 
+            newPosition.x = Mathf.Clamp(newPosition.x, -layerWidth/2 + cameraWidth, layerWidth/2);
+        }
+        else{
+            move.x = -verticalInput*layerSpeed*Time.deltaTime;
+            // Debug.Log("sceneSpeed: " + sceneSpeed[i]);
+            newPosition = layer.anchoredPosition - move;
+            // Debug.Log("anchoredPosition for " + i + ": " + sceneLayers[i].GetComponent<RectTransform>().anchoredPosition); 
+            newPosition.x = Mathf.Clamp(newPosition.x, -layerWidth/2 + cameraWidth, layerWidth/2);
+        }
     
         layer.anchoredPosition = newPosition;
     }

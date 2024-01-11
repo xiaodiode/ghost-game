@@ -6501,8 +6501,8 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1157257304}
   m_HandleRect: {fileID: 1157257303}
   m_Direction: 2
-  m_Value: 0
-  m_Size: 1
+  m_Value: 1
+  m_Size: 0.9999938
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:
@@ -11038,8 +11038,8 @@ MonoBehaviour:
   m_ShadowVolumeIntensityEnabled: 0
   m_ShadowVolumeIntensity: 0.75
   m_LocalBounds:
-    m_Center: {x: -1.3322525, y: 0.3043518, z: 0}
-    m_Extent: {x: 192.17535, y: 96.10475, z: 0}
+    m_Center: {x: -1.3250961, y: 0.30130005, z: 0}
+    m_Extent: {x: 192.1719, y: 96.1088, z: 0}
   m_PointLightInnerAngle: 360
   m_PointLightOuterAngle: 360
   m_PointLightInnerRadius: 0
@@ -11168,7 +11168,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 0}
-  m_AnchoredPosition: {x: 0, y: 13.250001}
+  m_AnchoredPosition: {x: 0, y: 13.249849}
   m_SizeDelta: {x: -0.00005882906, y: 0}
   m_Pivot: {x: 0, y: 0.05}
 --- !u!114 &1752166573
@@ -15319,8 +15319,8 @@ MonoBehaviour:
   m_ShadowVolumeIntensityEnabled: 0
   m_ShadowVolumeIntensity: 0.75
   m_LocalBounds:
-    m_Center: {x: 0.002550006, y: 0.0013000369, z: 0}
-    m_Extent: {x: 1.08325, y: 1.0871999, z: 0}
+    m_Center: {x: -0.0052999854, y: -0.0026999712, z: 0}
+    m_Extent: {x: 1.0818, y: 1.0835, z: 0}
   m_PointLightInnerAngle: 360
   m_PointLightOuterAngle: 360
   m_PointLightInnerRadius: 0
@@ -16936,6 +16936,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 126417435376145841, guid: 2cfde306b17adc04cbc1885179a6cf1c, type: 3}
+      propertyPath: currRoom
+      value: 
+      objectReference: {fileID: 105583874}
     - target: {fileID: 126417435376145841, guid: 2cfde306b17adc04cbc1885179a6cf1c, type: 3}
       propertyPath: currView
       value: 
