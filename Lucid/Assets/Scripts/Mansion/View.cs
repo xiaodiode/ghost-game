@@ -25,7 +25,7 @@ public class View : MonoBehaviour
     void Start()
     {
         yCameraPosition = view.anchoredPosition.y;
-        Debug.Log("yCameraPosition: " + yCameraPosition);
+        // Debug.Log("yCameraPosition: " + yCameraPosition);
 
         adjustLayerWidths();
         updateFurniturePos(botFurniture, botWidth, botLayer);
@@ -42,6 +42,13 @@ public class View : MonoBehaviour
     }
 
     private void adjustLayerWidths(){
+        float oldBotX, oldMidX, oldTopX;
+
+        oldBotX = wallLayer.anchoredPosition.x;
+        oldMidX = wallLayer.anchoredPosition.x;
+        oldTopX = wallLayer.anchoredPosition.x;
+        Debug.Log("oldBotX, oldMidX, oldTopX: " + oldBotX + " " + oldMidX + " " + oldTopX);
+
         roomWidth = wallLayer.rect.width;  
 
         /* extend bot, mid, and top layer lengths 
@@ -50,16 +57,16 @@ public class View : MonoBehaviour
         midOffset = 3*botOffset;
         topOffset = 3*midOffset;
 
-        if(isLeft){
+        // if(isLeft){
             botWidth = roomWidth + botOffset;
             midWidth = roomWidth + midOffset;
             topWidth = roomWidth + topOffset;    
-        }
-        else{
-            botWidth = roomWidth - botOffset;
-            midWidth = roomWidth - midOffset;
-            topWidth = roomWidth - topOffset;
-        }
+        // }
+        // else{
+        //     botWidth = roomWidth - botOffset;
+        //     midWidth = roomWidth - midOffset;
+        //     topWidth = roomWidth - topOffset;
+        // }
         
 
         /* update layer lengths in game */
@@ -70,10 +77,36 @@ public class View : MonoBehaviour
         newBotOffset.x = botWidth;
         newMidOffset.x = midWidth;
         newTopOffset.x = topWidth;
+        // Debug.Log("botwidth, midwidth, topwidth: " + botWidth + midWidth + topWidth);
 
         botLayer.offsetMax = newBotOffset;
         midLayer.offsetMax = newMidOffset;
         topLayer.offsetMax = newTopOffset;
+
+        if(!isLeft){
+            float newBotX, newMidX, newTopX; 
+            Vector2 newBot, newMid, newTop;
+
+            newBot = botLayer.anchoredPosition;
+            newMid = midLayer.anchoredPosition;
+            newTop = topLayer.anchoredPosition;
+
+            newBotX = botLayer.anchoredPosition.x;
+            newMidX = midLayer.anchoredPosition.x;
+            newTopX = topLayer.anchoredPosition.x;
+
+            newBotX = newBotX - 2*(newBotX - oldBotX);
+            newMidX = newMidX - 2*(newMidX - oldMidX);
+            newTopX = newTopX - 2*(newTopX - oldTopX);
+
+            newBot.x = newBotX;
+            newMid.x = newMidX;
+            newTop.x = newTopX;
+
+            botLayer.anchoredPosition = newBot;
+            midLayer.anchoredPosition = newMid;
+            topLayer.anchoredPosition = newTop;
+        }
     }
 
     private void updateFurniturePos(List<RectTransform> furnitureList, float newWidth, RectTransform newLayer){
@@ -85,7 +118,8 @@ public class View : MonoBehaviour
             
             // scale x position to new layer length
             oldX = position.x;
-            newX = newWidth*(oldX / roomWidth);    
+            newX = newWidth*(oldX / roomWidth);
+            
             // Debug.Log("new X position: " + newX);
 
             // update furniture position
