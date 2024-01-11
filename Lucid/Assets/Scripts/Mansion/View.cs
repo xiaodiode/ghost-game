@@ -32,6 +32,10 @@ public class View : MonoBehaviour
         updateFurniturePos(botFurniture, botWidth, botLayer);
         updateFurniturePos(midFurniture, midWidth, midLayer);
         updateFurniturePos(topFurniture, topWidth, topLayer);
+        if(!isLeft){
+            translateRightView();
+        }
+        
 
         ready = true; // signal to scene controller that all layers and furniture are ready for movement
     }   
@@ -70,9 +74,9 @@ public class View : MonoBehaviour
         midLayer.offsetMax = newMidOffset;
         topLayer.offsetMax = newTopOffset;
 
-        if(!isLeft){
-            translateRightView();
-        }
+        // if(!isLeft){
+        //     translateRightView();
+        // }
 
     }
 
@@ -113,6 +117,10 @@ public class View : MonoBehaviour
             // scale x position to new layer length
             oldX = position.x;
             newX = newWidth*(oldX / roomWidth);
+
+            // if(!isLeft){
+            //     newX = newX - roomWidth + cameraWidth;
+            // }
             
             // Debug.Log("new X position: " + newX);
 
