@@ -3025,6 +3025,7 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 638326995}
+  - {fileID: 1085291929}
   m_Father: {fileID: 1345681261}
   m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -4643,11 +4644,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 71d687851a61c6d409b628bf297e3754, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  playerCanvas: {fileID: 437723791}
   player: {fileID: 638326995}
   sceneController: {fileID: 1063774803}
   lockMovement: 0
   playerXMin: 0
   playerXMax: 0
+  playerXCenter: 0
   playerSpeed: 0
   monologueText: {fileID: 258231420}
   narrativeLog: {fileID: 1097840901}
@@ -7526,14 +7529,14 @@ RectTransform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1085291928}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: -5399.9995}
-  m_LocalScale: {x: 1, y: 1, z: 54}
+  m_LocalPosition: {x: 0, y: 0, z: -4752.373}
+  m_LocalScale: {x: 1, y: 1, z: 47.523735}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1767895281}
   - {fileID: 519420032}
   - {fileID: 306307846}
-  m_Father: {fileID: 1345681261}
+  m_Father: {fileID: 437723791}
   m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
@@ -8999,7 +9002,6 @@ RectTransform:
   - {fileID: 412688280}
   - {fileID: 2089785412}
   - {fileID: 437723791}
-  - {fileID: 1085291929}
   m_Father: {fileID: 0}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -11038,8 +11040,8 @@ MonoBehaviour:
   m_ShadowVolumeIntensityEnabled: 0
   m_ShadowVolumeIntensity: 0.75
   m_LocalBounds:
-    m_Center: {x: -1.3247452, y: 0.2961998, z: 0}
-    m_Extent: {x: 192.17856, y: 96.1078, z: 0}
+    m_Center: {x: -1.3339539, y: 0.30274963, z: 0}
+    m_Extent: {x: 192.17995, y: 96.09845, z: 0}
   m_PointLightInnerAngle: 360
   m_PointLightOuterAngle: 360
   m_PointLightInnerRadius: 0
@@ -11168,7 +11170,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 0}
-  m_AnchoredPosition: {x: 0, y: 13.249998}
+  m_AnchoredPosition: {x: 0, y: 13.249999}
   m_SizeDelta: {x: -0.00005882906, y: 0}
   m_Pivot: {x: 0, y: 0.05}
 --- !u!114 &1752166573
@@ -15319,8 +15321,8 @@ MonoBehaviour:
   m_ShadowVolumeIntensityEnabled: 0
   m_ShadowVolumeIntensity: 0.75
   m_LocalBounds:
-    m_Center: {x: -0.0036000013, y: -0.0022000074, z: 0}
-    m_Extent: {x: 1.0802, y: 1.0877, z: 0}
+    m_Center: {x: -0.00090003014, y: 0.0009999871, z: 0}
+    m_Extent: {x: 1.0799, y: 1.0841999, z: 0}
   m_PointLightInnerAngle: 360
   m_PointLightOuterAngle: 360
   m_PointLightInnerRadius: 0

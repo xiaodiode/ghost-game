@@ -1,6 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
-using System.Runtime.CompilerServices;
 using TMPro;
 using UnityEngine;
 
@@ -8,11 +5,12 @@ public class PlayerController : MonoBehaviour
 {
     const float cameraWidth = 640;
 
+    [SerializeField] public RectTransform playerCanvas;
     [SerializeField] public RectTransform player;
     [SerializeField] public SceneController sceneController;
     [SerializeField] public bool lockMovement;
 
-    [SerializeField] private float playerXMin, playerXMax;
+    [SerializeField] private float playerXMin, playerXMax, playerXCenter;
     [SerializeField] private float playerSpeed;
     [SerializeField] private RectTransform monologueText;
     [SerializeField] private RectTransform narrativeLog;
@@ -27,6 +25,7 @@ public class PlayerController : MonoBehaviour
     {
         playerXMin = player.anchoredPosition.x;
         playerXMax = cameraWidth - playerXMin;
+        playerXCenter = cameraWidth/2;
 
         playerSpeed = sceneController.baseSpeed;
 
@@ -42,24 +41,7 @@ public class PlayerController : MonoBehaviour
             if(verticalInput < 0 && player.localScale.x > 0 ||
                     verticalInput > 0 && player.localScale.x < 0){
                 
-                playerScale = player.localScale;
-                playerScale.x = -playerScale.x;
-
-                // flipping player also flips all character ui, so must flip back
-                monologueScale = monologueText.localScale;
-                monologueScale.x = -monologueScale.x;
-
-                logScale = narrativeLog.localScale;
-                logScale.x = -logScale.x;
-
-                inputScale = demonInput.localScale;
-                inputScale.x = -inputScale.x;
-
-                // update all scales to flip 
-                player.transform.localScale = playerScale;
-                monologueText.localScale = monologueScale;
-                narrativeLog.localScale = logScale;
-                demonInput.localScale = inputScale;
+                flipPlayer();
             }
             
             horizontalMovement();
@@ -81,11 +63,57 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    private void OnViewLeft(){
+    private void flipPlayer(){
+        playerScale = player.localScale;
+        playerScale.x = -playerScale.x;
+
+        // flipping player also flips all character ui, so must flip back
+        monologueScale = monologueText.localScale;
+        monologueScale.x = -monologueScale.x;
+
+        logScale = narrativeLog.localScale;
+        logScale.x = -logScale.x;
+
+        inputScale = demonInput.localScale;
+        inputScale.x = -inputScale.x;
+
+        // update all scales to flip 
+        player.transform.localScale = playerScale;
+        monologueText.localScale = monologueScale;
+        narrativeLog.localScale = logScale;
+        demonInput.localScale = inputScale;
+    }
+
+    private void OnGoLeftRoom(){
 
     }
 
-    private void OnViewRight(){
+    private void OnGoRightRoom(){
         
+    }
+
+    private void OnSwitchViews(){   
+        Vector2 newCameraPos = playerCanvas.anchoredPosition;
+        Vector2 currPlayerPos = player.anchoredPosition;
+
+        float newCameraY = sceneController.otherView.yCameraPosition;
+        float newPlayerX;
+        
+        newCameraPos.y = newCameraY;
+
+        playerCanvas.anchoredPosition = newCameraPos;
+        flipPlayer();
+
+        if(currPlayerPos.x < playerXCenter){
+            newPlayerX = playerXCenter + (playerXCenter - currPlayerPos.x);
+        }
+        else{
+            newPlayerX = playerXCenter - (currPlayerPos.x - playerXCenter);
+        }
+
+        currPlayerPos.x = newPlayerX;
+        player.anchoredPosition = currPlayerPos;
+
+        sceneController.switchViews();
     }
 }

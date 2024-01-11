@@ -146,4 +146,13 @@ public class SceneController : MonoBehaviour
 
         layer.anchoredPosition = newPosition;
     }
+
+    // update the view variables
+    public void switchViews(){
+        View tempView = currView;
+
+        currView = otherView;
+        otherView = tempView;
+
+    }
 }

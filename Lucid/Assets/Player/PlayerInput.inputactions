@@ -6,7 +6,7 @@
             "id": "7925b91d-519a-4e09-aed1-937bb38e6696",
             "actions": [
                 {
-                    "name": "ViewLeft",
+                    "name": "GoLeftRoom",
                     "type": "Button",
                     "id": "be791b08-ff7f-405c-b479-5f62e47b88dc",
                     "expectedControlType": "Button",
@@ -15,9 +15,18 @@
                     "initialStateCheck": false
                 },
                 {
-                    "name": "ViewRight",
+                    "name": "GoRightRoom",
                     "type": "Button",
                     "id": "2602cd08-001d-41a6-8a07-24f9b44fa622",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "SwitchViews",
+                    "type": "Button",
+                    "id": "dc35dc25-3cb3-42d6-8b49-5fde97be9e83",
                     "expectedControlType": "Button",
                     "processors": "",
                     "interactions": "",
@@ -32,7 +41,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "ViewLeft",
+                    "action": "GoLeftRoom",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
@@ -43,7 +52,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "ViewLeft",
+                    "action": "GoLeftRoom",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
@@ -54,7 +63,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "ViewRight",
+                    "action": "GoRightRoom",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
@@ -65,7 +74,18 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "ViewRight",
+                    "action": "GoRightRoom",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "fe4591e1-5f75-43ad-91ab-9f37ae4ab80d",
+                    "path": "<Mouse>/rightButton",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "SwitchViews",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }
