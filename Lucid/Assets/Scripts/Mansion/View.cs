@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class View : MonoBehaviour
 {
+    const float cameraWidth = 640;
     [SerializeField] public bool ready = false;
     [SerializeField] public bool isLeft;
     [SerializeField] public RectTransform view;
@@ -27,7 +28,7 @@ public class View : MonoBehaviour
         yCameraPosition = view.anchoredPosition.y;
         // Debug.Log("yCameraPosition: " + yCameraPosition);
 
-        adjustLayerWidths();
+        adjustLayers();
         updateFurniturePos(botFurniture, botWidth, botLayer);
         updateFurniturePos(midFurniture, midWidth, midLayer);
         updateFurniturePos(topFurniture, topWidth, topLayer);
@@ -41,10 +42,7 @@ public class View : MonoBehaviour
         
     }
 
-    private void adjustLayerWidths(){
-        float wallX;
-
-        wallX = wallLayer.anchoredPosition.x;
+    private void adjustLayers(){
         roomWidth = wallLayer.rect.width;  
 
         /* extend bot, mid, and top layer lengths 
@@ -73,30 +71,36 @@ public class View : MonoBehaviour
         topLayer.offsetMax = newTopOffset;
 
         if(!isLeft){
-            float newBotX, newMidX, newTopX; 
-            Vector2 newBot, newMid, newTop;
-
-            newBot = botLayer.anchoredPosition;
-            newMid = midLayer.anchoredPosition;
-            newTop = topLayer.anchoredPosition;
-
-            newBotX = botLayer.anchoredPosition.x;
-            newMidX = midLayer.anchoredPosition.x;
-            newTopX = topLayer.anchoredPosition.x;
-
-            //update X anchored positions to the left of wall for right view
-            newBotX = newBotX - 2*(newBotX - wallX);
-            newMidX = newMidX - 2*(newMidX - wallX);
-            newTopX = newTopX - 2*(newTopX - wallX);
-
-            newBot.x = newBotX;
-            newMid.x = newMidX;
-            newTop.x = newTopX;
-
-            botLayer.anchoredPosition = newBot;
-            midLayer.anchoredPosition = newMid;
-            topLayer.anchoredPosition = newTop;
+            translateRightView();
         }
+
+    }
+
+    private void translateRightView(){
+        float wallX = wallLayer.anchoredPosition.x;
+        float newWallX, newBotX, newMidX, newTopX; 
+        Vector2 newWall, newBot, newMid, newTop;
+
+        newWall = wallLayer.anchoredPosition;
+        newBot = botLayer.anchoredPosition;
+        newMid = midLayer.anchoredPosition;
+        newTop = topLayer.anchoredPosition;
+        
+        //update X anchored positions to the left of wall for right view
+        newWallX = newWall.x - roomWidth + cameraWidth;
+        newBotX = newBot.x - 2*(newBot.x - wallX) - botWidth + cameraWidth;;
+        newMidX = newMid.x - 2*(newMid.x - wallX) - botWidth + cameraWidth;;
+        newTopX = newTop.x - 2*(newTop.x - wallX) - botWidth + cameraWidth;;
+
+        newWall.x = newWallX;
+        newBot.x = newBotX;
+        newMid.x = newMidX;
+        newTop.x = newTopX;
+
+        wallLayer.anchoredPosition = newWall;
+        botLayer.anchoredPosition = newBot;
+        midLayer.anchoredPosition = newMid;
+        topLayer.anchoredPosition = newTop;
     }
 
     private void updateFurniturePos(List<RectTransform> furnitureList, float newWidth, RectTransform newLayer){
