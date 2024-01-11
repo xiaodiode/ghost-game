@@ -38,8 +38,10 @@ public class PlayerController : MonoBehaviour
         // Debug.Log("lockmovement: " + lockMovement);
         if(!lockMovement){
             verticalInput = Input.GetAxis("Vertical");
-            if(verticalInput < 0 && player.localScale.x > 0 ||
-                    verticalInput > 0 && player.localScale.x < 0){
+            if((sceneController.isLeftView && verticalInput < 0 && player.localScale.x > 0) ||
+                    (sceneController.isLeftView && verticalInput > 0 && player.localScale.x < 0) ||
+                    (!sceneController.isLeftView && verticalInput > 0 && player.localScale.x > 0) ||
+                    (!sceneController.isLeftView && verticalInput < 0 && player.localScale.x < 0)){
                 
                 flipPlayer();
             }
@@ -55,7 +57,14 @@ public class PlayerController : MonoBehaviour
             
             if(verticalInput!=0){
                 move.x = verticalInput*playerSpeed*Time.deltaTime;
-                newPosition = player.anchoredPosition + move;
+
+                if(sceneController.isLeftView){
+                    newPosition = player.anchoredPosition + move;    
+                }
+                else{
+                    newPosition = player.anchoredPosition - move; 
+                }
+                
                 newPosition.x = Mathf.Clamp(newPosition.x, playerXMin, playerXMax);
                 
                 player.anchoredPosition = newPosition;

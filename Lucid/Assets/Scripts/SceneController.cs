@@ -17,7 +17,7 @@ public class SceneController : MonoBehaviour
     [SerializeField] public float baseSpeed;
     
     [SerializeField] private float botSpeed, midSpeed, topSpeed;
-    [SerializeField] private float startPosition, endPosition;
+    [SerializeField] private float startLeftPos, endLeftPos, startRightPos, endRightPos;
     private Vector2 move = Vector2.zero;
     private Vector2 newPosition;
     private float baseTime;
@@ -60,9 +60,6 @@ public class SceneController : MonoBehaviour
         midSpeed = (currView.midWidth - cameraWidth) / baseTime;
         topSpeed = (currView.topWidth - cameraWidth) / baseTime;
 
-        startPosition = currView.wallLayer.anchoredPosition.x;
-        endPosition = startPosition - currView.roomWidth + cameraWidth;
-
         lockMovement = false;
 
         // checks if current view is left/right and initializes the other view of room
@@ -74,20 +71,29 @@ public class SceneController : MonoBehaviour
             isLeftView = false;
             otherView = currRoom.leftView;
         }
+
+        startLeftPos = currView.wallLayer.anchoredPosition.x;
+        endLeftPos = startLeftPos - currView.roomWidth + cameraWidth;
+
+        startRightPos = otherView.wallLayer.anchoredPosition.x;
+        endRightPos = startRightPos - otherView.roomWidth + cameraWidth;
+        // Debug.Log("startRightPos: " + startRightPos + " endrightpos: " + endRightPos);
     }
 
     private void updateSceneMovement(){
         verticalInput = Input.GetAxis("Vertical");
         
-        if(currView.wallLayer.anchoredPosition.x == endPosition && verticalInput>=0){
+        if((isLeftView && currView.wallLayer.anchoredPosition.x == endLeftPos && verticalInput>=0) || 
+            (!isLeftView && currView.wallLayer.anchoredPosition.x == endLeftPos && verticalInput<=0)){
             atRightEdge = true;
             isMoving = false;
-            // Debug.Log("at right edge");
+            Debug.Log("at right edge");
         }
-        else if(currView.wallLayer.anchoredPosition.x == startPosition && verticalInput<=0){
+        else if((isLeftView && currView.wallLayer.anchoredPosition.x == startLeftPos && verticalInput<=0) ||
+            (!isLeftView && currView.wallLayer.anchoredPosition.x == startLeftPos && verticalInput>=0)){
             atLeftEdge = true;
             isMoving = false;
-            // Debug.Log("at left edge");
+            Debug.Log("at left edge");
         }
         else{
             atRightEdge = false;
@@ -97,15 +103,15 @@ public class SceneController : MonoBehaviour
                 isMoving = true;
 
                 // moves the layers of the current room's left and right layers
-                updateLayerPosition(true, baseSpeed, currView.wallLayer, currView.roomWidth);
-                updateLayerPosition(true, botSpeed, currView.botLayer, currView.botWidth);
-                updateLayerPosition(true, midSpeed, currView.midLayer, currView.midWidth);
-                updateLayerPosition(true, topSpeed, currView.topLayer, currView.topWidth);
+                updateLayerPosition(currView.isLeft, baseSpeed, currView.wallLayer, currView.roomWidth);
+                updateLayerPosition(currView.isLeft, botSpeed, currView.botLayer, currView.botWidth);
+                updateLayerPosition(currView.isLeft, midSpeed, currView.midLayer, currView.midWidth);
+                updateLayerPosition(currView.isLeft, topSpeed, currView.topLayer, currView.topWidth);
 
-                updateLayerPosition(false, baseSpeed, otherView.wallLayer, otherView.roomWidth);
-                updateLayerPosition(false, botSpeed, otherView.botLayer, otherView.botWidth);
-                updateLayerPosition(false, midSpeed, otherView.midLayer, otherView.midWidth);
-                updateLayerPosition(false, topSpeed, otherView.topLayer, otherView.topWidth);
+                updateLayerPosition(otherView.isLeft, baseSpeed, otherView.wallLayer, otherView.roomWidth);
+                updateLayerPosition(otherView.isLeft, botSpeed, otherView.botLayer, otherView.botWidth);
+                updateLayerPosition(otherView.isLeft, midSpeed, otherView.midLayer, otherView.midWidth);
+                updateLayerPosition(otherView.isLeft, topSpeed, otherView.topLayer, otherView.topWidth);
                 
             }
             else{
@@ -154,5 +160,6 @@ public class SceneController : MonoBehaviour
         currView = otherView;
         otherView = tempView;
 
+        isLeftView = !isLeftView;
     }
 }
