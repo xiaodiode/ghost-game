@@ -953,6 +953,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 105583873}
+  - component: {fileID: 105583874}
   m_Layer: 0
   m_Name: Living Room
   m_TagString: Untagged
@@ -982,6 +983,22 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &105583874
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 105583872}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1af75214f643e254c84fcb7314f46647, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  leftView: {fileID: 68363338}
+  rightView: {fileID: 427449309}
+  leftRoom: {fileID: 1386314712}
+  rightRoom: {fileID: 765978630}
 --- !u!1 &116420907
 GameObject:
   m_ObjectHideFlags: 0
@@ -5621,6 +5638,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 765978629}
+  - component: {fileID: 765978630}
   m_Layer: 0
   m_Name: Bedroom
   m_TagString: Untagged
@@ -5650,6 +5668,22 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &765978630
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 765978628}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1af75214f643e254c84fcb7314f46647, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  leftView: {fileID: 1406959163}
+  rightView: {fileID: 417912331}
+  leftRoom: {fileID: 105583874}
+  rightRoom: {fileID: 1386314712}
 --- !u!1 &811870518
 GameObject:
   m_ObjectHideFlags: 0
@@ -6468,7 +6502,7 @@ MonoBehaviour:
   m_HandleRect: {fileID: 1157257303}
   m_Direction: 2
   m_Value: 0
-  m_Size: 0.9999946
+  m_Size: 1
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:
@@ -9161,7 +9195,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ready: 0
-  isLeft: 0
+  isLeft: 1
   view: {fileID: 1366592635}
   yCameraPosition: 0
   roomWidth: 0
@@ -9193,6 +9227,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1386314711}
+  - component: {fileID: 1386314712}
   m_Layer: 0
   m_Name: Bathroom
   m_TagString: Untagged
@@ -9222,6 +9257,22 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &1386314712
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1386314710}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1af75214f643e254c84fcb7314f46647, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  leftView: {fileID: 1366592636}
+  rightView: {fileID: 831940863}
+  leftRoom: {fileID: 765978630}
+  rightRoom: {fileID: 105583874}
 --- !u!1 &1399992972
 GameObject:
   m_ObjectHideFlags: 0
@@ -9543,7 +9594,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ready: 0
-  isLeft: 0
+  isLeft: 1
   view: {fileID: 1406959162}
   yCameraPosition: 0
   roomWidth: 0
@@ -10987,8 +11038,8 @@ MonoBehaviour:
   m_ShadowVolumeIntensityEnabled: 0
   m_ShadowVolumeIntensity: 0.75
   m_LocalBounds:
-    m_Center: {x: -1.3308487, y: 0.3036995, z: 0}
-    m_Extent: {x: 192.17725, y: 96.1077, z: 0}
+    m_Center: {x: -1.3322525, y: 0.3043518, z: 0}
+    m_Extent: {x: 192.17535, y: 96.10475, z: 0}
   m_PointLightInnerAngle: 360
   m_PointLightOuterAngle: 360
   m_PointLightInnerRadius: 0
@@ -11117,7 +11168,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 0}
-  m_AnchoredPosition: {x: 0, y: 13.249997}
+  m_AnchoredPosition: {x: 0, y: 13.250001}
   m_SizeDelta: {x: -0.00005882906, y: 0}
   m_Pivot: {x: 0, y: 0.05}
 --- !u!114 &1752166573
@@ -15268,8 +15319,8 @@ MonoBehaviour:
   m_ShadowVolumeIntensityEnabled: 0
   m_ShadowVolumeIntensity: 0.75
   m_LocalBounds:
-    m_Center: {x: -0.0015000105, y: -0.0036000013, z: 0}
-    m_Extent: {x: 1.0884, y: 1.0851, z: 0}
+    m_Center: {x: 0.002550006, y: 0.0013000369, z: 0}
+    m_Extent: {x: 1.08325, y: 1.0871999, z: 0}
   m_PointLightInnerAngle: 360
   m_PointLightOuterAngle: 360
   m_PointLightInnerRadius: 0
