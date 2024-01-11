@@ -88,9 +88,9 @@ public class View : MonoBehaviour
         
         //update X anchored positions to the left of wall for right view
         newWallX = newWall.x - roomWidth + cameraWidth;
-        newBotX = newBot.x - 2*(newBot.x - wallX) - botWidth + cameraWidth;;
-        newMidX = newMid.x - 2*(newMid.x - wallX) - botWidth + cameraWidth;;
-        newTopX = newTop.x - 2*(newTop.x - wallX) - botWidth + cameraWidth;;
+        newBotX = newBot.x - 2*(newBot.x - wallX) - roomWidth + cameraWidth;;
+        newMidX = newMid.x - 2*(newMid.x - wallX) - roomWidth + cameraWidth;;
+        newTopX = newTop.x - 2*(newTop.x - wallX) - roomWidth + cameraWidth;;
 
         newWall.x = newWallX;
         newBot.x = newBotX;
