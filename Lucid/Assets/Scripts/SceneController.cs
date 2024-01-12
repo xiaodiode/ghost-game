@@ -87,13 +87,13 @@ public class SceneController : MonoBehaviour
             (!isLeftView && currView.wallLayer.anchoredPosition.x == playerEndPos && verticalInput<=0)){
             atRightEdge = true;
             isMoving = false;
-            // Debug.Log("at right edge");
+            Debug.Log("at right edge");
         }
         else if((isLeftView && currView.wallLayer.anchoredPosition.x == playerStartPos && verticalInput<=0) ||
             (!isLeftView && currView.wallLayer.anchoredPosition.x == playerStartPos && verticalInput>=0)){
             atLeftEdge = true;
             isMoving = false;
-            // Debug.Log("at left edge");
+            Debug.Log("at left edge");
         }
         else{
             atRightEdge = false;
@@ -139,17 +139,6 @@ public class SceneController : MonoBehaviour
         layer.anchoredPosition = newPosition;
     }
 
-    private void resetLayersLeft(View view){
-        
-    }
-
-    private void resetLayersRight(RectTransform layer, float layerWidth){
-        newPosition = layer.anchoredPosition;
-        newPosition.x = -layerWidth/2 + cameraWidth;
-
-        layer.anchoredPosition = newPosition;
-    }
-
     // update the view variables
     public void switchViews(){
         View tempView = currView;
@@ -163,9 +152,13 @@ public class SceneController : MonoBehaviour
     public void switchRooms(bool isLeft){
         if(isLeft){
             currRoom = currRoom.leftRoom;
+            atLeftEdge = false;
+            atRightEdge = true;
         }
         else{
             currRoom = currRoom.rightRoom;
+            atRightEdge = false;
+            atLeftEdge = true;
         }
 
         if(isLeftView){

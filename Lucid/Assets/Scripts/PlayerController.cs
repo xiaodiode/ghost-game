@@ -80,7 +80,7 @@ public class PlayerController : MonoBehaviour
             (!sceneController.isLeftView && sceneController.atRightEdge && player.anchoredPosition.x == playerXMax)){
 
             canEnterLeft = true;
-            Debug.Log("canenterLeft");
+            // Debug.Log("canenterLeft");
         }
         else if((sceneController.isLeftView && sceneController.atRightEdge && player.anchoredPosition.x == playerXMax) ||
             (!sceneController.isLeftView && sceneController.atLeftEdge && player.anchoredPosition.x == playerXMin)){
@@ -91,7 +91,7 @@ public class PlayerController : MonoBehaviour
             canEnterLeft = false;
             canEnterRight = false;
         }
-        Debug.Log("canEnterLeft: " + canEnterLeft);
+        // Debug.Log("canEnterLeft: " + canEnterLeft);
     }
 
     private void flipPlayer(){
@@ -116,23 +116,17 @@ public class PlayerController : MonoBehaviour
     }
 
     private void OnGoLeftRoom(){
-        if(canEnterLeft){
-            Vector2 newCameraPos = playerCanvas.anchoredPosition;
-            Vector2 newPlayerPos = player.anchoredPosition;
+        Vector2 newCameraPos = playerCanvas.anchoredPosition;
+        Vector2 newPlayerPos = player.anchoredPosition;
 
-            float newCameraY;
-            
+        float newCameraY = 0;
+        
+        if(canEnterLeft){
             if(sceneController.isLeftView){
                 sceneController.currRoom.leftRoom.leftView.shiftLayersLeft();
                 sceneController.currRoom.leftRoom.rightView.shiftLayersRight();
 
                 newCameraY = sceneController.currRoom.leftRoom.leftView.yCameraPosition;
-            }
-            else{
-                sceneController.currRoom.leftRoom.rightView.shiftLayersLeft();
-                sceneController.currRoom.leftRoom.leftView.shiftLayersRight();
-
-                newCameraY = sceneController.currRoom.leftRoom.rightView.yCameraPosition;
             }
 
             newCameraPos.y = newCameraY;
@@ -143,10 +137,62 @@ public class PlayerController : MonoBehaviour
 
             sceneController.switchRooms(true);
         }
+        else if(canEnterRight){
+            if(!sceneController.isLeftView){
+                sceneController.currRoom.rightRoom.rightView.shiftLayersLeft();
+                sceneController.currRoom.rightRoom.leftView.shiftLayersRight();
+
+                newCameraY = sceneController.currRoom.rightRoom.rightView.yCameraPosition;
+            }
+
+            newCameraPos.y = newCameraY;
+            newPlayerPos.x = playerXMax;
+
+            playerCanvas.anchoredPosition = newCameraPos;
+            player.anchoredPosition = newPlayerPos;
+
+            sceneController.switchRooms(false);
+        }
     }
 
     private void OnGoRightRoom(){
-        
+        Vector2 newCameraPos = playerCanvas.anchoredPosition;
+        Vector2 newPlayerPos = player.anchoredPosition;
+
+        float newCameraY = 0;
+
+        if(canEnterRight){
+            if(sceneController.isLeftView){
+                sceneController.currRoom.rightRoom.leftView.shiftLayersRight();
+                sceneController.currRoom.rightRoom.rightView.shiftLayersLeft();
+
+                newCameraY = sceneController.currRoom.rightRoom.leftView.yCameraPosition;
+            }
+
+            newCameraPos.y = newCameraY;
+            newPlayerPos.x = playerXMin;
+
+            playerCanvas.anchoredPosition = newCameraPos;
+            player.anchoredPosition = newPlayerPos;
+
+            sceneController.switchRooms(false);
+        }
+        else if(canEnterLeft){
+            if(!sceneController.isLeftView){
+                sceneController.currRoom.leftRoom.rightView.shiftLayersRight();
+                sceneController.currRoom.leftRoom.leftView.shiftLayersLeft();
+
+                newCameraY = sceneController.currRoom.leftRoom.rightView.yCameraPosition;
+            }
+
+            newCameraPos.y = newCameraY;
+            newPlayerPos.x = playerXMin;
+
+            playerCanvas.anchoredPosition = newCameraPos;
+            player.anchoredPosition = newPlayerPos;
+
+            sceneController.switchRooms(true);
+        }
     }
 
     private void OnSwitchViews(){   
