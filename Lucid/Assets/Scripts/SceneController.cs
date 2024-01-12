@@ -7,6 +7,7 @@ public class SceneController : MonoBehaviour
 {   
     const float cameraWidth = 640;
 
+    [SerializeField] public Mansion mansion;
     [SerializeField] public Room currRoom;
     [SerializeField] public View currView;
     [SerializeField] public View otherView;
@@ -15,9 +16,10 @@ public class SceneController : MonoBehaviour
     [SerializeField] public bool lockMovement;
     [SerializeField] public bool isMoving;
     [SerializeField] public float baseSpeed;
-    
+    [SerializeField] public float playerStartPos, playerEndPos;
+
     [SerializeField] private float botSpeed, midSpeed, topSpeed;
-    [SerializeField] private float startLeftPos, endLeftPos, startRightPos, endRightPos;
+    
     private Vector2 move = Vector2.zero;
     private Vector2 newPosition;
     private float baseTime;
@@ -72,28 +74,26 @@ public class SceneController : MonoBehaviour
             otherView = currRoom.leftView;
         }
 
-        startLeftPos = currView.wallLayer.anchoredPosition.x;
-        endLeftPos = startLeftPos - currView.roomWidth + cameraWidth;
+        playerStartPos = currView.wallLayer.anchoredPosition.x;
+        playerEndPos = playerStartPos - currView.roomWidth + cameraWidth;
 
-        startRightPos = otherView.wallLayer.anchoredPosition.x;
-        endRightPos = startRightPos - otherView.roomWidth + cameraWidth;
         // Debug.Log("startRightPos: " + startRightPos + " endrightpos: " + endRightPos);
     }
 
     private void updateSceneMovement(){
         verticalInput = Input.GetAxis("Vertical");
         
-        if((isLeftView && currView.wallLayer.anchoredPosition.x == endLeftPos && verticalInput>=0) || 
-            (!isLeftView && currView.wallLayer.anchoredPosition.x == endLeftPos && verticalInput<=0)){
+        if((isLeftView && currView.wallLayer.anchoredPosition.x == playerEndPos && verticalInput>=0) || 
+            (!isLeftView && currView.wallLayer.anchoredPosition.x == playerEndPos && verticalInput<=0)){
             atRightEdge = true;
             isMoving = false;
-            Debug.Log("at right edge");
+            // Debug.Log("at right edge");
         }
-        else if((isLeftView && currView.wallLayer.anchoredPosition.x == startLeftPos && verticalInput<=0) ||
-            (!isLeftView && currView.wallLayer.anchoredPosition.x == startLeftPos && verticalInput>=0)){
+        else if((isLeftView && currView.wallLayer.anchoredPosition.x == playerStartPos && verticalInput<=0) ||
+            (!isLeftView && currView.wallLayer.anchoredPosition.x == playerStartPos && verticalInput>=0)){
             atLeftEdge = true;
             isMoving = false;
-            Debug.Log("at left edge");
+            // Debug.Log("at left edge");
         }
         else{
             atRightEdge = false;
@@ -139,11 +139,8 @@ public class SceneController : MonoBehaviour
         layer.anchoredPosition = newPosition;
     }
 
-    private void resetLayersLeft(RectTransform layer, float layerWidth){
-        newPosition = layer.anchoredPosition;
-        newPosition.x = layerWidth/2;
-
-        layer.anchoredPosition = newPosition;
+    private void resetLayersLeft(View view){
+        
     }
 
     private void resetLayersRight(RectTransform layer, float layerWidth){
@@ -162,4 +159,24 @@ public class SceneController : MonoBehaviour
 
         isLeftView = !isLeftView;
     }
+
+    public void switchRooms(bool isLeft){
+        if(isLeft){
+            currRoom = currRoom.leftRoom;
+        }
+        else{
+            currRoom = currRoom.rightRoom;
+        }
+
+        if(isLeftView){
+            currView = currRoom.leftView;
+            otherView = currRoom.rightView;    
+        }
+        else{
+            currView = currRoom.rightView;
+            otherView = currRoom.leftView;    
+        }
+    }
+
+    
 }

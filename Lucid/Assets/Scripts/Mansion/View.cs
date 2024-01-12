@@ -18,6 +18,8 @@ public class View : MonoBehaviour
     [SerializeField] private List<RectTransform> topFurniture = new();
 
     
+    
+    private Vector2 baseWall, baseBot, baseMid, baseTop;
 
     private float botOffset, midOffset, topOffset;
     private Vector2 newBotOffset, newMidOffset, newTopOffset;
@@ -26,6 +28,7 @@ public class View : MonoBehaviour
     void Start()
     {
         yCameraPosition = view.anchoredPosition.y;
+
         // Debug.Log("yCameraPosition: " + yCameraPosition);
 
         adjustLayers();
@@ -33,7 +36,7 @@ public class View : MonoBehaviour
         updateFurniturePos(midFurniture, midWidth, midLayer);
         updateFurniturePos(topFurniture, topWidth, topLayer);
         if(!isLeft){
-            translateRightView();
+            shiftLayersLeft();
         }
         
 
@@ -74,27 +77,26 @@ public class View : MonoBehaviour
         midLayer.offsetMax = newMidOffset;
         topLayer.offsetMax = newTopOffset;
 
-        // if(!isLeft){
-        //     translateRightView();
-        // }
-
+        baseWall = wallLayer.anchoredPosition;
+        baseBot = botLayer.anchoredPosition;
+        baseMid = midLayer.anchoredPosition;
+        baseTop = topLayer.anchoredPosition;
     }
 
-    private void translateRightView(){
-        float wallX = wallLayer.anchoredPosition.x;
+    public void shiftLayersLeft(){
         float newWallX, newBotX, newMidX, newTopX; 
         Vector2 newWall, newBot, newMid, newTop;
 
-        newWall = wallLayer.anchoredPosition;
-        newBot = botLayer.anchoredPosition;
-        newMid = midLayer.anchoredPosition;
-        newTop = topLayer.anchoredPosition;
+        newWall = baseWall;
+        newBot = baseBot;
+        newMid = baseMid;
+        newTop = baseTop;
         
         //update X anchored positions to the left of wall for right view
         newWallX = newWall.x - roomWidth + cameraWidth;
-        newBotX = newBot.x - 2*(newBot.x - wallX) - roomWidth + cameraWidth;;
-        newMidX = newMid.x - 2*(newMid.x - wallX) - roomWidth + cameraWidth;;
-        newTopX = newTop.x - 2*(newTop.x - wallX) - roomWidth + cameraWidth;;
+        newBotX = newBot.x - 2*(newBot.x - baseWall.x) - roomWidth + cameraWidth;;
+        newMidX = newMid.x - 2*(newMid.x - baseWall.x) - roomWidth + cameraWidth;;
+        newTopX = newTop.x - 2*(newTop.x - baseWall.x) - roomWidth + cameraWidth;;
 
         newWall.x = newWallX;
         newBot.x = newBotX;
@@ -105,6 +107,13 @@ public class View : MonoBehaviour
         botLayer.anchoredPosition = newBot;
         midLayer.anchoredPosition = newMid;
         topLayer.anchoredPosition = newTop;
+    }
+
+    public void shiftLayersRight(){
+        wallLayer.anchoredPosition = baseWall;
+        botLayer.anchoredPosition = baseBot;
+        midLayer.anchoredPosition = baseMid;
+        topLayer.anchoredPosition = baseTop;
     }
 
     private void updateFurniturePos(List<RectTransform> furnitureList, float newWidth, RectTransform newLayer){
@@ -118,10 +127,6 @@ public class View : MonoBehaviour
             oldX = position.x;
             newX = newWidth*(oldX / roomWidth);
 
-            // if(!isLeft){
-            //     newX = newX - roomWidth + cameraWidth;
-            // }
-            
             // Debug.Log("new X position: " + newX);
 
             // update furniture position

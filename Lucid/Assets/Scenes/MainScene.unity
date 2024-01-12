@@ -4648,6 +4648,8 @@ MonoBehaviour:
   player: {fileID: 638326995}
   sceneController: {fileID: 1063774803}
   lockMovement: 0
+  canEnterLeft: 0
+  canEnterRight: 0
   playerXMin: 0
   playerXMax: 0
   playerXCenter: 0
@@ -6504,8 +6506,8 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1157257304}
   m_HandleRect: {fileID: 1157257303}
   m_Direction: 2
-  m_Value: 1
-  m_Size: 1
+  m_Value: 0
+  m_Size: 0.9999942
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:
@@ -11040,8 +11042,8 @@ MonoBehaviour:
   m_ShadowVolumeIntensityEnabled: 0
   m_ShadowVolumeIntensity: 0.75
   m_LocalBounds:
-    m_Center: {x: -1.3339539, y: 0.30274963, z: 0}
-    m_Extent: {x: 192.17995, y: 96.09845, z: 0}
+    m_Center: {x: -1.3290024, y: 0.30315018, z: 0}
+    m_Extent: {x: 192.1706, y: 96.11134, z: 0}
   m_PointLightInnerAngle: 360
   m_PointLightOuterAngle: 360
   m_PointLightInnerRadius: 0
@@ -11170,7 +11172,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 0}
-  m_AnchoredPosition: {x: 0, y: 13.249999}
+  m_AnchoredPosition: {x: 0, y: 13.250011}
   m_SizeDelta: {x: -0.00005882906, y: 0}
   m_Pivot: {x: 0, y: 0.05}
 --- !u!114 &1752166573
@@ -15321,8 +15323,8 @@ MonoBehaviour:
   m_ShadowVolumeIntensityEnabled: 0
   m_ShadowVolumeIntensity: 0.75
   m_LocalBounds:
-    m_Center: {x: -0.00090003014, y: 0.0009999871, z: 0}
-    m_Extent: {x: 1.0799, y: 1.0841999, z: 0}
+    m_Center: {x: 0.0034999847, y: 0.0048999786, z: 0}
+    m_Extent: {x: 1.0848, y: 1.0796, z: 0}
   m_PointLightInnerAngle: 360
   m_PointLightOuterAngle: 360
   m_PointLightInnerRadius: 0

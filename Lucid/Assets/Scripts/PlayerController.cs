@@ -9,6 +9,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] public RectTransform player;
     [SerializeField] public SceneController sceneController;
     [SerializeField] public bool lockMovement;
+    [SerializeField] public bool canEnterLeft, canEnterRight;
 
     [SerializeField] private float playerXMin, playerXMax, playerXCenter;
     [SerializeField] private float playerSpeed;
@@ -30,6 +31,8 @@ public class PlayerController : MonoBehaviour
         playerSpeed = sceneController.baseSpeed;
 
         lockMovement = false;
+        canEnterLeft = false;
+        canEnterRight= false;
     }
 
     // Update is called once per frame
@@ -66,10 +69,29 @@ public class PlayerController : MonoBehaviour
                 }
                 
                 newPosition.x = Mathf.Clamp(newPosition.x, playerXMin, playerXMax);
+
                 
                 player.anchoredPosition = newPosition;
             }
+            
         }
+        // check to see if scene and player are at edges of room and set ability to enter room
+        if((sceneController.isLeftView && sceneController.atLeftEdge && player.anchoredPosition.x == playerXMin) ||
+            (!sceneController.isLeftView && sceneController.atRightEdge && player.anchoredPosition.x == playerXMax)){
+
+            canEnterLeft = true;
+            Debug.Log("canenterLeft");
+        }
+        else if((sceneController.isLeftView && sceneController.atRightEdge && player.anchoredPosition.x == playerXMax) ||
+            (!sceneController.isLeftView && sceneController.atLeftEdge && player.anchoredPosition.x == playerXMin)){
+
+            canEnterRight = true;
+        }
+        else{
+            canEnterLeft = false;
+            canEnterRight = false;
+        }
+        Debug.Log("canEnterLeft: " + canEnterLeft);
     }
 
     private void flipPlayer(){
@@ -94,7 +116,28 @@ public class PlayerController : MonoBehaviour
     }
 
     private void OnGoLeftRoom(){
+        if(canEnterLeft){
+            Vector2 newCameraPos = playerCanvas.anchoredPosition;
 
+            float newCameraY, newCameraX;
+            
+            if(sceneController.isLeftView){
+                sceneController.currRoom.leftRoom.leftView.shiftLayersLeft();
+                sceneController.currRoom.leftRoom.rightView.shiftLayersRight();
+
+                newCameraY = sceneController.currRoom.leftRoom.leftView.yCameraPosition;
+            }
+            else{
+                sceneController.currRoom.leftRoom.rightView.shiftLayersLeft();
+                sceneController.currRoom.leftRoom.leftView.shiftLayersRight();
+
+                newCameraY = sceneController.currRoom.leftRoom.rightView.yCameraPosition;
+            }
+             
+            newCameraX = sceneController.playerEndPos;
+
+            sceneController.switchRooms(true);
+        }
     }
 
     private void OnGoRightRoom(){
