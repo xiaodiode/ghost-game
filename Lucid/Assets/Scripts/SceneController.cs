@@ -176,6 +176,9 @@ public class SceneController : MonoBehaviour
             currView = currRoom.rightView;
             otherView = currRoom.leftView;    
         }
+
+        playerStartPos = currView.wallLayer.anchoredPosition.x;
+        playerEndPos = playerStartPos - currView.roomWidth + cameraWidth;
     }
 
     

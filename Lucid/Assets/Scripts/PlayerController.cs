@@ -118,8 +118,9 @@ public class PlayerController : MonoBehaviour
     private void OnGoLeftRoom(){
         if(canEnterLeft){
             Vector2 newCameraPos = playerCanvas.anchoredPosition;
+            Vector2 newPlayerPos = player.anchoredPosition;
 
-            float newCameraY, newCameraX;
+            float newCameraY;
             
             if(sceneController.isLeftView){
                 sceneController.currRoom.leftRoom.leftView.shiftLayersLeft();
@@ -133,8 +134,12 @@ public class PlayerController : MonoBehaviour
 
                 newCameraY = sceneController.currRoom.leftRoom.rightView.yCameraPosition;
             }
-             
-            newCameraX = sceneController.playerEndPos;
+
+            newCameraPos.y = newCameraY;
+            newPlayerPos.x = playerXMax;
+
+            playerCanvas.anchoredPosition = newCameraPos;
+            player.anchoredPosition = newPlayerPos;
 
             sceneController.switchRooms(true);
         }
