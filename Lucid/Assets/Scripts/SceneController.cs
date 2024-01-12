@@ -169,6 +169,15 @@ public class SceneController : MonoBehaviour
             currView = currRoom.rightView;
             otherView = currRoom.leftView;    
         }
+        
+        baseTime = (currView.roomWidth - cameraWidth) / baseSpeed;
+
+        // initializes the layer speeds based on the speed of the room
+        botSpeed = (currView.botWidth - cameraWidth) / baseTime;
+        midSpeed = (currView.midWidth - cameraWidth) / baseTime;
+        topSpeed = (currView.topWidth - cameraWidth) / baseTime;
+
+        lockMovement = false;
 
         playerStartPos = currView.wallLayer.anchoredPosition.x;
         playerEndPos = playerStartPos - currView.roomWidth + cameraWidth;
